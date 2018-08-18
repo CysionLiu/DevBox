@@ -1,1 +1,1 @@
-include ':sample', ':baselib'
+include ':sample', ':baselib', ':train'

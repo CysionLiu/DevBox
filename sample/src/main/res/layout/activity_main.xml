@@ -23,5 +23,11 @@
         android:onClick="listPlay"
         android:text="列表播放"
         android:textAllCaps="false"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="numParse"
+        android:text="数字解析"
+        android:textAllCaps="false"/>
 
 </LinearLayout>

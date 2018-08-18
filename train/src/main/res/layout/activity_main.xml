@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".activity.SplashActivity">
+
+    <TextView
+        android:id="@+id/tv_top_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_small"
+        android:gravity="center"
+        android:text="@string/app_name"></TextView>
+
+    <com.cysion.train.view.CustomHomeViewPager
+        android:id="@+id/vp_home_vp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"></com.cysion.train.view.CustomHomeViewPager>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_bar"
+        android:layout_gravity="bottom"
+        android:background="#ffffffff"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        ></android.support.design.widget.TabLayout>
+</LinearLayout>

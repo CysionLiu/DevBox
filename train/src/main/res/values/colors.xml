@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+     <!--background-->
+    <color name="main_background">#FFFFFF</color>
+    <color name="sub_background">#cccccc</color>
+    <color name="min_background">#aaaaaa</color>
+
+    <!--text-->
+    <color name="main_text">#000000</color>
+    <color name="sub_text">#555555</color>
+    <color name="min_text">#C8C8C8</color>
+
+    <!--tag-->
+    <color name="main_tag">#ffaa99</color>
+    <color name="sub_tag">#ff6699</color>
+    <color name="min_tag">#EA5404</color>
+
+
+
+</resources>
