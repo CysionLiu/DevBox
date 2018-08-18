@@ -9,7 +9,13 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.SplashActivity">
 
+<Button
+    android:id="@+id/btnGetAll"
+    android:text="getAll"
+    android:textAllCaps="false"
 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

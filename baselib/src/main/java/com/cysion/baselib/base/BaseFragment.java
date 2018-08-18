@@ -38,7 +38,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
         mRootView = inflater.inflate(getLayoutId(), container, false);
-        mUnbinder = ButterKnife.bind(mRootView);
+        mUnbinder = ButterKnife.bind(this,mRootView);
         initViews();
         initData();
         return mRootView;

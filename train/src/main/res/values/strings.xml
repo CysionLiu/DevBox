@@ -4,4 +4,11 @@
     <string name="home_hot">热点</string>
     <string name="home_dingzhi">定制</string>
     <string name="home_user">我的</string>
+
+
+    <!--网络数据状态-->
+    <string name="str_invalid_data">没有获得数据</string>
+    <string name="str_net_error">网络访问异常</string>
+    <string name="str_no_net">网络已断开</string>
+
 </resources>

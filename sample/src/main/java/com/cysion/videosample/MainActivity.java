@@ -17,6 +17,9 @@ import com.google.gson.Gson;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<String> call, Response<String> response) {
                         Logger.d(response.body());
                         String json = response.body();
+                        try {
+                            JSONObject jsonObject = new JSONObject(json);
+                            Logger.e(jsonObject.optJSONObject("data").toString());
+                        } catch (JSONException aE) {
+
+
+                        }
+
+
                         ExpertMapEntity expertMapEntity = new Gson().fromJson(json, ExpertMapEntity.class);
                         Map<String, ExpertEntity> data = expertMapEntity.getData();
                         Set<String> strings = data.keySet();
