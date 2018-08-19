@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.cysion.baselib.listener.OnTypeClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter {
@@ -17,6 +18,9 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter {
 
     public BaseAdapter(List<T> aEntities, Context aContext, OnTypeClickListener aOnTypeClickListener) {
         mEntities = aEntities;
+        if (mEntities == null) {
+            mEntities = new ArrayList<>();
+        }
         mContext = aContext;
         mOnTypeClickListener = aOnTypeClickListener;
     }
@@ -29,6 +33,23 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return mEntities == null ? 0 : mEntities.size();
+    }
+
+    public void addEntities(List<T> aEntities) {
+        if (mEntities != null) {
+            mEntities.addAll(aEntities);
+        } else {
+            mEntities = aEntities;
+        }
+    }
+
+    public void setEntities(List<T> aEntities) {
+        if (mEntities != null) {
+            mEntities.clear();
+            mEntities.addAll(aEntities);
+        } else {
+            mEntities = aEntities;
+        }
     }
 
     @NonNull

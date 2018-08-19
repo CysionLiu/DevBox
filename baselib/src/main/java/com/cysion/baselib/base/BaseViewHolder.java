@@ -32,7 +32,7 @@ public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
     public BaseViewHolder(View itemView) {
         super(itemView);
         mRoot = itemView;
-        ButterKnife.bind(mRoot);
+        ButterKnife.bind(this,mRoot);
     }
 
     public final void bindData(Context aContext, OnTypeClickListener aOnTypeClickListener, final T obj, final int position) {

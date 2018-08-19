@@ -94,7 +94,7 @@ public class HomeLogic {
                     }
                     aHashMapPureListener.done(data);
                 } catch (Exception aE) {
-
+                    aHashMapPureListener.dont(404, Box.str(R.string.str_invalid_data));
                 }
             }
 

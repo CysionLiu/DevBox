@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity {
     protected void initView() {
         ShowUtil.darkAndWhite(this, true);
         mTvTopTitle.setText(Box.str(R.string.app_name));
+        mVpHomeVp.setOffscreenPageLimit(4);
     }
 
     @Override

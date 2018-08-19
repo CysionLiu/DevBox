@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/main_background"
     android:fitsSystemWindows="true"
     tools:context=".activity.SplashActivity">
 
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
-        android:gravity="center"
-        android:text="222"
-        android:textColor="@color/sub_tag"
-        android:textSize="@dimen/header1"/>
-</FrameLayout>
+        android:layout_height="@dimen/topbar_small"
+        android:background="@color/sub_background">
+
+        <TextView
+            android:gravity="center"
+            android:text="城市区域时间段"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_train_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/rl_empty"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="480dp"
+            android:gravity="center"
+            android:text="@string/str_invalid_data"
+            android:textColor="@color/sub_tag"
+            android:textSize="@dimen/header1"/>
+    </RelativeLayout>
+</LinearLayout>
