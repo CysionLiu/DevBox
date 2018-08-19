@@ -47,7 +47,7 @@ public class HomeFragment extends BaseFragment {
                 Logger.d(result.getRevisedExpert().get(0).getName());
                 Logger.d(result.getRevisedTrain().get(1).getName());
                 Logger.d(result.getStyle().get(3).getName());
-                Logger.d(result.getNews().get(0).getData().getMap());
+                Logger.d(result.getNews().get(0).getName());
             }
 
             @Override

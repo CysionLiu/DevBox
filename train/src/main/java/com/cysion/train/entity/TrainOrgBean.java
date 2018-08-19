@@ -1,6 +1,7 @@
 package com.cysion.train.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 列表中的培训
@@ -31,6 +32,24 @@ public class TrainOrgBean implements Serializable {
     private String state;
     private String cdate;
     private String logo;
+    private List<Base64TrainCourseBean> open;
+    private List<Base64TrainCourseBean> meeting;
+
+    public List<Base64TrainCourseBean> getMeeting() {
+        return meeting;
+    }
+
+    public void setMeeting(List<Base64TrainCourseBean> aMeeting) {
+        meeting = aMeeting;
+    }
+
+    public List<Base64TrainCourseBean> getOpen() {
+        return open;
+    }
+
+    public void setOpen(List<Base64TrainCourseBean> aOpen) {
+        open = aOpen;
+    }
 
     public String getId() {
         return id;
