@@ -2,32 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="4dp"
+                android:paddingTop="5dp"
     >
 
     <ImageView
-        android:layout_centerHorizontal="true"
         android:id="@android:id/icon"
         android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:adjustViewBounds="true"
+        android:layout_height="@dimen/icon_ss"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
+        android:adjustViewBounds="true"
         />
 
     <FrameLayout
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp">
+
         <TextView
             android:id="@android:id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="我的"
-            android:textSize="@dimen/text_small"
             android:includeFontPadding="false"
+            android:text="我的"
             android:textColor="@drawable/home_bottom_bar"
+            android:textSize="@dimen/text_small"
             />
     </FrameLayout>
 </RelativeLayout>

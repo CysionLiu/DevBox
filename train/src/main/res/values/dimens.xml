@@ -10,7 +10,7 @@
     <dimen name="text_main">14dp</dimen>
     <dimen name="text_large">16dp</dimen>
     <dimen name="text_larger">18dp</dimen>
-    <dimen name="text_small">12dp</dimen>
+    <dimen name="text_small">11dp</dimen>
     <dimen name="text_smaller">9dp</dimen>
 
     <!--space-->
@@ -27,7 +27,7 @@
     <dimen name="topbar_small">30dp</dimen>
     <dimen name="topbar_large">42dp</dimen>
     <dimen name="topbar_larger">48dp</dimen>
-    <dimen name="bottom_bar">48dp</dimen>
+    <dimen name="bottom_bar">47dp</dimen>
 
     <!--image-->
     <dimen name="image">120dp</dimen>
@@ -40,9 +40,9 @@
     <!--icon-->
     <dimen name="icon">28dp</dimen>
     <dimen name="icon_s">24dp</dimen>
-    <dimen name="icon_ss">20dp</dimen>
+    <dimen name="icon_ss">21dp</dimen>
     <dimen name="icon_b">32dp</dimen>
     <dimen name="icon_bb">36dp</dimen>
-    <dimen name="icon_bbb">45dp</dimen>
+    <dimen name="icon_bbb">46dp</dimen>
 
 </resources>

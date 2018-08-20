@@ -20,22 +20,21 @@
             android:layout_height="160dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"></com.cysion.train.view.MyUltranViewPager>
+            android:layout_marginTop="2dp"></com.cysion.train.view.MyUltranViewPager>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_top_styles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="22dp"></android.support.v7.widget.RecyclerView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="6dp"
             android:text="@string/str_train_opt"
             android:textColor="@color/main_text"
-
             android:textSize="@dimen/header2"
             android:textStyle="bold"/>
 
@@ -43,7 +42,7 @@
             android:id="@+id/rv_train_opt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="24dp"></android.support.v7.widget.RecyclerView>
 
         <TextView
             android:id="@+id/tv_more_opt"
@@ -55,13 +54,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="38dp"
             android:text="@string/str_train_org"
             android:textColor="@color/main_text"
-
             android:textSize="@dimen/header2"
-
             android:textStyle="bold"/>
 
 
@@ -69,33 +66,31 @@
             android:id="@+id/rv_train_orgs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"></com.cysion.train.view.HorizontalRecyclerView>
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"></com.cysion.train.view.HorizontalRecyclerView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="38dp"
             android:text="@string/str_train_expert"
             android:textColor="@color/main_text"
-
             android:textSize="@dimen/header2"
-
             android:textStyle="bold"/>
 
         <com.cysion.train.view.HorizontalRecyclerView
             android:id="@+id/rv_train_experts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"></com.cysion.train.view.HorizontalRecyclerView>
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"></com.cysion.train.view.HorizontalRecyclerView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="38dp"
             android:text="@string/str_train_recent"
             android:textColor="@color/main_text"
             android:textSize="@dimen/header2"
@@ -105,19 +100,23 @@
             android:id="@+id/rv_train_recent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="24dp"></android.support.v7.widget.RecyclerView>
 
         <TextView
             android:id="@+id/tv_more_recent"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="更多"/>
+            android:text="更多近期培训信息"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center"
+        <ImageView
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="38dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/tech_mark"
             android:text="技术支持"/>
 
 

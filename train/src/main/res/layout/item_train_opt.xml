@@ -5,10 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="22dp"
     android:fitsSystemWindows="true"
     app:cardCornerRadius="8dp"
     app:cardElevation="0dp"
@@ -17,7 +16,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="18dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/iv_train_top"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="182dp"
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:scaleType="fitXY"
@@ -37,18 +37,22 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:paddingBottom="18dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="18dp"
+            >
 
             <TextView
                 android:id="@+id/tv_train_name"
                 android:layout_width="216dp"
                 android:layout_height="wrap_content"
-                android:lineSpacingMultiplier="1.1"
-                android:textColor="@color/main_text"
-                android:lines="2"
-                android:textStyle="bold"
                 android:ellipsize="end"
+                android:lineSpacingMultiplier="1.1"
+                android:lines="2"
+                android:textColor="@color/main_text"
                 android:textSize="@dimen/text_large"
+                android:textStyle="bold"
                 tools:text="名称"/>
 
 
@@ -58,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="2dp"
+                android:gravity="bottom"
                 android:lineSpacingMultiplier="1.1"
                 android:textColor="@color/min_tag"
                 android:textSize="@dimen/text_small"
@@ -68,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/tv_price_ext"
+                android:gravity="bottom"
                 android:lineSpacingMultiplier="1.1"
                 android:textColor="@color/min_tag"
                 android:textSize="@dimen/text_main"
@@ -79,7 +85,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
 
             <TextView
                 android:id="@+id/tv_train_tags"
