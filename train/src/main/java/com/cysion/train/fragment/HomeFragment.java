@@ -11,10 +11,13 @@ import com.cysion.baselib.base.BaseFragment;
 import com.cysion.baselib.base.BaseViewHolder;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
+import com.cysion.train.Constant;
 import com.cysion.train.R;
+import com.cysion.train.adapter.ExpertAdapter;
 import com.cysion.train.adapter.HomeTopPageAdapter;
 import com.cysion.train.adapter.StyleAdapter;
 import com.cysion.train.adapter.TrainAdapter;
+import com.cysion.train.entity.ExpertBean;
 import com.cysion.train.entity.HomeDataBean;
 import com.cysion.train.entity.HomeTopBean;
 import com.cysion.train.entity.StyleBean;
@@ -27,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+
+import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
 
 public class HomeFragment extends BaseFragment {
 
@@ -51,8 +56,14 @@ public class HomeFragment extends BaseFragment {
     private List<HomeTopBean> mHomeTopBeans = new ArrayList<>();
     private List<StyleBean> mStyleBeans = new ArrayList<>();
     private List<TrainCourseBean> mOptTrains = new ArrayList<>();
+    private List<TrainCourseBean> mRecentTrains = new ArrayList<>();
+    private List<ExpertBean> mExpertOrgs = new ArrayList<>();
+    private List<ExpertBean> mExperts = new ArrayList<>();
     private StyleAdapter mStyleAdapter;
-    private TrainAdapter mTrainAdapter;
+    private TrainAdapter mTrainAdapterOpt;
+    private TrainAdapter mTrainAdapterRecent;
+    private ExpertAdapter mExpertOrgAdapter;
+    private ExpertAdapter mExpertAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -64,18 +75,57 @@ public class HomeFragment extends BaseFragment {
         initViewPager();
         initStyleList();
         initTrainOpt();
+        initTrainRecent();
+        initOrgs();
+        initExperts();
 
     }
 
-    private void initTrainOpt() {
-        mRvTrainOpt.setLayoutManager(new LinearLayoutManager(mActivity));
-        mTrainAdapter = new TrainAdapter(mOptTrains, mActivity, new OnTypeClickListener() {
+    private void initExperts() {
+        mRvTrainExperts.setLayoutManager(new LinearLayoutManager(mActivity, HORIZONTAL, false));
+        mExpertAdapter = new ExpertAdapter(mExperts, mActivity, new OnTypeClickListener() {
             @Override
             public void onClicked(Object obj, int position, int flag) {
 
             }
         });
-        mRvTrainOpt.setAdapter(mTrainAdapter);
+        mRvTrainExperts.setAdapter(mExpertAdapter);
+        mRvTrainExperts.setNestedScrollingEnabled(false);
+    }
+
+    private void initOrgs() {
+        mRvTrainOrgs.setLayoutManager(new LinearLayoutManager(mActivity, HORIZONTAL, false));
+        mExpertOrgAdapter = new ExpertAdapter(mExpertOrgs, mActivity, new OnTypeClickListener() {
+            @Override
+            public void onClicked(Object obj, int position, int flag) {
+
+            }
+        });
+        mRvTrainOrgs.setAdapter(mExpertOrgAdapter);
+        mRvTrainOrgs.setNestedScrollingEnabled(false);
+    }
+
+    private void initTrainRecent() {
+        mRvTrainRecent.setLayoutManager(new LinearLayoutManager(mActivity));
+        mTrainAdapterRecent = new TrainAdapter(mRecentTrains, mActivity, new OnTypeClickListener() {
+            @Override
+            public void onClicked(Object obj, int position, int flag) {
+
+            }
+        });
+        mRvTrainRecent.setAdapter(mTrainAdapterRecent);
+        mRvTrainRecent.setNestedScrollingEnabled(false);
+    }
+
+    private void initTrainOpt() {
+        mRvTrainOpt.setLayoutManager(new LinearLayoutManager(mActivity));
+        mTrainAdapterOpt = new TrainAdapter(mOptTrains, mActivity, new OnTypeClickListener() {
+            @Override
+            public void onClicked(Object obj, int position, int flag) {
+
+            }
+        });
+        mRvTrainOpt.setAdapter(mTrainAdapterOpt);
         mRvTrainOpt.setNestedScrollingEnabled(false);
 
     }
@@ -105,7 +155,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
         getAllData();
-
     }
 
     public void getAllData() {
@@ -125,10 +174,30 @@ public class HomeFragment extends BaseFragment {
                 mStyleAdapter.notifyDataSetChanged();
                 //优选培训
                 List<TrainCourseBean> news = result.getNews();
+                for (TrainCourseBean bean : news) {
+                    bean.setLocalType(Constant.HOME_LIST);
+                }
                 mOptTrains.clear();
                 mOptTrains.addAll(news);
-                mTrainAdapter.notifyDataSetChanged();
-
+                mTrainAdapterOpt.notifyDataSetChanged();
+                //近期培训
+                List<TrainCourseBean> old = result.getOld();
+                for (TrainCourseBean bean : old) {
+                    bean.setLocalType(Constant.HOME_LIST);
+                }
+                mRecentTrains.clear();
+                mRecentTrains.addAll(old);
+                mTrainAdapterRecent.notifyDataSetChanged();
+                //机构简介
+                List<ExpertBean> trainOrg = result.getTrain();
+                mExpertOrgs.clear();
+                mExpertOrgs.addAll(trainOrg);
+                mExpertOrgAdapter.notifyDataSetChanged();
+                //专家简介
+                List<ExpertBean> expert = result.getExpert();
+                mExperts.clear();
+                mExperts.addAll(expert);
+                mExpertAdapter.notifyDataSetChanged();
             }
 
             @Override

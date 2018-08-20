@@ -32,17 +32,34 @@ public class ExpertBean implements Serializable {
     private String cdate;
     private String info;
     private int total;
+    private String logo;
+    private int localType;
 
-    public List<Base64TrainCourseBean> getList() {
+    public List<TrainCourseBean> getList() {
         return list;
     }
 
-    public void setList(List<Base64TrainCourseBean> aList) {
+    public void setList(List<TrainCourseBean> aList) {
         list = aList;
     }
 
-    private List<Base64TrainCourseBean> list;
+    private List<TrainCourseBean> list;
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String aLogo) {
+        logo = aLogo;
+    }
+
+    public int getLocalType() {
+        return localType;
+    }
+
+    public void setLocalType(int aLocalType) {
+        localType = aLocalType;
+    }
 
     public String getId() {
         return id;

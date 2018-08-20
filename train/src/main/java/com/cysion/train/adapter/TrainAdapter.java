@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.cysion.baselib.base.BaseAdapter;
 import com.cysion.baselib.listener.OnTypeClickListener;
+import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.holder.train.TrainHolder;
@@ -24,8 +25,22 @@ public class TrainAdapter extends BaseAdapter<TrainCourseBean> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TrainHolder(
-                LayoutInflater.from(mContext).inflate(R.layout.item_train, parent, false)
-        );
+        switch (viewType) {
+            case Constant.MAIN_LIST:
+                return new TrainHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_train, parent, false)
+                );
+            case Constant.HOME_LIST:
+                return new TrainHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_train_opt, parent, false)
+                );
+        }
+        return null;
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mEntities.get(position).getLocalType();
     }
 }

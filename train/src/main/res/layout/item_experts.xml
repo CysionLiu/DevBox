@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="110dp"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:fitsSystemWindows="true"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_expert_top"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:background="@color/sub_background"
+            android:scaleType="fitXY"
+            android:src="@mipmap/test2"/>
+
+        <TextView
+            android:id="@+id/tv_expert_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/sub_text"
+            android:textSize="@dimen/text_main"
+            tools:text="名称"/>
+
+
+        <TextView
+            android:id="@+id/tv_expert_work"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/min_text"
+            android:lines="1"
+            android:includeFontPadding="true"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_smaller"
+            tools:text="单位/介绍"/>
+
+        <TextView
+            android:id="@+id/tv_expert_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:gravity="center"
+            android:lines="1"
+            android:ellipsize="end"
+            android:textColor="@color/min_text"
+            android:textSize="@dimen/text_smaller"
+            tools:text="头衔"/>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

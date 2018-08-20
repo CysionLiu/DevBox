@@ -10,6 +10,7 @@ import com.cysion.baselib.base.BaseFragment;
 import com.cysion.baselib.base.BaseViewHolder;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
+import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.entity.TrainCourseBean;
@@ -52,6 +53,9 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         TrainLogic.obj().getTrainList(new PureListener<List<TrainCourseBean>>() {
             @Override
             public void done(List<TrainCourseBean> result) {
+                for (TrainCourseBean bean : result) {
+                    bean.setLocalType(Constant.MAIN_LIST);
+                }
                 mTrainAdapter.setEntities(result);
                 mTrainAdapter.notifyDataSetChanged();
                 changeLayout(true);

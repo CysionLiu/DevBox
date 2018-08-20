@@ -17,7 +17,7 @@ public class HomeDataBean implements Serializable {
 
     private List<ExpertBean> expert;
 
-    private List<TrainOrgBean> train;
+    private List<ExpertBean> train;
 
     @SerializedName("new")
     private List<TrainCourseBean> news;
@@ -71,11 +71,11 @@ public class HomeDataBean implements Serializable {
         expert = aExpert;
     }
 
-    public List<TrainOrgBean> getTrain() {
+    public List<ExpertBean> getTrain() {
         return train;
     }
 
-    public void setTrain(List<TrainOrgBean> aTrain) {
+    public void setTrain(List<ExpertBean> aTrain) {
         train = aTrain;
     }
 }

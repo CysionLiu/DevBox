@@ -69,6 +69,7 @@ public class TrainCourseBean implements Serializable {
     private String cdate;
     private String style;
     private String starts;
+    private int localType;
 
 
 
@@ -138,6 +139,14 @@ public class TrainCourseBean implements Serializable {
     }
 
     private String city;
+
+    public int getLocalType() {
+        return localType;
+    }
+
+    public void setLocalType(int aLocalType) {
+        localType = aLocalType;
+    }
 
     public String getStarts() {
         return starts;

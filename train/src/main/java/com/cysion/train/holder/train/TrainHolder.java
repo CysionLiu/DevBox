@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.cysion.baselib.base.BaseViewHolder;
 import com.cysion.baselib.image.GlideRoundTransform;
+import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.entity.TrainCourseBean;
 
@@ -39,8 +40,14 @@ public class TrainHolder extends BaseViewHolder<TrainCourseBean> {
         if (obj == null) {
             return;
         }
-        Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext)).into(
-                mIvTrainTop);
+        if (obj.getLocalType() == Constant.MAIN_LIST) {
+            Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext)).into(
+                    mIvTrainTop);
+        }else{
+            Glide.with(mContext).load(obj.getTop()).into(
+                    mIvTrainTop);
+        }
+
         mTvTrainName.setText(obj.getName());
         //标签
         String tagStr = "";

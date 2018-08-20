@@ -11,4 +11,11 @@
     <string name="str_net_error">网络访问异常</string>
     <string name="str_no_net">网络已断开</string>
 
+    <!--首页-->
+    <string name="str_train_opt">优选培训</string>
+    <string name="str_train_org">培训机构</string>
+    <string name="str_train_recent">近期培训</string>
+    <string name="str_train_expert">专家介绍</string>
+
+
 </resources>
