@@ -1,5 +1,6 @@
 package com.cysion.train.holder.train;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,8 +56,11 @@ public class TrainHolder extends BaseViewHolder<TrainCourseBean> {
         mTvTrainTags.setText(tagStr);
         //时间地点
         String area = obj.getCity();
-        String end = obj.getStarts();
-        String area_time = end + " · " + area;
+        String startTime = obj.getStarts();
+        if (TextUtils.isEmpty(startTime) || startTime.length() > 5) {
+            startTime = obj.getStart();
+        }
+        String area_time = startTime + " · " + area;
         mTvTrainTimeAddress.setText(area_time);
         //价格
         TrainCourseBean.PriceBean price = obj.getPrice();

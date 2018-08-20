@@ -52,8 +52,8 @@
             android:layout_below="@id/tv_train_name"
             android:layout_marginTop="10dp"
             android:lineSpacingMultiplier="1.3"
-            android:textColor="@color/sub_text"
             android:paddingRight="20dp"
+            android:textColor="@color/sub_text"
             android:textSize="@dimen/text_small"
             tools:text="标签"/>
 
@@ -70,30 +70,30 @@
             android:textSize="@dimen/text_small"
             tools:text="时间地点"/>
 
+
+        <TextView
+            android:id="@+id/tv_price_ext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_train_price"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom"
+            android:lineSpacingMultiplier="1.3"
+            android:textColor="@color/min_tag"
+            android:textSize="@dimen/text_small"
+            tools:text="起"/>
+
         <TextView
             android:id="@+id/tv_train_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_train_tags"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/tv_train_time_address"
+            android:layout_toLeftOf="@id/tv_price_ext"
             android:lineSpacingMultiplier="1.3"
             android:textColor="@color/min_tag"
             android:textSize="@dimen/text_main"
             tools:text="10000"/>
-
-        <TextView
-            android:id="@+id/tv_price_ext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_train_tags"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/tv_train_price"
-            android:layout_alignBottom="@id/tv_train_price"
-            android:gravity="bottom"
-            android:lineSpacingMultiplier="1.3"
-            android:textColor="@color/min_tag"
-            android:textSize="@dimen/text_small"
-            tools:text="起"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -2,6 +2,7 @@ package com.cysion.train.fragment;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -13,9 +14,11 @@ import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.R;
 import com.cysion.train.adapter.HomeTopPageAdapter;
 import com.cysion.train.adapter.StyleAdapter;
+import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.entity.HomeDataBean;
 import com.cysion.train.entity.HomeTopBean;
 import com.cysion.train.entity.StyleBean;
+import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.HomeLogic;
 import com.cysion.train.view.MyUltranViewPager;
 import com.orhanobut.logger.Logger;
@@ -47,7 +50,9 @@ public class HomeFragment extends BaseFragment {
 
     private List<HomeTopBean> mHomeTopBeans = new ArrayList<>();
     private List<StyleBean> mStyleBeans = new ArrayList<>();
+    private List<TrainCourseBean> mOptTrains = new ArrayList<>();
     private StyleAdapter mStyleAdapter;
+    private TrainAdapter mTrainAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -58,6 +63,20 @@ public class HomeFragment extends BaseFragment {
     protected void initViews() {
         initViewPager();
         initStyleList();
+        initTrainOpt();
+
+    }
+
+    private void initTrainOpt() {
+        mRvTrainOpt.setLayoutManager(new LinearLayoutManager(mActivity));
+        mTrainAdapter = new TrainAdapter(mOptTrains, mActivity, new OnTypeClickListener() {
+            @Override
+            public void onClicked(Object obj, int position, int flag) {
+
+            }
+        });
+        mRvTrainOpt.setAdapter(mTrainAdapter);
+        mRvTrainOpt.setNestedScrollingEnabled(false);
 
     }
 
@@ -104,6 +123,11 @@ public class HomeFragment extends BaseFragment {
                 mStyleBeans.clear();
                 mStyleBeans.addAll(styleBeans);
                 mStyleAdapter.notifyDataSetChanged();
+                //优选培训
+                List<TrainCourseBean> news = result.getNews();
+                mOptTrains.clear();
+                mOptTrains.addAll(news);
+                mTrainAdapter.notifyDataSetChanged();
 
             }
 

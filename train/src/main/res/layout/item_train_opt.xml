@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginTop="8dp"
+    android:fitsSystemWindows="true"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp"
+    tools:context=".activity.SplashActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            >
+
+            <ImageView
+                android:id="@+id/iv_train_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:scaleType="fitXY"
+                android:src="@mipmap/test2"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_train_name"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.1"
+                android:textColor="@color/main_text"
+                android:textSize="@dimen/header2"
+                tools:text="名称"/>
+
+
+            <TextView
+                android:id="@+id/tv_price_ext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:lineSpacingMultiplier="1.1"
+                android:textColor="@color/min_tag"
+                android:textSize="@dimen/text_small"
+                tools:text="起"/>
+
+            <TextView
+                android:id="@+id/tv_train_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/tv_price_ext"
+                android:lineSpacingMultiplier="1.1"
+                android:textColor="@color/min_tag"
+                android:textSize="@dimen/text_main"
+                tools:text="10000"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_train_tags"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="1.1"
+                android:lines="1"
+                android:paddingRight="20dp"
+                android:textColor="@color/sub_text"
+                android:textSize="@dimen/text_small"
+                tools:text="标签"/>
+
+            <TextView
+                android:id="@+id/tv_train_time_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="1.1"
+                android:lines="1"
+                android:textColor="@color/sub_text"
+                android:textSize="@dimen/text_small"
+                tools:text="时间地点"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
