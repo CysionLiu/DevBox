@@ -2,7 +2,6 @@ package com.cysion.train.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 public class ExpertBean implements Serializable {
 
@@ -33,24 +32,17 @@ public class ExpertBean implements Serializable {
     private String cdate;
     private String info;
     private int total;
-    private Map<String,Base64TrainCourseBean> list;
-    private List<Base64TrainCourseBean> revisedList;
 
-    public Map<String, Base64TrainCourseBean> getList() {
+    public List<Base64TrainCourseBean> getList() {
         return list;
     }
 
-    public void setList(Map<String, Base64TrainCourseBean> aList) {
+    public void setList(List<Base64TrainCourseBean> aList) {
         list = aList;
     }
 
-    public List<Base64TrainCourseBean> getRevisedList() {
-        return revisedList;
-    }
+    private List<Base64TrainCourseBean> list;
 
-    public void setRevisedList(List<Base64TrainCourseBean> aRevisedList) {
-        revisedList = aRevisedList;
-    }
 
     public String getId() {
         return id;

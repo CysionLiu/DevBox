@@ -1,27 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
+    android:background="@color/sub_background"
     android:fitsSystemWindows="true"
     tools:context=".activity.SplashActivity">
 
-<Button
-    android:id="@+id/btnGetAll"
-    android:text="getAll"
-    android:textAllCaps="false"
-
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
-        android:gravity="center"
-        android:text="111"
-        android:textColor="@color/sub_tag"
-        android:textSize="@dimen/header1"/>
-</FrameLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cysion.train.view.MyUltranViewPager
+            android:id="@+id/vp_home_top"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"></com.cysion.train.view.MyUltranViewPager>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_top_styles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="一二三四"
+            android:textSize="@dimen/header2"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_train_opt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="一二三四"
+            android:textSize="@dimen/header2"/>
+
+        <TextView
+            android:id="@+id/tv_more_opt"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="更多"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_train_orgs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="一二三四"
+            android:textSize="@dimen/header2"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_train_experts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="一二三四"
+            android:textSize="@dimen/header2"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_train_recent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tv_more_recent"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="更多"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="技术支持"/>
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

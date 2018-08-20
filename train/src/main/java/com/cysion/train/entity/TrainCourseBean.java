@@ -68,6 +68,10 @@ public class TrainCourseBean implements Serializable {
     private String state;
     private String cdate;
     private String style;
+    private String starts;
+
+
+
     private PriceBean price;
     private CompanyBean company;
     private int states;
@@ -124,6 +128,23 @@ public class TrainCourseBean implements Serializable {
 
     public String getArea() {
         return area;
+    }
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String aCity) {
+        city = aCity;
+    }
+
+    private String city;
+
+    public String getStarts() {
+        return starts;
+    }
+
+    public void setStarts(String aStarts) {
+        starts = aStarts;
     }
 
     public void setArea(String area) {

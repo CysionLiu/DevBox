@@ -27,12 +27,13 @@
     <dimen name="topbar_small">30dp</dimen>
     <dimen name="topbar_large">42dp</dimen>
     <dimen name="topbar_larger">48dp</dimen>
-    <dimen name="bottom_bar">49dp</dimen>
+    <dimen name="bottom_bar">48dp</dimen>
 
     <!--image-->
     <dimen name="image">120dp</dimen>
     <dimen name="image_s">100dp</dimen>
     <dimen name="image_ss">80dp</dimen>
+    <dimen name="image_sss">60dp</dimen>
     <dimen name="image_b">140dp</dimen>
     <dimen name="image_bb">160dp</dimen>
 
@@ -42,5 +43,6 @@
     <dimen name="icon_ss">20dp</dimen>
     <dimen name="icon_b">32dp</dimen>
     <dimen name="icon_bb">36dp</dimen>
+    <dimen name="icon_bbb">45dp</dimen>
 
 </resources>

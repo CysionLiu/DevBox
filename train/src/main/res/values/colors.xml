@@ -2,12 +2,12 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FF0000</color>
 
 
      <!--background-->
     <color name="main_background">#FFFFFF</color>
-    <color name="sub_background">#cccccc</color>
+    <color name="sub_background">#f0f0f0</color>
     <color name="min_background">#aaaaaa</color>
 
     <!--text-->
@@ -18,7 +18,7 @@
     <!--tag-->
     <color name="main_tag">#ffaa99</color>
     <color name="sub_tag">#ff6699</color>
-    <color name="min_tag">#EA5404</color>
+    <color name="min_tag">#ff3333</color>
 
 
 

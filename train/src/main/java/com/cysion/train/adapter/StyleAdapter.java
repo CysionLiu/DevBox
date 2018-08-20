@@ -9,23 +9,23 @@ import android.view.ViewGroup;
 import com.cysion.baselib.base.BaseAdapter;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.train.R;
-import com.cysion.train.entity.TrainCourseBean;
-import com.cysion.train.holder.train.TrainHolder;
+import com.cysion.train.entity.StyleBean;
+import com.cysion.train.holder.style.StyleHolder;
 
 import java.util.List;
 
-public class TrainAdapter extends BaseAdapter<TrainCourseBean> {
+public class StyleAdapter extends BaseAdapter<StyleBean> {
 
 
-    public TrainAdapter(List<TrainCourseBean> aEntities, Context aContext, OnTypeClickListener aOnTypeClickListener) {
+    public StyleAdapter(List<StyleBean> aEntities, Context aContext, OnTypeClickListener aOnTypeClickListener) {
         super(aEntities, aContext, aOnTypeClickListener);
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TrainHolder(
-                LayoutInflater.from(mContext).inflate(R.layout.item_train, parent, false)
+        return new StyleHolder(
+                LayoutInflater.from(mContext).inflate(R.layout.item_style, parent, false)
         );
     }
 }

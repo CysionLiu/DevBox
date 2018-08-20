@@ -4,7 +4,7 @@ package com.cysion.train.entity;
 import java.io.Serializable;
 
 //首页轮播-单个对象
-public class HomeBean implements Serializable {
+public class HomeTopBean implements Serializable {
 
     /**
      * id : 11
