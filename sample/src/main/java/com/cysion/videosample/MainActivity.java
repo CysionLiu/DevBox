@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.cysion.baselib.net.AInjector;
 import com.cysion.baselib.net.Caller;
 import com.cysion.baselib.utils.ShowUtil;
@@ -104,5 +105,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void tos1(View view) {
+        ToastUtils.setBgColor(0x33333333);
+        ToastUtils.showShort("hahfashdfhshdfs");
+    }
+
+    public void tos2(View view) {
+    }
+
+    public void tos3(View view) {
     }
 }

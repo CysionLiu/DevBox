@@ -3,6 +3,7 @@ package com.cysion.train.fragment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -18,6 +19,7 @@ import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.view.MySmartRefreshLayout;
+import com.cysion.train.view.MyToast;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
@@ -55,6 +57,11 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 getData();
+                new MyToast.Builder().bgColor(0x99ff0000)
+                        .gravity(Gravity.CENTER)
+                        .text("这是自定义toast")
+                        .tvColor(0xff0000ff)
+                        .build().show();
             }
         });
     }
