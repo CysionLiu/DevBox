@@ -2,24 +2,25 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF0000</color>
+    <color name="colorAccent">#ffFF0000</color>
 
 
      <!--background-->
-    <color name="main_background">#FFFFFF</color>
-    <color name="sub_background">#f0f0f0</color>
-    <color name="light_background">#e5e5e5</color>
-    <color name="min_background">#aaaaaa</color>
+    <color name="main_background">#ffFFFFFF</color>
+    <color name="sub_background">#fff0f0f0</color>
+    <color name="light_background">#ffe5e5e5</color>
+    <color name="min_background">#ffaaaaaa</color>
 
     <!--text-->
-    <color name="main_text">#000000</color>
-    <color name="sub_text">#666666</color>
-    <color name="min_text">#C8C8C8</color>
+    <color name="main_text">#ff000000</color>
+    <color name="sub_text">#ff666666</color>
+    <color name="min_text">#ffC8C8C8</color>
+    <color name="red_text">#fffc3733</color>
 
     <!--tag-->
-    <color name="main_tag">#ffaa99</color>
-    <color name="sub_tag">#ff6699</color>
-    <color name="min_tag">#ff3333</color>
+    <color name="main_tag">#ffea5a05</color>
+    <color name="sub_tag">#ffea5a05</color>
+    <color name="min_tag">#ffff3333</color>
 
 
 

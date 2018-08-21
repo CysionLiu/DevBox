@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 
 import com.cysion.baselib.Box;
+import com.cysion.train.R;
 import com.tmall.ultraviewpager.UltraViewPager;
 
 public class MyUltranViewPager extends UltraViewPager {
@@ -34,13 +35,13 @@ public class MyUltranViewPager extends UltraViewPager {
         //设置indicator样式
         getIndicator()
                 .setOrientation(UltraViewPager.Orientation.HORIZONTAL)
-                .setFocusColor(Color.YELLOW)
+                .setFocusColor(R.color.colorAccent)
                 .setNormalColor(Color.WHITE)
                 .setRadius((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()));
         //设置indicator对齐方式
         getIndicator().setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
         //构造indicator,绑定到UltraViewPager
-        getIndicator().setMargin(0, 0, 0, (int) (6 * Box.density())).build();
+        getIndicator().setMargin(0, 0, 0, (int) (9 * Box.density())).build();
 
         //设定页面循环播放
         setInfiniteLoop(true);

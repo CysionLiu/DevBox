@@ -80,7 +80,7 @@
             android:layout_marginTop="10dp"
             android:gravity="bottom"
             android:lineSpacingMultiplier="1.3"
-            android:textColor="@color/min_tag"
+            android:textColor="@color/red_text"
             android:textSize="@dimen/text_small"
             tools:text="起"/>
 
@@ -92,7 +92,7 @@
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@id/tv_price_ext"
             android:lineSpacingMultiplier="1.3"
-            android:textColor="@color/min_tag"
+            android:textColor="@color/red_text"
             android:textSize="@dimen/text_main"
             tools:text="10000"/>
     </RelativeLayout>

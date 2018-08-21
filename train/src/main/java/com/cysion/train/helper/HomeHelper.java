@@ -34,6 +34,14 @@ public class HomeHelper {
         strings.add(Box.str(R.string.home_user));
         return strings;
     }
+    public List<String> getTopTitles() {
+        List<String> strings = new ArrayList<>();
+        strings.add(Box.str(R.string.app_name));
+        strings.add(Box.str(R.string.str_meeting_list));
+        strings.add(Box.str(R.string.home_dingzhi));
+        strings.add(Box.str(R.string.home_user));
+        return strings;
+    }
 
     public List<Fragment> getFragments() {
         List<Fragment> fragmentArrayList = new ArrayList<>();

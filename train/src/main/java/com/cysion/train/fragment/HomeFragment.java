@@ -13,6 +13,7 @@ import com.cysion.baselib.base.BaseViewHolder;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.Constant;
+import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.activity.MainActivity;
 import com.cysion.train.activity.TrainDetailActivity;
@@ -144,7 +145,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 ExpertBean expertBean = (ExpertBean) obj;
-                TrainOrgActivity.start(mActivity, "机构", expertBean.getId());
+                TrainOrgActivity.start(mActivity,  PageConstant.IS_ORG, expertBean.getId());
             }
         });
         mRvTrainOrgs.setAdapter(mExpertOrgAdapter);
@@ -158,7 +159,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 ExpertBean expertBean = (ExpertBean) obj;
-                TrainOrgActivity.start(mActivity, "专家", expertBean.getId());
+                TrainOrgActivity.start(mActivity, PageConstant.IS_EXPERT, expertBean.getId());
             }
         });
         mRvTrainExperts.setAdapter(mExpertAdapter);

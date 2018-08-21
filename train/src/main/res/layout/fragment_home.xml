@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.cysion.train.view.MySmartRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/smr_refresj"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.v4.widget.NestedScrollView
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/sub_background"
@@ -24,7 +22,9 @@
             <com.cysion.train.view.MyUltranViewPager
                 android:id="@+id/vp_home_top"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="162dp"
+                android:layout_marginLeft="-6dp"
+                android:layout_marginRight="-6dp"
                 android:layout_marginTop="0dp"></com.cysion.train.view.MyUltranViewPager>
 
             <android.support.v7.widget.RecyclerView
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/str_train_opt"
                 android:textColor="@color/main_text"
                 android:textSize="@dimen/header2"
@@ -47,7 +47,7 @@
                 android:id="@+id/rv_train_opt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"></android.support.v7.widget.RecyclerView>
+                android:layout_marginTop="2dp"></android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/tv_more_opt"
@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
-                android:layout_marginTop="38dp"
+                android:layout_marginTop="22dp"
                 android:text="@string/str_train_recent"
                 android:textColor="@color/main_text"
                 android:textSize="@dimen/header2"
@@ -103,7 +103,7 @@
                 android:id="@+id/rv_train_recent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"></android.support.v7.widget.RecyclerView>
+                android:layout_marginTop="2dp"></android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/tv_more_recent"

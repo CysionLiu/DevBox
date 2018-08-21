@@ -3,13 +3,21 @@ package com.cysion.train.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cysion.baselib.base.BaseActivity;
+import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
+import com.cysion.train.entity.ExpertBean;
+import com.cysion.train.logic.TrainLogic;
+import com.cysion.train.utils.URLImageParser;
 
 import butterknife.BindView;
 
@@ -18,10 +26,20 @@ public class TrainOrgActivity extends BaseActivity {
 
     @BindView(R.id.bar_expert)
     TopBar mBarExpert;
-    @BindView(R.id.tv_detail)
-    TextView mTvDetail;
     @BindView(R.id.rv_recent_train)
     RecyclerView mRvRecentTrain;
+    @BindView(R.id.iv_expert_logo)
+    ImageView mIvExpertLogo;
+    @BindView(R.id.tv_expert_name)
+    TextView mTvExpertName;
+    @BindView(R.id.tv_info)
+    TextView mTvInfo;
+    @BindView(R.id.tv_meeting_oper)
+    TextView mTvMeetingOper;
+    @BindView(R.id.tv_meeting_count)
+    TextView mTvMeetingCount;
+    @BindView(R.id.tv_expert_desc)
+    TextView mTvExpertDesc;
     private String mId;
     private String mType;
 
@@ -54,12 +72,43 @@ public class TrainOrgActivity extends BaseActivity {
                 }
             }
         });
-        mBarExpert.setTitle("专家");
+
     }
 
     @Override
     protected void initData() {
-        mTvDetail.setText(mType + mId);
+        if (PageConstant.IS_EXPERT.equals(mType)) {
+            mBarExpert.setTitle("专家介绍");
+            TrainLogic.obj().getExpertDetail(mId, mBeanPureListener);
+        } else {
+            mBarExpert.setTitle("培训机构");
+            TrainLogic.obj().getOrgDetail(mId, mBeanPureListener);
+        }
     }
 
+    private PureListener<ExpertBean> mBeanPureListener = new PureListener<ExpertBean>() {
+        @Override
+        public void done(ExpertBean result) {
+            if (PageConstant.IS_EXPERT.equals(mType)) {
+                Glide.with(TrainOrgActivity.this)
+                        .load(result.getTop()).into(mIvExpertLogo);
+                mTvInfo.setText(result.getInfo());
+                mTvMeetingOper.setText("参与会议");
+            } else {
+                Glide.with(TrainOrgActivity.this)
+                        .load(result.getLogo()).into(mIvExpertLogo);
+                mTvInfo.setText(result.getWork());
+                mTvMeetingOper.setText("举办会议");
+            }
+            mTvExpertName.setText(result.getName());
+            mTvMeetingCount.setText(result.getTotal() + "");
+            mTvExpertDesc.setText(Html.fromHtml(result.getDesc(), new URLImageParser(mTvExpertDesc), null));
+        }
+
+        @Override
+        public void dont(int flag, String msg) {
+            Toast.makeText(TrainOrgActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+        }
+    };
 }

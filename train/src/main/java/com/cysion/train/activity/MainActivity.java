@@ -4,7 +4,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
-import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.R;
@@ -40,7 +39,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         ShowUtil.darkAndWhite(this, true);
-        mTvTopTitle.setText(Box.str(R.string.app_name));
         mVpHomeVp.setOffscreenPageLimit(4);
     }
 
@@ -58,7 +56,7 @@ public class MainActivity extends BaseActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
                 Logger.d(tab.getPosition());
-                mTvTopTitle.setText(HomeHelper.obj().getTitles().get(tab.getPosition()));
+                mTvTopTitle.setText(HomeHelper.obj().getTopTitles().get(tab.getPosition()));
             }
         });
     }

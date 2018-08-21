@@ -9,17 +9,10 @@
     android:orientation="vertical"
     tools:context=".activity.SplashActivity">
 
-    <RelativeLayout
+    <com.cysion.train.view.MyTopBar
+        android:id="@+id/topbar_list_meeting"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/topbar_small"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="城市区域时间段"/>
-    </RelativeLayout>
+        android:layout_height="@dimen/topbar_large"></com.cysion.train.view.MyTopBar>
 
     <com.cysion.train.view.MySmartRefreshLayout
         android:id="@+id/smr_refresj"

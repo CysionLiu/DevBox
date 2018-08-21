@@ -7,6 +7,7 @@ import com.cysion.baselib.net.Caller;
 import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.api.TrainApi;
+import com.cysion.train.entity.ExpertBean;
 import com.cysion.train.entity.TrainCourseBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -60,7 +61,8 @@ public class TrainLogic {
                     JSONArray list = obj1.optJSONArray("list");
                     String jsonList = list.toString();
                     Logger.d(jsonList);
-                    List<TrainCourseBean> ps = new Gson().fromJson(jsonList,new TypeToken<List<TrainCourseBean>>(){}.getType());
+                    List<TrainCourseBean> ps = new Gson().fromJson(jsonList, new TypeToken<List<TrainCourseBean>>() {
+                    }.getType());
                     aPureListener.done(ps);
                 } catch (Exception aE) {
                     aPureListener.dont(404, Box.str(R.string.str_invalid_data));
@@ -72,5 +74,76 @@ public class TrainLogic {
                 aPureListener.dont(404, t.getMessage());
             }
         });
+    }
+
+    public void getExpertDetail(String id, final PureListener<ExpertBean> aPureListener) {
+        Caller.obj().load(TrainApi.class)
+                .getExpert(Constant.COMMON_QUERY_JSON,
+                        Constant.COMMON_QUERY_APPID, id)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String body = response.body();
+                        try {
+                            JSONObject jsonObject = new JSONObject(body);
+                            if (jsonObject.optInt("status") != Constant.STATUS_SUCCESS) {
+                                aPureListener.dont(404, jsonObject.optString("msg"));
+                                return;
+                            }
+                            JSONObject obj1 = jsonObject.optJSONObject("data");
+                            if (obj1 == null) {
+                                aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                                return;
+                            }
+                            String jsonList = obj1.toString();
+                            Logger.d(jsonList);
+                            ExpertBean ps = new Gson().fromJson(jsonList, ExpertBean.class);
+                            aPureListener.done(ps);
+                        } catch (Exception aE) {
+                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+    }
+
+
+    public void getOrgDetail(String id, final PureListener<ExpertBean> aPureListener) {
+        Caller.obj().load(TrainApi.class)
+                .getTrainOrg(Constant.COMMON_QUERY_JSON,
+                        Constant.COMMON_QUERY_APPID, id)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String body = response.body();
+                        try {
+                            JSONObject jsonObject = new JSONObject(body);
+                            if (jsonObject.optInt("status") != Constant.STATUS_SUCCESS) {
+                                aPureListener.dont(404, jsonObject.optString("msg"));
+                                return;
+                            }
+                            JSONObject obj1 = jsonObject.optJSONObject("data");
+                            if (obj1 == null) {
+                                aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                                return;
+                            }
+                            String jsonList = obj1.toString();
+                            Logger.d(jsonList);
+                            ExpertBean ps = new Gson().fromJson(jsonList, ExpertBean.class);
+                            aPureListener.done(ps);
+                        } catch (Exception aE) {
+                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
     }
 }
