@@ -9,6 +9,7 @@ import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.R;
 import com.cysion.train.adapter.CustomHomePageAdapter;
+import com.cysion.train.fragment.MainListFragment;
 import com.cysion.train.helper.HomeHelper;
 import com.cysion.train.simple.SimpleTabSelectListener;
 import com.cysion.train.view.CustomHomeViewPager;
@@ -52,7 +53,7 @@ public class MainActivity extends BaseActivity {
         mTablayoutMain.setupWithViewPager(mVpHomeVp);
         initTabs();
 
-        mTablayoutMain.addOnTabSelectedListener(new SimpleTabSelectListener(){
+        mTablayoutMain.addOnTabSelectedListener(new SimpleTabSelectListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
@@ -71,7 +72,8 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public void switchToList(String type){
-
+    public void switchToList(String type) {
+        mTablayoutMain.getTabAt(1).select();
+        ((MainListFragment) mFragments.get(1)).fromOuter("", type, "", 0);
     }
 }

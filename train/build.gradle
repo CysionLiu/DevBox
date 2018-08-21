@@ -6,8 +6,9 @@ android {
         applicationId "com.cysion.train"
         minSdkVersion 21
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        //年+月+日+序列号（1-9）
+        versionCode 1809011
+        versionName "1.0.0"
 
     }
 

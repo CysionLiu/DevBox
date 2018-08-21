@@ -7,11 +7,25 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="StartTheme" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@mipmap/test2</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="style_more_train">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingRight">40dp</item>
+        <item name="android:paddingLeft">40dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:background">@drawable/shape_text_more</item>
     </style>
 
 </resources>

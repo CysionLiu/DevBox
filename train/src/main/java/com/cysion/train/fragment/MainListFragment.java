@@ -1,5 +1,6 @@
 package com.cysion.train.fragment;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,9 +13,13 @@ import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.Constant;
 import com.cysion.train.R;
+import com.cysion.train.activity.TrainDetailActivity;
 import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.TrainLogic;
+import com.cysion.train.view.MySmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +31,14 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
     RecyclerView mRvTrainList;
     @BindView(R.id.rl_empty)
     RelativeLayout mRlEmpty;
+    @BindView(R.id.smr_refresj)
+    MySmartRefreshLayout mSmrRefresj;
     private LinearLayoutManager mLayoutManager;
     private TrainAdapter mTrainAdapter;
+    private String mSearchArea;
+    private String mSearchStyle;
+    private String mSearchTime;
+    private int mSearchType;
 
     @Override
     protected int getLayoutId() {
@@ -40,48 +51,68 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         mTrainAdapter = new TrainAdapter(new ArrayList<TrainCourseBean>(), mActivity, this);
         mRvTrainList.setLayoutManager(mLayoutManager);
         mRvTrainList.setAdapter(mTrainAdapter);
+        mSmrRefresj.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                getData();
+            }
+        });
     }
 
     @Override
     protected void initData() {
-
     }
 
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
+        getData();
+    }
+
+    private void getData() {
         TrainLogic.obj().getTrainList(new PureListener<List<TrainCourseBean>>() {
             @Override
             public void done(List<TrainCourseBean> result) {
+                mSmrRefresj.finishRefresh();
                 for (TrainCourseBean bean : result) {
                     bean.setLocalType(Constant.MAIN_LIST);
                 }
                 mTrainAdapter.setEntities(result);
                 mTrainAdapter.notifyDataSetChanged();
-                changeLayout(true);
-
+                changeLayout();
             }
 
             @Override
             public void dont(int flag, String msg) {
+                mSmrRefresj.finishRefresh(0, false);
                 ToastUtils.showShort(msg);
-                changeLayout(false);
+                changeLayout();
             }
-        }, "", "", "", 0);
-
+        }, mSearchArea, mSearchStyle, mSearchTime, mSearchType);
     }
 
+    //列表内元素点击事件，ITEM_CLICK默认为整个item
     @Override
     public void onClicked(Object obj, int position, int flag) {
         switch (flag) {
             case BaseViewHolder.ITEM_CLICK:
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                ToastUtils.showShort(bean.getName());
+                TrainDetailActivity.start(mActivity, "", bean.getId());
         }
-
     }
 
-    private void changeLayout(boolean hasData) {
+    //别的页面跳入本页面，携带筛选条件
+    public void fromOuter(String area, String style, String period, int type) {
+        mSearchArea = area;
+        mSearchStyle = style;
+        mSearchTime = period;
+        mSearchType = type;
+        getData();
+    }
+
+    //数据列视图和空视图切换
+    private void changeLayout() {
+        boolean hasData = mTrainAdapter.getItemCount() != 0;
         if (hasData) {
             mRlEmpty.setVisibility(View.GONE);
             mRvTrainList.setVisibility(View.VISIBLE);

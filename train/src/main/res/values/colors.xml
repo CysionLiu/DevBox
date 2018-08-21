@@ -8,6 +8,7 @@
      <!--background-->
     <color name="main_background">#FFFFFF</color>
     <color name="sub_background">#f0f0f0</color>
+    <color name="light_background">#e5e5e5</color>
     <color name="min_background">#aaaaaa</color>
 
     <!--text-->

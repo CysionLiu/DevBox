@@ -16,6 +16,8 @@
     <string name="str_train_org">培训机构</string>
     <string name="str_train_recent">近期培训</string>
     <string name="str_train_expert">专家介绍</string>
+    <string name="str_more_recnet">更多近期培训信息</string>
+    <string name="str_more_opt">更多优选培训信息</string>
 
 
 </resources>

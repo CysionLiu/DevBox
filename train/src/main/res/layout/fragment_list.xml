@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/main_background"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".activity.SplashActivity">
 
     <RelativeLayout
@@ -15,31 +15,42 @@
         >
 
         <TextView
-            android:gravity="center"
-            android:text="城市区域时间段"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="城市区域时间段"/>
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_train_list"
-        android:background="@color/sub_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
-    <RelativeLayout
-        android:id="@+id/rl_empty"
-        android:visibility="gone"
+    <com.cysion.train.view.MySmartRefreshLayout
+        android:id="@+id/smr_refresj"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="480dp"
-            android:gravity="center"
-            android:text="@string/str_invalid_data"
-            android:textColor="@color/sub_tag"
-            android:textSize="@dimen/header1"/>
-    </RelativeLayout>
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_train_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/sub_background"></android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/rl_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="180dp"
+                    android:gravity="center"
+                    android:text="@string/str_invalid_data"
+                    android:textColor="@color/sub_tag"
+                    android:textSize="@dimen/header1"/>
+            </RelativeLayout>
+        </FrameLayout>
+    </com.cysion.train.view.MySmartRefreshLayout>
 </LinearLayout>

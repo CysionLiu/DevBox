@@ -6,8 +6,13 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
+
+import com.cysion.baselib.cache.ACache;
 
 /**
  * Created by cysion on 2017\12\22 0022.
@@ -136,5 +141,30 @@ public class Box {
             aE.printStackTrace();
         }
         return packageInfo;
+    }
+
+    public static String uuid() {
+        String key = "myUuidmyUuidmyUuid";
+        String myUuid = ACache.get(ctx()).getAsString(key);
+        if (!TextUtils.isEmpty(myUuid)) {
+            return myUuid;
+        }
+        //兼容老用户
+        TelephonyManager mTelephonyMgr = (TelephonyManager) ctx
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        if (mTelephonyMgr != null) {
+            myUuid = mTelephonyMgr.getDeviceId();
+        }
+        if (!TextUtils.isEmpty(myUuid) && !myUuid.startsWith("0")) {
+            return myUuid;
+        }
+        //没有，则生成唯一码，缓存
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            myUuid = Build.getSerial();
+        } else {
+            myUuid = Build.SERIAL;
+        }
+        ACache.get(ctx()).put(key, myUuid);
+        return myUuid;
     }
 }
