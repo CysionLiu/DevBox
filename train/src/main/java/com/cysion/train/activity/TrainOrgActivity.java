@@ -3,7 +3,6 @@ package com.cysion.train.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,16 +12,19 @@ import com.bumptech.glide.Glide;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
+import com.cysion.baselib.utils.ViewUtil;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.entity.ExpertBean;
 import com.cysion.train.logic.TrainLogic;
-import com.cysion.train.utils.URLImageParser;
+import com.cysion.train.view.SimpleWebview;
 
 import butterknife.BindView;
 
 public class TrainOrgActivity extends BaseActivity {
 
+    public static final String EXPERT_URL = "https://trade.5dev.cn/cultivate/main/?l=details1&id=";
+    public static final String ORG_URL = "https://trade.5dev.cn/cultivate/main/?l=details&id=";
 
     @BindView(R.id.bar_expert)
     TopBar mBarExpert;
@@ -38,8 +40,8 @@ public class TrainOrgActivity extends BaseActivity {
     TextView mTvMeetingOper;
     @BindView(R.id.tv_meeting_count)
     TextView mTvMeetingCount;
-    @BindView(R.id.tv_expert_desc)
-    TextView mTvExpertDesc;
+    @BindView(R.id.web_simple)
+    SimpleWebview mWebSimple;
     private String mId;
     private String mType;
 
@@ -83,6 +85,7 @@ public class TrainOrgActivity extends BaseActivity {
         } else {
             mBarExpert.setTitle("培训机构");
             TrainLogic.obj().getOrgDetail(mId, mBeanPureListener);
+
         }
     }
 
@@ -94,15 +97,17 @@ public class TrainOrgActivity extends BaseActivity {
                         .load(result.getTop()).into(mIvExpertLogo);
                 mTvInfo.setText(result.getInfo());
                 mTvMeetingOper.setText("参与会议");
+                mWebSimple.loadUrl("https://blog.csdn.net/Vivian8725118/article/details/53326036");
             } else {
                 Glide.with(TrainOrgActivity.this)
                         .load(result.getLogo()).into(mIvExpertLogo);
                 mTvInfo.setText(result.getWork());
                 mTvMeetingOper.setText("举办会议");
+                mWebSimple.loadUrl(ORG_URL + result.getId());
+
             }
             mTvExpertName.setText(result.getName());
             mTvMeetingCount.setText(result.getTotal() + "");
-            mTvExpertDesc.setText(Html.fromHtml(result.getDesc(), new URLImageParser(mTvExpertDesc), null));
         }
 
         @Override
@@ -111,4 +116,10 @@ public class TrainOrgActivity extends BaseActivity {
 
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ViewUtil.obj().gcViews(getWindow().getDecorView());
+    }
 }

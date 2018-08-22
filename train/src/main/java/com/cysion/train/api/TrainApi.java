@@ -15,6 +15,9 @@ public interface TrainApi {
     //获得某个会议详情
     @GET("content/?l=api.desc")
     Call<String> getTrain(@Query("json") int json, @Query("appid") int appid, @Query("id") String id, @Query("uid") String uid);
+    //获得某个会议详情-内容
+    @GET("main/?l=index")
+    Call<String> getTrainInfo(@Query("json") int json, @Query("appid") int appid, @Query("id") String id, @Query("uid") String uid);
 
     //获得专家列表
     @GET("content/?l=api.expert")
@@ -25,6 +28,10 @@ public interface TrainApi {
     @GET("content/?l=api.expert_desc")
     Call<String> getExpert(@Query("json") int json, @Query("appid") int appid, @Query("id") String id);
 
+    //获得某个专家详情-内容
+    @GET("main/?l=details1")
+    Call<String> getExpertInfo(@Query("json") int json, @Query("appid") int appid, @Query("id") String id);
+
 
     //获得培训机构列表
     @GET("content/?l=api.train")
@@ -33,6 +40,9 @@ public interface TrainApi {
     //获得某个机构详情
     @GET("content/?l=api.train_desc")
     Call<String> getTrainOrg(@Query("json") int json, @Query("appid") int appid, @Query("id") String id);
+    //获得某个机构详情-内容
+    @GET("main/?l=details")
+    Call<String> getTrainOrgInfo(@Query("json") int json, @Query("appid") int appid, @Query("id") String id);
 
 
 }
