@@ -24,6 +24,9 @@
     <string name="str_city">城市</string>
     <string name="str_style">类型</string>
     <string name="str_period">时段</string>
+    <string name="str_collect">收藏</string>
+    <string name="str_enroll">报名</string>
+    <string name="str_meeting_detail">会议详情</string>
 
 
 </resources>

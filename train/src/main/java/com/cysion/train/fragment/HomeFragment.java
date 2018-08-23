@@ -131,7 +131,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                TrainDetailActivity.start(mActivity, "", bean.getId());
+                TrainDetailActivity.start(mActivity, "", bean);
             }
         });
         mRvTrainOpt.setAdapter(mTrainAdapterOpt);
@@ -173,7 +173,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                TrainDetailActivity.start(mActivity, "", bean.getId());
+                TrainDetailActivity.start(mActivity, "", bean);
             }
         });
         mRvTrainRecent.setAdapter(mTrainAdapterRecent);

@@ -1,41 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_background"
-    android:fitsSystemWindows="true"
-    >
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.cysion.baselib.ui.TopBar
+        android:id="@+id/bar_train"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"></com.cysion.baselib.ui.TopBar>
 
-        <com.cysion.baselib.ui.TopBar
-            android:id="@+id/bar_train"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.cysion.baselib.ui.TopBar>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/sub_background"></View>
 
-        <View
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v4.widget.NestedScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:background="@color/sub_background"></View>
+            android:layout_height="match_parent"
+            android:background="@color/main_background"
+            android:fitsSystemWindows="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <com.cysion.train.view.MyUltranViewPager
+                    android:id="@+id/vp_train_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="-12dp"
+                    android:layout_marginRight="-12dp"></com.cysion.train.view.MyUltranViewPager>
+
+                <TextView
+                    android:id="@+id/tv_train_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textSize="@dimen/header2"
+                    android:textStyle="bold"
+                    tools:text="名称是个招牌"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/main_tag"></RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/main_background">
+
+                    <ImageView
+                        android:id="@+id/iv_time"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_expand"/>
+
+                    <TextView
+                        android:id="@+id/tv_time_fix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@id/iv_time"
+                        android:text="时间"
+                        android:textSize="@dimen/text_large"/>
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@id/tv_time_fix"
+                        android:textSize="@dimen/text_large"
+                        tools:text="2018.08.28-2018.10.05"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/sub_background"></View>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/main_background">
+
+                    <ImageView
+                        android:id="@+id/iv_address"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_expand"/>
+
+                    <TextView
+                        android:id="@+id/tv_address_fix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@id/iv_address"
+                        android:text="地点"
+                        android:textSize="@dimen/text_large"/>
+
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@id/tv_address_fix"
+                        android:textSize="@dimen/text_large"
+                        tools:text="北京 天坛公园"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/sub_background"></View>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/main_background">
+
+                    <ImageView
+                        android:id="@+id/iv_price"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_expand"/>
+
+                    <TextView
+                        android:id="@+id/tv_price_fix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@id/iv_price"
+                        android:text="价格"
+                        android:textSize="@dimen/text_large"/>
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@id/tv_price_fix"
+                        android:textColor="@color/min_tag"
+                        android:textSize="@dimen/text_large"
+                        tools:text="¥9000"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@id/tv_price"
+                        android:background="@drawable/shape_text_more"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="报名立享折扣"
+                        android:textColor="@color/min_tag"
+                        android:textSize="@dimen/text_main"
+                        />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="@color/sub_background"></View>
+
+                <com.cysion.train.view.SimpleWebview
+                    android:id="@+id/web_simple"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"></com.cysion.train.view.SimpleWebview>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/iv_to_share"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="20dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_launcher"/>
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_bar_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_collect"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@color/main_tag"
+                android:gravity="center"
+                android:text="@string/str_collect"/>
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="3dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="电话"/>
+
+            <TextView
+                android:id="@+id/tv_enroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main_tag"
+                android:gravity="center"
+                android:text="@string/str_enroll"/>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_detail"
+            android:id="@+id/tv_enroll_end"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:background="@color/min_background"
+            android:gravity="center"
+            android:text="报名已结束"
+            android:textColor="@color/main_background"
+            android:visibility="gone"/>
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:background="@color/sub_background"></View>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_infos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+    </FrameLayout>
+</LinearLayout>
