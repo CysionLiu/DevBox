@@ -15,9 +15,7 @@ public interface TrainApi {
     //获得某个会议详情
     @GET("content/?l=api.desc")
     Call<String> getTrain(@Query("json") int json, @Query("appid") int appid, @Query("id") String id, @Query("uid") String uid);
-    //获得某个会议详情-内容
-    @GET("main/?l=index")
-    Call<String> getTrainInfo(@Query("json") int json, @Query("appid") int appid, @Query("id") String id, @Query("uid") String uid);
+
 
     //获得专家列表
     @GET("content/?l=api.expert")

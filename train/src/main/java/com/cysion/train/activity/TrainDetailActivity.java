@@ -7,14 +7,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cysion.baselib.base.BaseActivity;
+import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.adapter.TrainDetailPageAdapter;
 import com.cysion.train.entity.TrainCourseBean;
+import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.view.MyUltranViewPager;
 import com.cysion.train.view.SimpleWebview;
 
@@ -90,6 +93,7 @@ public class TrainDetailActivity extends BaseActivity {
         });
         mBarTrain.setTitle(getString(R.string.str_meeting_detail));
         mWebSimple.loadUrl("https://www.baidu.com/");
+        mVpTrainDetail.setAutoScroll(100000000);
         setupData(courseBean);
     }
 
@@ -104,10 +108,24 @@ public class TrainDetailActivity extends BaseActivity {
         mVpTrainDetail.setAdapter(adapter);
         mTvTime.setText(aCourseBean.getStart());
         mTvAddress.setText(aCourseBean.getCity());
-        mTvAddress.setText(aCourseBean.getPrice().getMin());
+        if (aCourseBean.getPrice() != null) {
+            mTvAddress.setText(aCourseBean.getPrice().getMin());
+        }
     }
 
     @Override
     protected void initData() {
+        TrainLogic.obj().getTrainDetail(mId, new PureListener<TrainCourseBean>() {
+            @Override
+            public void done(TrainCourseBean result) {
+                setupData(result);
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+                Toast.makeText(TrainDetailActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 }

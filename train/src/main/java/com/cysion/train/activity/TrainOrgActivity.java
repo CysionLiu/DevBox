@@ -128,7 +128,7 @@ public class TrainOrgActivity extends BaseActivity {
                         @Override
                         public void onClicked(Object obj, int position, int flag) {
                             TrainCourseBean bean = (TrainCourseBean) obj;
-                            TrainDetailActivity.start(TrainOrgActivity.this, "", bean.getId());
+                            TrainDetailActivity.start(TrainOrgActivity.this, "", bean);
                         }
                     });
                     mRvRecentTrain.setAdapter(adapter);
@@ -164,7 +164,7 @@ public class TrainOrgActivity extends BaseActivity {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                TrainDetailActivity.start(TrainOrgActivity.this, "", bean.getId());
+                TrainDetailActivity.start(TrainOrgActivity.this, "", bean);
             }
         });
         mRvRecentTrain.setAdapter(adapter);

@@ -360,7 +360,7 @@ public class TrainCourseBean implements Serializable {
         this.tags = tags;
     }
 
-    public static class PriceBean {
+    public static class PriceBean implements Serializable {
         /**
          * max : 0
          * min : 9800元
@@ -534,7 +534,7 @@ public class TrainCourseBean implements Serializable {
         }
     }
 
-    public static class TagsBean {
+    public static class TagsBean implements Serializable {
         /**
          * id : 14
          * name : 旅游
