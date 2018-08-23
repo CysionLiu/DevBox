@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.ui.TopBar;
+import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.adapter.TrainDetailPageAdapter;
@@ -70,6 +71,7 @@ public class TrainDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        ShowUtil.darkAndWhite(this, true);
         Intent intent = getIntent();
         TrainCourseBean courseBean = null;
         if (intent != null) {

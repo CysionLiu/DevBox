@@ -18,6 +18,8 @@ public class PageConstant {
     //专家
     public static final String IS_EXPERT = "is_expert";
     public static final String IS_ORG = "is_org";
+    //近期排序,传参
+    public static final int RECENT_SORT = 2;
 
 
 }

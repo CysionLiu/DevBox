@@ -11,11 +11,13 @@ import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.entity.TrainCourseBean;
+import com.cysion.train.holder.OrgTrainHolder;
 import com.cysion.train.holder.train.TrainHolder;
 
 import java.util.List;
 
 public class TrainAdapter extends BaseAdapter<TrainCourseBean> {
+
 
 
     public TrainAdapter(List<TrainCourseBean> aEntities, Context aContext, OnTypeClickListener aOnTypeClickListener) {
@@ -33,6 +35,10 @@ public class TrainAdapter extends BaseAdapter<TrainCourseBean> {
             case Constant.HOME_LIST:
                 return new TrainHolder(
                         LayoutInflater.from(mContext).inflate(R.layout.item_train_opt, parent, false)
+                );
+            case Constant.ORG_LIST:
+                return new OrgTrainHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_train_org, parent, false)
                 );
         }
         return null;

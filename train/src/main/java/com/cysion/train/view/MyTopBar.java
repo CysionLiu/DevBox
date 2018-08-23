@@ -18,8 +18,8 @@ public class MyTopBar extends RelativeLayout {
 
     private View mRootView;
     private TextView mTxtTitle;
-    private TextView mImgRight;
-    private TextView mImgLeft;
+    private TextView mTvRight;
+    private TextView mTvLeft;
     private OnTopBarClickListener mOnTopBarClickListener = new OnTopBarClickListener() {
         @Override
         public void onIconClicked(View aView, Pos aPosition) {
@@ -36,9 +36,9 @@ public class MyTopBar extends RelativeLayout {
             int viewId = v.getId();
             if (viewId == R.id.img_left_topbar) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.LEFT);
-            }else if(viewId == R.id.txt_title_topbar){
+            } else if (viewId == R.id.txt_title_topbar) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.MIDDLE);
-            }else if(viewId == R.id.img_right_topbar){
+            } else if (viewId == R.id.img_right_topbar) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.RIGHT);
             }
         }
@@ -73,12 +73,12 @@ public class MyTopBar extends RelativeLayout {
         LayoutInflater inflater = (LayoutInflater) aContext.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         mRootView = inflater.inflate(R.layout.meeting_list_top_bar, this);
-        mImgLeft = mRootView.findViewById(R.id.txt_title_left);
-        mImgRight = mRootView.findViewById(R.id.txt_title_right);
+        mTvLeft = mRootView.findViewById(R.id.txt_title_left);
+        mTvRight = mRootView.findViewById(R.id.txt_title_right);
         mTxtTitle = (TextView) mRootView.findViewById(R.id.txt_title_topbar);
-        mImgLeft.setOnClickListener(mOnClickListener);
+        mTvLeft.setOnClickListener(mOnClickListener);
         mTxtTitle.setOnClickListener(mOnClickListener);
-        mImgRight.setOnClickListener(mOnClickListener);
+        mTvRight.setOnClickListener(mOnClickListener);
     }
 
     public void setOnTopBarClickListener(OnTopBarClickListener aOnTopBarClickListener) {
@@ -97,12 +97,20 @@ public class MyTopBar extends RelativeLayout {
     public View getView(Pos aPos) {
         switch (aPos) {
             case LEFT:
-                return mImgLeft;
+                return mTvLeft;
             case MIDDLE:
                 return mTxtTitle;
             case RIGHT:
-                return mImgRight;
+                return mTvRight;
         }
         return null;
+    }
+
+    public void setLeftText(String msg) {
+        mTvLeft.setText(msg);
+    }
+
+    public void setRightText(String msg) {
+        mTvRight.setText(msg);
     }
 }

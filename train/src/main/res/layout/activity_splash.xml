@@ -10,22 +10,16 @@
     tools:context=".activity.SplashActivity">
 
     <ImageView
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@mipmap/test1"/>
 
     <TextView
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="480dp"
         android:gravity="center"
         android:text="@string/app_name"
-        android:textColor="@color/main_background"
+        android:textColor="@color/sub_tag"
         android:textSize="@dimen/header1"/>
-    <com.cysion.train.view.SimpleWebview
-        android:id="@+id/web"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.cysion.train.view.SimpleWebview>
 </FrameLayout>
