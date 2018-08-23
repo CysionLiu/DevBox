@@ -30,6 +30,8 @@ public class TrainHolder extends BaseViewHolder<TrainCourseBean> {
     TextView mTvTrainPrice;
     @BindView(R.id.tv_price_ext)
     TextView mTvTrainExt;
+    @BindView(R.id.tv_style_tag)
+    TextView mTvTrainTag;
 
     public TrainHolder(View itemView) {
         super(itemView);
@@ -43,7 +45,7 @@ public class TrainHolder extends BaseViewHolder<TrainCourseBean> {
         if (obj.getLocalType() == Constant.MAIN_LIST) {
             Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext)).into(
                     mIvTrainTop);
-        }else{
+        } else {
             Glide.with(mContext).load(obj.getTop()).into(
                     mIvTrainTop);
         }
@@ -77,7 +79,7 @@ public class TrainHolder extends BaseViewHolder<TrainCourseBean> {
             mTvTrainExt.setText(price.getPrice_ext());
         }
         mTvTrainPrice.setText(priceStr);
-
+        mTvTrainTag.setText(obj.getStyle());
     }
 
 }

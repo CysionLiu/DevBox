@@ -70,8 +70,15 @@ public class TrainCourseBean implements Serializable {
     private String style;
     private String starts;
     private int localType;
+    private String week;
 
+    public String getWeek() {
+        return week;
+    }
 
+    public void setWeek(String aWeek) {
+        week = aWeek;
+    }
 
     private PriceBean price;
     private CompanyBean company;
@@ -130,6 +137,7 @@ public class TrainCourseBean implements Serializable {
     public String getArea() {
         return area;
     }
+
     public String getCity() {
         return city;
     }
@@ -394,8 +402,8 @@ public class TrainCourseBean implements Serializable {
          * name : 知学学院
          * top : http://trade.5dev.cn/upload/data/upload/1/2018/08/08/756fe34e9c24ae8064c4898ee4c42148.jpg
          * desc : <p>
-         <span style="font-size:16px;">知学学院成立于2013年，亲历着中国房地产行业从零售型向经营型转变这一波澜壮阔的大时代。我们的初心是打造房地产下半场操盘手的学习型社群，以“爱是最好的经营”为办学理念，培养房地产项目高层管理人员完成“从开发到经营”的转变。</span>
-         </p>
+         * <span style="font-size:16px;">知学学院成立于2013年，亲历着中国房地产行业从零售型向经营型转变这一波澜壮阔的大时代。我们的初心是打造房地产下半场操盘手的学习型社群，以“爱是最好的经营”为办学理念，培养房地产项目高层管理人员完成“从开发到经营”的转变。</span>
+         * </p>
          * reorder : 1
          * state : 1
          * cdate : 1533708301
@@ -471,30 +479,30 @@ public class TrainCourseBean implements Serializable {
          * order : 1
          * title : 会议简介
          * info : <p>
-         欢迎您参加由知学学院举办的【乡村旅游与休闲农业创新体验游学成都站】。作为中国农家乐的发源地，成都乡村旅游与休闲农业发展引领全国，以美丽乡村，乡村度假，乡村社区，社区营造，亲子农庄，乡村民宿为代表的乡村振兴新经济，正成为四川省乡村旅游发展的新亮点，增长点。
-         </p>
-         <p>
-         9月4日-7日，精选成都乡村旅游和休闲农业9个经典案例，与一线操盘手与行业人士一起考察交流！
-         </p>
-         <p>
-         <br />
-         </p>
-         <p>
-         主办单位：知学学院、蓝城农业研究院
-         </p>
-         <p>
-         课程时间：2018年9月4日-9月7日
-         </p>
-         <p>
-         地点：成都
-         </p>
-         <p>
-         <br />
-         </p>
-         <p>
-         <img src="http://trade.5dev.cn/upload/data/upload/1/2018/08/08/2184e12a3d859f18804a87956fe7851b.jpg" alt="" />
-         </p>
-         <br />
+         * 欢迎您参加由知学学院举办的【乡村旅游与休闲农业创新体验游学成都站】。作为中国农家乐的发源地，成都乡村旅游与休闲农业发展引领全国，以美丽乡村，乡村度假，乡村社区，社区营造，亲子农庄，乡村民宿为代表的乡村振兴新经济，正成为四川省乡村旅游发展的新亮点，增长点。
+         * </p>
+         * <p>
+         * 9月4日-7日，精选成都乡村旅游和休闲农业9个经典案例，与一线操盘手与行业人士一起考察交流！
+         * </p>
+         * <p>
+         * <br />
+         * </p>
+         * <p>
+         * 主办单位：知学学院、蓝城农业研究院
+         * </p>
+         * <p>
+         * 课程时间：2018年9月4日-9月7日
+         * </p>
+         * <p>
+         * 地点：成都
+         * </p>
+         * <p>
+         * <br />
+         * </p>
+         * <p>
+         * <img src="http://trade.5dev.cn/upload/data/upload/1/2018/08/08/2184e12a3d859f18804a87956fe7851b.jpg" alt="" />
+         * </p>
+         * <br />
          */
 
         private String order;

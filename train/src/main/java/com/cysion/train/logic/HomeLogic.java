@@ -2,6 +2,7 @@ package com.cysion.train.logic;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.cysion.baselib.Box;
+import com.cysion.baselib.cache.ACache;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.net.Caller;
 import com.cysion.train.Constant;
@@ -9,6 +10,7 @@ import com.cysion.train.R;
 import com.cysion.train.api.MultiApi;
 import com.cysion.train.entity.HomeAllDataBean;
 import com.cysion.train.entity.HomeDataBean;
+import com.cysion.train.fragment.HomeFragment;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -52,6 +54,8 @@ public class HomeLogic {
                         aHashMapPureListener.dont(404, Box.str(R.string.str_invalid_data));
                         return;
                     }
+                    //缓存
+                    ACache.get(Box.ctx()).put(HomeFragment.HOME_DATA_CACHE, body);
                     HomeAllDataBean homeAllDataBean = new Gson().fromJson(body, HomeAllDataBean.class);
                     HomeDataBean data = homeAllDataBean.getData();
                     aHashMapPureListener.done(data);

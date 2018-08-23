@@ -5,11 +5,14 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseFragment;
 import com.cysion.baselib.base.BaseViewHolder;
+import com.cysion.baselib.cache.ACache;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.Constant;
@@ -23,6 +26,7 @@ import com.cysion.train.adapter.HomeTopPageAdapter;
 import com.cysion.train.adapter.StyleAdapter;
 import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.entity.ExpertBean;
+import com.cysion.train.entity.HomeAllDataBean;
 import com.cysion.train.entity.HomeDataBean;
 import com.cysion.train.entity.HomeTopBean;
 import com.cysion.train.entity.StyleBean;
@@ -30,6 +34,7 @@ import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.HomeLogic;
 import com.cysion.train.view.MySmartRefreshLayout;
 import com.cysion.train.view.MyUltranViewPager;
+import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -117,7 +122,7 @@ public class HomeFragment extends BaseFragment {
             public void onClicked(Object obj, int position, int flag) {
                 if (BaseViewHolder.ITEM_CLICK == flag) {
                     StyleBean bean = (StyleBean) obj;
-                    ((MainActivity) mActivity).switchToList(bean.getId());
+                    ((MainActivity) mActivity).switchToList(bean.getId(), 0);
                 }
             }
         });
@@ -145,7 +150,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 ExpertBean expertBean = (ExpertBean) obj;
-                TrainOrgActivity.start(mActivity,  PageConstant.IS_ORG, expertBean.getId());
+                TrainOrgActivity.start(mActivity, PageConstant.IS_ORG, expertBean.getId());
             }
         });
         mRvTrainOrgs.setAdapter(mExpertOrgAdapter);
@@ -182,8 +187,22 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        //从缓存读取
+        try {
+            String body = ACache.get(Box.ctx()).getAsString(HomeFragment.HOME_DATA_CACHE);
+            if (!TextUtils.isEmpty(body)) {
+                HomeAllDataBean homeAllDataBean = new Gson().fromJson(body, HomeAllDataBean.class);
+                HomeDataBean data = homeAllDataBean.getData();
+                refreshDataList(data);
+            }
+        } catch (Exception aE) {
+        }
+
+        //远程获取
         getAllData();
     }
+
+    public static final String HOME_DATA_CACHE = "";
 
     public void getAllData() {
         HomeLogic.obj().getAllData(new PureListener<HomeDataBean>() {
@@ -191,42 +210,7 @@ public class HomeFragment extends BaseFragment {
             public void done(HomeDataBean result) {
                 mSmrRefresj.finishRefresh();
                 Logger.d(result);
-                //轮播图
-                List<HomeTopBean> revisedHome = result.getHome();
-                mHomeTopBeans.clear();
-                mHomeTopBeans.addAll(revisedHome);
-                mVpHomeTop.refresh();
-                //样式列表
-                List<StyleBean> styleBeans = result.getStyle();
-                mStyleBeans.clear();
-                mStyleBeans.addAll(styleBeans);
-                mStyleAdapter.notifyDataSetChanged();
-                //优选培训
-                List<TrainCourseBean> news = result.getNews();
-                for (TrainCourseBean bean : news) {
-                    bean.setLocalType(Constant.HOME_LIST);
-                }
-                mOptTrains.clear();
-                mOptTrains.addAll(news);
-                mTrainAdapterOpt.notifyDataSetChanged();
-                //近期培训
-                List<TrainCourseBean> old = result.getOld();
-                for (TrainCourseBean bean : old) {
-                    bean.setLocalType(Constant.HOME_LIST);
-                }
-                mRecentTrains.clear();
-                mRecentTrains.addAll(old);
-                mTrainAdapterRecent.notifyDataSetChanged();
-                //机构简介
-                List<ExpertBean> trainOrg = result.getTrain();
-                mExpertOrgs.clear();
-                mExpertOrgs.addAll(trainOrg);
-                mExpertOrgAdapter.notifyDataSetChanged();
-                //专家简介
-                List<ExpertBean> expert = result.getExpert();
-                mExperts.clear();
-                mExperts.addAll(expert);
-                mExpertAdapter.notifyDataSetChanged();
+                refreshDataList(result);
             }
 
             @Override
@@ -237,10 +221,59 @@ public class HomeFragment extends BaseFragment {
         });
     }
 
+    private void refreshDataList(HomeDataBean result) {
+//轮播图
+        List<HomeTopBean> revisedHome = result.getHome();
+        mHomeTopBeans.clear();
+        mHomeTopBeans.addAll(revisedHome);
+        mVpHomeTop.refresh();
+        //样式列表
+        List<StyleBean> styleBeans = result.getStyle();
+        mStyleBeans.clear();
+        mStyleBeans.addAll(styleBeans);
+        mStyleAdapter.notifyDataSetChanged();
+        //优选培训
+        List<TrainCourseBean> news = result.getNews();
+        for (TrainCourseBean bean : news) {
+            bean.setLocalType(Constant.HOME_LIST);
+        }
+        mOptTrains.clear();
+        mOptTrains.addAll(news);
+        mTrainAdapterOpt.notifyDataSetChanged();
+        //近期培训
+        List<TrainCourseBean> old = result.getOld();
+        for (TrainCourseBean bean : old) {
+            bean.setLocalType(Constant.HOME_LIST);
+        }
+        mRecentTrains.clear();
+        mRecentTrains.addAll(old);
+        mTrainAdapterRecent.notifyDataSetChanged();
+        //机构简介
+        List<ExpertBean> trainOrg = result.getTrain();
+        mExpertOrgs.clear();
+        mExpertOrgs.addAll(trainOrg);
+        mExpertOrgAdapter.notifyDataSetChanged();
+        //专家简介
+        List<ExpertBean> expert = result.getExpert();
+        mExperts.clear();
+        mExperts.addAll(expert);
+        mExpertAdapter.notifyDataSetChanged();
+    }
+
     private View.OnClickListener mOnClickMoreListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((MainActivity) mActivity).switchToList("");
+            int viewId = v.getId();
+            switch (viewId) {
+                case R.id.tv_more_opt:
+                    ((MainActivity) mActivity).switchToList("", 0);
+                    break;
+                case R.id.tv_more_recent:
+                    ((MainActivity) mActivity).switchToList("", PageConstant.RECENT_SORT);
+                    break;
+                default:
+                    break;
+            }
         }
     };
 }

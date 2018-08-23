@@ -38,17 +38,13 @@ public class SimpleWebview extends WebView {
     private void initSettings() {
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         //支持自动加载图片
         settings.setLoadsImagesAutomatically(true);
-        settings.setBlockNetworkImage(false);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         // 缩放按钮
         settings.setDisplayZoomControls(false);
         settings.setDomStorageEnabled(true);
         settings.setAllowFileAccess(true);
-        settings.setAppCacheEnabled(true);
         settings.setUseWideViewPort(true);//适应分辨率
         settings.setLoadWithOverviewMode(true);
     }

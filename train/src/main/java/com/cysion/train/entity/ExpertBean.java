@@ -44,6 +44,24 @@ public class ExpertBean implements Serializable {
     }
 
     private List<TrainCourseBean> list;
+    private List<TrainCourseBean> open;
+    private List<TrainCourseBean> meeting;
+
+    public List<TrainCourseBean> getOpen() {
+        return open;
+    }
+
+    public void setOpen(List<TrainCourseBean> aOpen) {
+        open = aOpen;
+    }
+
+    public List<TrainCourseBean> getMeeting() {
+        return meeting;
+    }
+
+    public void setMeeting(List<TrainCourseBean> aMeeting) {
+        meeting = aMeeting;
+    }
 
     public String getLogo() {
         return logo;

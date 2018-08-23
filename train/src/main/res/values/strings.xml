@@ -8,9 +8,9 @@
     <string name="str_meeting_list">会议列表</string>
 
 
-
     <!--网络数据状态-->
     <string name="str_invalid_data">没有获得数据</string>
+    <string name="str_error_data">数据格式异常</string>
     <string name="str_net_error">网络访问异常</string>
     <string name="str_no_net">网络已断开</string>
 
@@ -24,6 +24,14 @@
     <string name="str_city">城市</string>
     <string name="str_style">类型</string>
     <string name="str_period">时段</string>
+    <string name="str_recent_start">即将开始</string>
+    <string name="str_ended_meeting">过往会议</string>
+    <string name="str_get_dingzhi">立即提交，获取专属方案</string>
+    <string name="str_def_your_request">请简要描述你的需求...</string>
+    <string name="str_my_profile">我的资料</string>
+    <string name="str_my_sign">我的报名</string>
+    <string name="str_my_collect">我的收藏</string>
+    <string name="str_hotline">客服热线</string>
 
 
 </resources>
