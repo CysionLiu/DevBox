@@ -21,5 +21,7 @@ public class PageConstant {
     //近期排序,传参
     public static final int RECENT_SORT = 2;
 
+    //所有页面请求结果成功码
+    public static final int RESULT_OK = 200;
 
 }

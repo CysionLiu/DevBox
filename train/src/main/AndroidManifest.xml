@@ -33,7 +33,9 @@
             android:name=".activity.TrainDetailActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.LoginActivity"
+                  android:screenOrientation="portrait"
+            >
         </activity>
     </application>
 

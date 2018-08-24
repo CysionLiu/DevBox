@@ -9,6 +9,7 @@ import com.cysion.train.R;
 import com.cysion.train.api.TrainApi;
 import com.cysion.train.entity.ExpertBean;
 import com.cysion.train.entity.TrainCourseBean;
+import com.cysion.train.utils.MyJsonUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
@@ -48,16 +49,8 @@ public class TrainLogic {
             public void onResponse(Call<String> call, Response<String> response) {
                 String body = response.body();
                 try {
-                    JSONObject jsonObject = new JSONObject(body);
-                    if (jsonObject.optInt("status") != Constant.STATUS_SUCCESS) {
-                        aPureListener.dont(404, jsonObject.optString("msg"));
-                        return;
-                    }
-                    JSONObject obj1 = jsonObject.optJSONObject("data");
-                    if (obj1 == null) {
-                        aPureListener.dont(404, Box.str(R.string.str_invalid_data));
-                        return;
-                    }
+                    JSONObject obj1 = MyJsonUtil.obj().handleCommon(body, aPureListener);
+                    if (obj1 == null) return;
                     JSONArray list = obj1.optJSONArray("list");
                     String jsonList = list.toString();
                     Logger.d(jsonList);
@@ -85,17 +78,11 @@ public class TrainLogic {
                     public void onResponse(Call<String> call, Response<String> response) {
                         String body = response.body();
                         try {
-                            JSONObject jsonObject = new JSONObject(body);
-                            if (jsonObject.optInt("status") != Constant.STATUS_SUCCESS) {
-                                aPureListener.dont(404, jsonObject.optString("msg"));
+                            JSONObject jsonObject = MyJsonUtil.obj().handleCommon(body, aPureListener);
+                            if (jsonObject == null) {
                                 return;
                             }
-                            JSONObject obj1 = jsonObject.optJSONObject("data");
-                            if (obj1 == null) {
-                                aPureListener.dont(404, Box.str(R.string.str_invalid_data));
-                                return;
-                            }
-                            String jsonList = obj1.toString();
+                            String jsonList = jsonObject.toString();
                             Logger.d(jsonList);
                             ExpertBean ps = new Gson().fromJson(jsonList, ExpertBean.class);
                             aPureListener.done(ps);
@@ -106,7 +93,7 @@ public class TrainLogic {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-
+                        aPureListener.dont(404, t.getMessage());
                     }
                 });
     }
@@ -121,14 +108,8 @@ public class TrainLogic {
                     public void onResponse(Call<String> call, Response<String> response) {
                         String body = response.body();
                         try {
-                            JSONObject jsonObject = new JSONObject(body);
-                            if (jsonObject.optInt("status") != Constant.STATUS_SUCCESS) {
-                                aPureListener.dont(404, jsonObject.optString("msg"));
-                                return;
-                            }
-                            JSONObject obj1 = jsonObject.optJSONObject("data");
+                            JSONObject obj1 = MyJsonUtil.obj().handleCommon(body, aPureListener);
                             if (obj1 == null) {
-                                aPureListener.dont(404, Box.str(R.string.str_invalid_data));
                                 return;
                             }
                             String jsonList = obj1.toString();
@@ -142,14 +123,15 @@ public class TrainLogic {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-
+                        aPureListener.dont(404, t.getMessage());
                     }
                 });
     }
-     public void getTrainDetail(String id, final PureListener<TrainCourseBean> aPureListener) {
+
+    public void getTrainDetail(String id, final PureListener<TrainCourseBean> aPureListener) {
         Caller.obj().load(TrainApi.class)
                 .getTrain(Constant.COMMON_QUERY_JSON,
-                        Constant.COMMON_QUERY_APPID, id,"")
+                        Constant.COMMON_QUERY_APPID, id, "")
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -176,7 +158,7 @@ public class TrainLogic {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-
+                        aPureListener.dont(404, t.getMessage());
                     }
                 });
     }

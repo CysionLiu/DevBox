@@ -34,34 +34,64 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp">
+                android:paddingRight="0dp">
 
                 <com.cysion.train.view.MyUltranViewPager
                     android:id="@+id/vp_train_detail"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_marginLeft="-12dp"
-                    android:layout_marginRight="-12dp"></com.cysion.train.view.MyUltranViewPager>
+                    android:layout_marginRight="0dp"></com.cysion.train.view.MyUltranViewPager>
 
-                <TextView
-                    android:id="@+id/tv_train_name"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:textSize="@dimen/header2"
-                    android:textStyle="bold"
-                    tools:text="名称是个招牌"/>
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_train_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textSize="@dimen/header2"
+                        android:textStyle="bold"
+                        tools:text="名称是个招牌"/>
+
+                    <TextView
+                        android:id="@+id/tv_train_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/shape_tag2"
+                        android:includeFontPadding="false"
+                        android:padding="3dp"
+                        android:textColor="@color/main_background"
+                        android:textSize="@dimen/text_main"
+                        tools:text="田园"/>
+                </FrameLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
                     android:layout_marginTop="12dp"
-                    android:background="@color/main_tag"></RelativeLayout>
+                    android:background="@color/main_background">
+
+                    <TextView
+                        android:id="@+id/tv_train_tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="标签*标签"/>
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
                     android:layout_marginTop="12dp"
                     android:background="@color/main_background">
 
@@ -70,7 +100,7 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/icon_expand"/>
+                        android:src="@mipmap/time_clock"/>
 
                     <TextView
                         android:id="@+id/tv_time_fix"
@@ -80,7 +110,7 @@
                         android:layout_marginLeft="6dp"
                         android:layout_toRightOf="@id/iv_time"
                         android:text="时间"
-                        android:textSize="@dimen/text_large"/>
+                        android:textSize="@dimen/text_main"/>
 
                     <TextView
                         android:id="@+id/tv_time"
@@ -89,7 +119,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="6dp"
                         android:layout_toRightOf="@id/tv_time_fix"
-                        android:textSize="@dimen/text_large"
+                        android:textSize="@dimen/text_main"
                         tools:text="2018.08.28-2018.10.05"/>
 
                 </RelativeLayout>
@@ -102,6 +132,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
                     android:layout_marginTop="12dp"
                     android:background="@color/main_background">
 
@@ -110,7 +142,7 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/icon_expand"/>
+                        android:src="@mipmap/locate_icon"/>
 
                     <TextView
                         android:id="@+id/tv_address_fix"
@@ -120,7 +152,7 @@
                         android:layout_marginLeft="6dp"
                         android:layout_toRightOf="@id/iv_address"
                         android:text="地点"
-                        android:textSize="@dimen/text_large"/>
+                        android:textSize="@dimen/text_main"/>
 
                     <TextView
                         android:id="@+id/tv_address"
@@ -129,9 +161,15 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="6dp"
                         android:layout_toRightOf="@id/tv_address_fix"
-                        android:textSize="@dimen/text_large"
+                        android:textSize="@dimen/text_main"
                         tools:text="北京 天坛公园"/>
 
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_expand"/>
                 </RelativeLayout>
 
                 <View
@@ -142,6 +180,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
                     android:layout_marginTop="12dp"
                     android:background="@color/main_background">
 
@@ -150,7 +190,7 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/icon_expand"/>
+                        android:src="@mipmap/price_icon"/>
 
                     <TextView
                         android:id="@+id/tv_price_fix"
@@ -160,7 +200,7 @@
                         android:layout_marginLeft="6dp"
                         android:layout_toRightOf="@id/iv_price"
                         android:text="价格"
-                        android:textSize="@dimen/text_large"/>
+                        android:textSize="@dimen/text_main"/>
 
                     <TextView
                         android:id="@+id/tv_price"
@@ -170,7 +210,7 @@
                         android:layout_marginLeft="6dp"
                         android:layout_toRightOf="@id/tv_price_fix"
                         android:textColor="@color/min_tag"
-                        android:textSize="@dimen/text_large"
+                        android:textSize="@dimen/text_main"
                         tools:text="¥9000"/>
 
                     <TextView
@@ -198,6 +238,8 @@
                     android:id="@+id/web_simple"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
                     android:layout_marginTop="12dp"></com.cysion.train.view.SimpleWebview>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
@@ -231,26 +273,53 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:background="@color/main_tag"
+                android:drawablePadding="3dp"
+                android:drawableTop="@drawable/collect_icon_selector"
                 android:gravity="center"
-                android:text="@string/str_collect"/>
+                android:includeFontPadding="false"
+                android:padding="3dp"
+                android:text="@string/str_collect"
+                android:textColor="@color/main_tag"/>
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_marginRight="3dp"
-                android:background="@color/colorPrimary"
+                android:drawablePadding="3dp"
+                android:drawableTop="@mipmap/phone"
                 android:gravity="center"
-                android:text="电话"/>
+                android:includeFontPadding="false"
+                android:padding="3dp"
+                android:text="电话"
+                android:textColor="@color/main_tag"
+                android:textSize="@dimen/text_main"/>
 
-            <TextView
-                android:id="@+id/tv_enroll"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/main_tag"
-                android:gravity="center"
-                android:text="@string/str_enroll"/>
+                android:background="@color/main_tag">
+
+                <TextView
+                    android:id="@+id/tv_enroll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/str_enroll"
+                    android:textColor="@color/main_background"
+                    android:textSize="@dimen/header1"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toRightOf="@+id/tv_enroll"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/dis_price"/>
+            </RelativeLayout>
         </LinearLayout>
 
         <TextView

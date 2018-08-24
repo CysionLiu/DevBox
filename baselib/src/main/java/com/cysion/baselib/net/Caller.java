@@ -72,4 +72,9 @@ public class Caller implements ICall {
         }
         return mRetrofit.create(clazz);
     }
+
+    @Override
+    public OkHttpClient getClient() {
+        return mOkHttpClient;
+    }
 }

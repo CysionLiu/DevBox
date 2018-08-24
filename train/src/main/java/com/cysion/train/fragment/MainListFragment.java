@@ -68,11 +68,10 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 getData();
-                new MyToast.Builder().bgColor(0x99ff0000)
+                new MyToast.Builder()
                         .gravity(Gravity.CENTER)
                         .text("这是自定义toast")
-                        .tvColor(0xff0000ff)
-                        .build().show();
+                        .buildToShow();
             }
         });
     }

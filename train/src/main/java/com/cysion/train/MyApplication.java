@@ -11,6 +11,7 @@ import com.cysion.baselib.Box;
 import com.cysion.baselib.net.AInjector;
 import com.cysion.baselib.net.Caller;
 import com.cysion.baselib.simplify.AppLifeCallBacker;
+import com.cysion.train.simple.UserCaller;
 import com.cysion.train.view.MySmartRefreshLayout;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -50,6 +51,11 @@ public class MyApplication extends Application {
         Utils.init(this);
         registerActivityLifecycleCallbacks(new AppLifeCallBacker());
         //初始化网络请求
+        initCaller();
+
+    }
+
+    private void initCaller() {
         Caller.obj().inject(Constant.HOST, new AInjector() {
             @Override
             public Map<String, String> headers() {
@@ -61,6 +67,6 @@ public class MyApplication extends Application {
                 return map;
             }
         });
-
+        UserCaller.obj().inject(Constant.PASSPORT_HOST, null);
     }
 }
