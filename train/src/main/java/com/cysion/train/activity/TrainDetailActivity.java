@@ -23,7 +23,7 @@ import com.cysion.train.R;
 import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.adapter.TrainDetailPageAdapter;
 import com.cysion.train.entity.TrainCourseBean;
-import com.cysion.train.helper.UserCache;
+import com.cysion.train.helper.LoginHelper;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.logic.UserLogic;
 import com.cysion.train.view.MyUltranViewPager;
@@ -219,9 +219,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         switch (viewId) {
             case R.id.tv_collect:
                 //是否登录
-                if (!UserCache.obj().isLogin()) {
-                    Intent myIntent = new Intent(TrainDetailActivity.this, LoginActivity.class);
-                    startActivityForResult(myIntent, TO_LOGIN);
+                if (LoginHelper.obj().toLoginPage(this)) {
                     return;
                 }
                 if (mCurCourseBean.getStates() != Constant.COLLECTED_STATE) {
@@ -238,7 +236,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == TO_LOGIN) {
+        if (resultCode == RESULT_OK && requestCode == Constant.LOGIN_REQ) {
             initData();
         }
 

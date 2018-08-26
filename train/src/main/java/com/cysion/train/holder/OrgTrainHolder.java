@@ -31,7 +31,8 @@ public class OrgTrainHolder extends BaseViewHolder<TrainCourseBean> {
 
     @Override
     protected void fillData(TrainCourseBean obj, int position) {
-        Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext)).into(mIvTrainTop);
+        Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext))
+                .placeholder(R.mipmap.place_list).into(mIvTrainTop);
         mTvStyleTag.setText(obj.getStyle());
         mTvTrainName.setText(obj.getName());
         mTvTrainAddress.setText(obj.getCity());

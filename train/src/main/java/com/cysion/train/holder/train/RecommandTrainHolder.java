@@ -28,7 +28,7 @@ public class RecommandTrainHolder extends BaseViewHolder<TrainCourseBean> {
 
     @Override
     protected void fillData(TrainCourseBean obj, int position) {
-        Glide.with(mContext).load(obj.getTop()).into(mIvTrainTop);
+        Glide.with(mContext).load(obj.getTop()).placeholder(R.mipmap.place_list).into(mIvTrainTop);
         mTvTrainName.setText(obj.getName());
         mTvTrainAddress.setText(obj.getStart() + "·" + obj.getCity());
     }

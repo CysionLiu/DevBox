@@ -4,11 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseFragment;
 import com.cysion.baselib.base.BaseViewHolder;
@@ -68,10 +66,6 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 getData();
-                new MyToast.Builder()
-                        .gravity(Gravity.CENTER)
-                        .text("这是自定义toast")
-                        .buildToShow();
             }
         });
     }
@@ -112,7 +106,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
             @Override
             public void dont(int flag, String msg) {
                 mSmrRefresj.finishRefresh(0, false);
-                ToastUtils.showShort(msg);
+                new MyToast.Builder().text(msg).buildToShow();
                 changeLayout();
             }
         }, mSearchArea, mSearchStyle, mSearchTime, mSearchType);
@@ -124,7 +118,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         switch (flag) {
             case BaseViewHolder.ITEM_CLICK:
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                TrainDetailActivity.start(mActivity,  bean);
+                TrainDetailActivity.start(mActivity, bean);
         }
     }
 

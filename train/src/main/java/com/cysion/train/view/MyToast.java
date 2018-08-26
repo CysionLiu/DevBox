@@ -97,4 +97,12 @@ public class MyToast {
             mToast.show();
         }
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static void quickShow(String msg) {
+        builder().text(msg).buildToShow();
+    }
 }

@@ -24,6 +24,6 @@ public class StyleHolder extends BaseViewHolder<StyleBean> {
     @Override
     protected void fillData(StyleBean obj, int position) {
         mTvHomeStyle.setText(obj.getName());
-        Glide.with(mContext).load(obj.getTop()).into(mIvHomeStyle);
+        Glide.with(mContext).load(obj.getTop()).placeholder(R.mipmap.place_style).into(mIvHomeStyle);
     }
 }

@@ -46,7 +46,8 @@ public class CollectTrainHolder extends BaseViewHolder<TrainCourseBean> {
         if (obj == null) {
             return;
         }
-        Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext)).into(
+        Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext))
+                .placeholder(R.mipmap.place_list).into(
                 mIvTrainTop);
 
         mTvTrainName.setText(obj.getName());

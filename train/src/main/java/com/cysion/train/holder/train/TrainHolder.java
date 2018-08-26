@@ -43,7 +43,8 @@ public class TrainHolder extends BaseViewHolder<TrainCourseBean> {
             return;
         }
         if (obj.getLocalType() == Constant.MAIN_LIST) {
-            Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext)).into(
+            Glide.with(mContext).load(obj.getTop())
+                    .placeholder(R.mipmap.place_list).transform(new GlideRoundTransform(mContext)).into(
                     mIvTrainTop);
         } else {
             Glide.with(mContext).load(obj.getTop()).into(

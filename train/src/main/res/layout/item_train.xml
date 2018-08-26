@@ -28,7 +28,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:src="@mipmap/test2"/>
+            android:src="@mipmap/place_list"/>
 
         <TextView
             android:id="@+id/tv_style_tag"

@@ -21,6 +21,9 @@ public class Constant {
     public static final int COLLECTED_STATE = 1;
     //未收藏状态
     public static final int NOT_COLLECTED_STATE = 2;
+
+    //请求登录页面
+    public static final int LOGIN_REQ = 355;
     /**
      * 以下，会议列表不同形式
      */

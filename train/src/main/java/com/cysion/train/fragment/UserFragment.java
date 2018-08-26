@@ -14,7 +14,9 @@ import com.cysion.train.R;
 import com.cysion.train.activity.CollectActivity;
 import com.cysion.train.adapter.UserOptionAdapter;
 import com.cysion.train.entity.UserOptions;
+import com.cysion.train.helper.LoginHelper;
 import com.cysion.train.helper.UserCache;
+import com.cysion.train.view.MyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +55,13 @@ public class UserFragment extends BaseFragment {
             public void onClicked(Object obj, int position, int flag) {
                 UserOptions options = (UserOptions) obj;
                 if (options.getType() == Constant.MY_COLLECT) {
+                    if (LoginHelper.obj().toLoginPage(mActivity)) {
+                        return;
+                    }
                     Intent myIntent = new Intent(mActivity, CollectActivity.class);
                     startActivity(myIntent);
+                }else{
+                    MyToast.quickShow("功能未完成");
                 }
             }
         });

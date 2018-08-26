@@ -30,9 +30,9 @@ public class ExpertHolder extends BaseViewHolder<ExpertBean> {
     @Override
     protected void fillData(ExpertBean obj, int position) {
         if (TextUtils.isEmpty(obj.getTop())) {
-            Glide.with(mContext).load(obj.getLogo()).into(mIvExpertTop);
+            Glide.with(mContext).load(obj.getLogo()).placeholder(R.mipmap.place_org).into(mIvExpertTop);
         } else {
-            Glide.with(mContext).load(obj.getTop()).into(mIvExpertTop);
+            Glide.with(mContext).load(obj.getTop()).placeholder(R.mipmap.place_expert).into(mIvExpertTop);
         }
         mTvExpertName.setText(obj.getName());
         mTvExpertWork.setText(obj.getWork());

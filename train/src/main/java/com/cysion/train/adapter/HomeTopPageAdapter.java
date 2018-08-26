@@ -41,7 +41,8 @@ public class HomeTopPageAdapter extends PagerAdapter {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_vp_home_top, null);
         ImageView imgTop = view.findViewById(R.id.iv_home_top);
         com.orhanobut.logger.Logger.d(mHomeTopBeans.get(position).getTop());
-        Glide.with(mContext).load(mHomeTopBeans.get(position).getTop()).into(imgTop);
+        Glide.with(mContext).load(mHomeTopBeans.get(position).getTop())
+                .placeholder(R.mipmap.place_home_top).into(imgTop);
         container.addView(view);    //这一步很重要
         return view;
     }

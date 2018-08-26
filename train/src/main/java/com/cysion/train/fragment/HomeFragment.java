@@ -33,6 +33,7 @@ import com.cysion.train.entity.StyleBean;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.HomeLogic;
 import com.cysion.train.view.MySmartRefreshLayout;
+import com.cysion.train.view.MyToast;
 import com.cysion.train.view.MyUltranViewPager;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
@@ -136,7 +137,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                TrainDetailActivity.start(mActivity,  bean);
+                TrainDetailActivity.start(mActivity, bean);
             }
         });
         mRvTrainOpt.setAdapter(mTrainAdapterOpt);
@@ -178,7 +179,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                TrainDetailActivity.start(mActivity,  bean);
+                TrainDetailActivity.start(mActivity, bean);
             }
         });
         mRvTrainRecent.setAdapter(mTrainAdapterRecent);
@@ -217,6 +218,7 @@ public class HomeFragment extends BaseFragment {
             public void dont(int flag, String msg) {
                 Logger.d(msg);
                 mSmrRefresj.finishRefresh(0, false);
+                MyToast.quickShow(msg);
             }
         });
     }

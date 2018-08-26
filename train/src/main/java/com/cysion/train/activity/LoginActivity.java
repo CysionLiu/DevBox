@@ -129,22 +129,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         @Override
         public void onTick(long l) {
             //防止计时过程中重复点击
-            mBtnGetCode.setClickable(false);
-            mBtnGetCode.setText(l / 1000 + "s后重试");
-            mBtnGetCode.setTextColor(Box.color(R.color.main_background));
-            mBtnGetCode.setBackgroundColor(Box.color(R.color.min_background));
-
+            if (mBtnGetCode != null) {
+                mBtnGetCode.setClickable(false);
+                mBtnGetCode.setText(l / 1000 + "s后重试");
+                mBtnGetCode.setTextColor(Box.color(R.color.main_background));
+                mBtnGetCode.setBackgroundColor(Box.color(R.color.min_background));
+            }
         }
 
         //计时完毕的方法
         @Override
         public void onFinish() {
-            //重新给Button设置文字
-            mBtnGetCode.setText("重新获取验证码");
-            mBtnGetCode.setClickable(true);
-            //设置可点击
-            mBtnGetCode.setTextColor(Box.color(R.color.main_background));
-            mBtnGetCode.setBackgroundColor(Box.color(R.color.colorPrimary));
+            if (mBtnGetCode != null) {
+                //重新给Button设置文字
+                mBtnGetCode.setText("重新获取验证码");
+                mBtnGetCode.setClickable(true);
+                //设置可点击
+                mBtnGetCode.setTextColor(Box.color(R.color.main_background));
+                mBtnGetCode.setBackgroundColor(Box.color(R.color.colorPrimary));
+            }
         }
     }
 }
