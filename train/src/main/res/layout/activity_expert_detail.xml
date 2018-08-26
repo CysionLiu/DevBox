@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/main_background"
     android:layout_height="match_parent"
+    android:background="@color/main_background"
     android:orientation="vertical">
 
     <com.cysion.baselib.ui.TopBar
@@ -153,6 +153,41 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="0dp"
                 android:paddingRight="0dp"></android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:id="@+id/ll_meeting_box_old"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/main_tag"></View>
+
+                <TextView
+                    android:id="@+id/tv_meeting_list_name_old"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_ended_meeting"
+                    android:textColor="@color/main_tag"
+                    android:textSize="@dimen/text_large"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recent_train_old"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

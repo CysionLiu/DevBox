@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.train.R;
+import com.cysion.train.helper.UserCache;
 
 
 public class SplashActivity extends BaseActivity {
@@ -24,6 +25,7 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                UserCache.obj().outCache();
                 Intent myIntent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(myIntent);
                 finish();

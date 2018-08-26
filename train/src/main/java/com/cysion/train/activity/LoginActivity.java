@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.listener.PureListener;
+import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.logic.UserLogic;
@@ -43,6 +44,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initView() {
+        ShowUtil.darkAndWhite(this,true);
         mBtnLogin.setOnClickListener(this);
         mBtnGetCode.setOnClickListener(this);
     }
@@ -81,7 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         UserLogic.obj().login(aMobile, aCode, new PureListener<String>() {
             @Override
             public void done(String result) {
-                new MyToast.Builder().text("登录成功").iconId(R.mipmap.app_icon).buildToShow();
+                new MyToast.Builder().text("登录成功").buildToShow();
                 setResult(PageConstant.RESULT_OK);
                 finish();
             }
@@ -98,14 +100,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String trim = mEtPhone.getText().toString().trim();
         if (TextUtils.isEmpty(trim)) {
             new MyToast.Builder()
-                    .gravity(Gravity.BOTTOM)
-                    .iconId(R.mipmap.app_icon)
                     .text("手机号为空")
                     .buildToShow();
             return null;
         }
         if (trim.length() != 11) {
-            new MyToast.Builder().gravity(Gravity.CENTER).text("手机号格dfgdgdgdrgdrgdgdrgdrgrdg式不对").buildToShow();
+            new MyToast.Builder().gravity(Gravity.CENTER).text("手机号格式不对").buildToShow();
             return null;
         }
         return trim;

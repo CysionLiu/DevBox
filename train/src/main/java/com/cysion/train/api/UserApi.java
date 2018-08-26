@@ -43,4 +43,21 @@ public interface UserApi {
                             @Query("uid") String uid, @Query("session") String session,
                             @Query("username") String username,
                             @Query("avatar") String avatar, @Query("gender") String gender);
+
+    //收藏会议
+    @GET("content/?l=api.collect")
+    Call<String> col(@Query("json") int json, @Query("appid") int appid,
+                         @Query("uid") String uid, @Query("type") String type,
+                     @Query("col_id") String col_id);
+
+    //取消收藏会议
+    @GET("content/?l=api.collect")
+    Call<String> decol(@Query("json") int json, @Query("appid") int appid,
+                         @Query("uid") String uid, @Query("type") String type,
+                     @Query("col_id") String col_id);
+
+
+    //获得收藏列表
+    @GET("content/?l=api.mycollect")
+    Call<String> getCollects(@Query("json") int json, @Query("appid") int appid, @Query("uid") String uid);
 }

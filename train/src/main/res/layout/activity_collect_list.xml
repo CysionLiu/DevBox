@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:orientation="vertical">
+
+    <com.cysion.baselib.ui.TopBar
+        android:id="@+id/bar_expert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cysion.baselib.ui.TopBar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/sub_background"></View>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_train"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

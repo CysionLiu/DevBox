@@ -241,6 +241,34 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
                     android:layout_marginTop="12dp"></com.cysion.train.view.SimpleWebview>
+                <View
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="@color/sub_background"></View>
+                <TextView
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="推荐会议"
+                    android:textColor="@color/min_tag"
+                    android:drawableLeft="@mipmap/hot_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="10dp"
+                    android:layout_height="wrap_content"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_recommand"
+                    android:paddingBottom="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:gravity="center"
+                    android:background="@color/sub_background"
+                    android:text="————已经到底了————"
+                    android:textColor="@color/min_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"/>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
@@ -252,7 +280,7 @@
             android:layout_marginBottom="30dp"
             android:layout_marginRight="20dp"
             android:adjustViewBounds="true"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/to_share_icon"/>
     </FrameLayout>
 
 

@@ -16,7 +16,7 @@
         android:gravity="center"
         android:maxWidth="200dp"
         android:padding="20dp"
-        android:textColor="@color/main_tag"
+        android:textColor="@color/main_background"
         android:textSize="@dimen/header1"
         tools:text="toast"/>
 </LinearLayout>

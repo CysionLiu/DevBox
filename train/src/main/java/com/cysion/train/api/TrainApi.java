@@ -34,6 +34,8 @@ public interface TrainApi {
     @GET("content/?l=api.train_desc")
     Call<String> getTrainOrg(@Query("json") int json, @Query("appid") int appid, @Query("id") String id);
 
-
+    //获得推荐会议列表[某个会议的]
+    @GET("content/?l=api.matic")
+    Call<String> getRecommandMeetings(@Query("json") int json, @Query("appid") int appid, @Query("id") String id);
 
 }

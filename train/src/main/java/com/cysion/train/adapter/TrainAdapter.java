@@ -12,6 +12,8 @@ import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.holder.OrgTrainHolder;
+import com.cysion.train.holder.train.CollectTrainHolder;
+import com.cysion.train.holder.train.RecommandTrainHolder;
 import com.cysion.train.holder.train.TrainHolder;
 
 import java.util.List;
@@ -39,6 +41,14 @@ public class TrainAdapter extends BaseAdapter<TrainCourseBean> {
             case Constant.ORG_LIST:
                 return new OrgTrainHolder(
                         LayoutInflater.from(mContext).inflate(R.layout.item_train_org, parent, false)
+                );
+            case Constant.RECOMMAND_LIST:
+                return new RecommandTrainHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_train_recommand, parent, false)
+                );
+            case Constant.COLLECT_LIST:
+                return new CollectTrainHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_train_col, parent, false)
                 );
         }
         return null;

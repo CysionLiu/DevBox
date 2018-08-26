@@ -124,7 +124,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         switch (flag) {
             case BaseViewHolder.ITEM_CLICK:
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                TrainDetailActivity.start(mActivity, "", bean);
+                TrainDetailActivity.start(mActivity,  bean);
         }
     }
 

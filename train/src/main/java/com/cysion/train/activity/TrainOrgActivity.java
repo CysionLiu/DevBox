@@ -59,6 +59,12 @@ public class TrainOrgActivity extends BaseActivity {
     TextView mTvMeetingListName;
     @BindView(R.id.ll_meeting_box)
     LinearLayout mLlMeetingBox;
+    @BindView(R.id.tv_meeting_list_name_old)
+    TextView mTvMeetingListNameOld;
+    @BindView(R.id.ll_meeting_box_old)
+    LinearLayout mLlMeetingBoxOld;
+    @BindView(R.id.rv_recent_train_old)
+    RecyclerView mRvRecentTrainOld;
     private String mId;
     private String mType;
 
@@ -118,24 +124,8 @@ public class TrainOrgActivity extends BaseActivity {
                         .load(result.getLogo()).into(mIvExpertLogo);
                 mTvInfo.setText(result.getWork());
                 mTvMeetingOper.setText("举办会议");
-                List<TrainCourseBean> open = result.getOpen();
-                if (open != null && open.size() > 0) {
-                    for (TrainCourseBean bean : open) {
-                        bean.setLocalType(Constant.ORG_LIST);
-                    }
-                    mRvRecentTrain.setLayoutManager(new LinearLayoutManager(TrainOrgActivity.this));
-                    TrainAdapter adapter = new TrainAdapter(open, TrainOrgActivity.this, new OnTypeClickListener() {
-                        @Override
-                        public void onClicked(Object obj, int position, int flag) {
-                            TrainCourseBean bean = (TrainCourseBean) obj;
-                            TrainDetailActivity.start(TrainOrgActivity.this, "", bean);
-                        }
-                    });
-                    mRvRecentTrain.setAdapter(adapter);
-                } else {
-                    mLlMeetingBox.setVisibility(View.GONE);
-                }
-// TODO: 2018\8\23 0023 过往会议。。。
+                setForOrgOpen(result);
+                setForOrgMeeting(result);
             }
 
         }
@@ -146,7 +136,48 @@ public class TrainOrgActivity extends BaseActivity {
         }
     };
 
+    private void setForOrgMeeting(ExpertBean result) {
+        List<TrainCourseBean> meeting = result.getMeeting();
+        if (meeting != null && meeting.size() > 0) {
+            for (TrainCourseBean bean : meeting) {
+                bean.setLocalType(Constant.ORG_LIST);
+            }
+            mRvRecentTrainOld.setLayoutManager(new LinearLayoutManager(TrainOrgActivity.this));
+            TrainAdapter adapter = new TrainAdapter(meeting, TrainOrgActivity.this, new OnTypeClickListener() {
+                @Override
+                public void onClicked(Object obj, int position, int flag) {
+                    TrainCourseBean bean = (TrainCourseBean) obj;
+                    TrainDetailActivity.start(TrainOrgActivity.this,  bean);
+                }
+            });
+            mRvRecentTrainOld.setAdapter(adapter);
+        } else {
+            mLlMeetingBoxOld.setVisibility(View.GONE);
+        }
+    }
+
+    private void setForOrgOpen(ExpertBean result) {
+        List<TrainCourseBean> open = result.getOpen();
+        if (open != null && open.size() > 0) {
+            for (TrainCourseBean bean : open) {
+                bean.setLocalType(Constant.ORG_LIST);
+            }
+            mRvRecentTrain.setLayoutManager(new LinearLayoutManager(TrainOrgActivity.this));
+            TrainAdapter adapter = new TrainAdapter(open, TrainOrgActivity.this, new OnTypeClickListener() {
+                @Override
+                public void onClicked(Object obj, int position, int flag) {
+                    TrainCourseBean bean = (TrainCourseBean) obj;
+                    TrainDetailActivity.start(TrainOrgActivity.this,  bean);
+                }
+            });
+            mRvRecentTrain.setAdapter(adapter);
+        } else {
+            mLlMeetingBox.setVisibility(View.GONE);
+        }
+    }
+
     private boolean setDataForExpert(ExpertBean result) {
+        mLlMeetingBoxOld.setVisibility(View.GONE);
         Glide.with(TrainOrgActivity.this)
                 .load(result.getTop()).into(mIvExpertLogo);
         mTvInfo.setText(result.getInfo());
@@ -164,7 +195,7 @@ public class TrainOrgActivity extends BaseActivity {
             @Override
             public void onClicked(Object obj, int position, int flag) {
                 TrainCourseBean bean = (TrainCourseBean) obj;
-                TrainDetailActivity.start(TrainOrgActivity.this, "", bean);
+                TrainDetailActivity.start(TrainOrgActivity.this, bean);
             }
         });
         mRvRecentTrain.setAdapter(adapter);

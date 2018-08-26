@@ -8,12 +8,13 @@ import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MyJsonUtil {
 
-    private static Gson gson;
+    private Gson gson;
     private static volatile MyJsonUtil instance;
 
     private MyJsonUtil() {
@@ -27,9 +28,9 @@ public class MyJsonUtil {
         return instance;
     }
 
-    //校验后，得到data数据
+    //校验后，得到data数据,{}
     @Nullable
-    public JSONObject handleCommon(String aBody, PureListener aPureListener) throws JSONException {
+    public JSONObject handleCommonObj(String aBody, PureListener aPureListener) throws JSONException {
         JSONObject jsonObject = new JSONObject(aBody);
         int status = jsonObject.optInt("status");
         if (status != Constant.STATUS_SUCCESS) {
@@ -42,6 +43,30 @@ public class MyJsonUtil {
             return null;
         }
         return obj1;
+    }
+
+    //校验后，得到data数据,[]
+    @Nullable
+    public JSONArray handleCommonArray(String aBody, PureListener aPureListener) throws JSONException {
+        JSONObject jsonObject = new JSONObject(aBody);
+        int status = jsonObject.optInt("status");
+        if (status != Constant.STATUS_SUCCESS) {
+            aPureListener.dont(status, jsonObject.optString("msg"));
+            return null;
+        }
+        JSONArray data = jsonObject.optJSONArray("data");
+        if (data == null) {
+            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+            return null;
+        }
+        return data;
+    }
+
+    public Gson gson() {
+        if (gson == null) {
+            gson = new Gson();
+        }
+        return gson;
     }
 
 }
