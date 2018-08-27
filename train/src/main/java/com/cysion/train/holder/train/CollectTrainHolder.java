@@ -17,7 +17,8 @@ import butterknife.BindView;
 
 public class CollectTrainHolder extends BaseViewHolder<TrainCourseBean> {
 
-
+    public static final int DEL = 100;
+    public static final int SHARE = 101;
     @BindView(R.id.iv_train_top)
     ImageView mIvTrainTop;
     @BindView(R.id.tv_style_tag)
@@ -42,10 +43,23 @@ public class CollectTrainHolder extends BaseViewHolder<TrainCourseBean> {
     }
 
     @Override
-    protected void fillData(TrainCourseBean obj, int position) {
+    protected void fillData(final TrainCourseBean obj, final int position) {
         if (obj == null) {
             return;
         }
+        mTvDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnTypeClickListener.onClicked(obj, position, DEL);
+            }
+        });
+        mTvShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnTypeClickListener.onClicked(obj, position, SHARE);
+            }
+        });
+
         Glide.with(mContext).load(obj.getTop()).transform(new GlideRoundTransform(mContext))
                 .placeholder(R.mipmap.place_list).into(
                 mIvTrainTop);
@@ -79,6 +93,6 @@ public class CollectTrainHolder extends BaseViewHolder<TrainCourseBean> {
             mTvPriceExt.setText(price.getPrice_ext());
         }
         mTvTrainPrice.setText(priceStr);
-        mTvPriceExt.setText(obj.getStyle());
+        mTvStyleTag.setText(obj.getStyle());
     }
 }

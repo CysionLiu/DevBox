@@ -21,7 +21,7 @@
     <string name="str_train_expert">专家介绍</string>
     <string name="str_more_recnet">更多近期培训信息</string>
     <string name="str_more_opt">更多优选培训信息</string>
-    <string name="str_city">城市</string>
+    <string name="str_area">地区</string>
     <string name="str_style">类型</string>
     <string name="str_period">时段</string>
     <string name="str_recent_start">即将开始</string>

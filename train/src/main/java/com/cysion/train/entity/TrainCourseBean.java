@@ -83,7 +83,6 @@ public class TrainCourseBean implements Serializable {
     private PriceBean price;
     private CompanyBean company;
     private int states;
-    private List<ContentBean> content;
     private List<TagsBean> tags;
 
     public String getId() {
@@ -342,14 +341,6 @@ public class TrainCourseBean implements Serializable {
 
     public void setStates(int states) {
         this.states = states;
-    }
-
-    public List<ContentBean> getContent() {
-        return content;
-    }
-
-    public void setContent(List<ContentBean> content) {
-        this.content = content;
     }
 
     public List<TagsBean> getTags() {

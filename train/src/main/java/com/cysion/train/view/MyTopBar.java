@@ -34,11 +34,11 @@ public class MyTopBar extends RelativeLayout {
         @Override
         public void onClick(View v) {
             int viewId = v.getId();
-            if (viewId == R.id.img_left_topbar) {
+            if (viewId == R.id.txt_title_left) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.LEFT);
             } else if (viewId == R.id.txt_title_topbar) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.MIDDLE);
-            } else if (viewId == R.id.img_right_topbar) {
+            } else if (viewId == R.id.txt_title_right) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.RIGHT);
             }
         }

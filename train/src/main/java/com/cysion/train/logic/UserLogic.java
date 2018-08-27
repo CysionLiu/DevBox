@@ -147,6 +147,9 @@ public class UserLogic {
     }
 
     public void getColList(final PureListener<List<TrainCourseBean>> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
         Caller.obj().load(UserApi.class).getCollects(
                 Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID, UserCache.obj().getUid()
         ).enqueue(new Callback<String>() {

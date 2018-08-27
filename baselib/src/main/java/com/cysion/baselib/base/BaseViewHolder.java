@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
     private String mPageType;
     protected OnTypeClickListener mOnTypeClickListener;
-    public static final int ITEM_CLICK = 0xc1;
+    public static final int ITEM_CLICK = 0xccc1;
     protected int mPosition;
     protected View mRoot;
     protected Context mContext;

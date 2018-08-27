@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.IntentUtils;
 import com.cysion.baselib.base.BaseFragment;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.train.Constant;
@@ -28,10 +29,6 @@ public class UserFragment extends BaseFragment {
     @BindView(R.id.rv_user_options)
     RecyclerView mRvUserOptions;
     List<UserOptions> mUserOptions;
-    public static final int ZILIAO = 1000;
-    public static final int BAOMING = 1001;
-    public static final int SHOUCANG = 1002;
-    public static final int KEFU = 1003;
     @BindView(R.id.iv_user_avatar)
     ImageView mIvUserAvatar;
     @BindView(R.id.tv_logo_name)
@@ -60,7 +57,10 @@ public class UserFragment extends BaseFragment {
                     }
                     Intent myIntent = new Intent(mActivity, CollectActivity.class);
                     startActivity(myIntent);
-                }else{
+                } else if (options.getType() == Constant.MY_HOTLINE) {
+                    Intent myIntent = IntentUtils.getCallIntent(options.getMsg1());
+                    startActivity(myIntent);
+                } else {
                     MyToast.quickShow("功能未完成");
                 }
             }

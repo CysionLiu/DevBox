@@ -45,6 +45,11 @@ public class AreaBean implements Serializable {
         id = aId;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public static class City implements Serializable {
         private Map<String, List<AreaBean>> city;
 

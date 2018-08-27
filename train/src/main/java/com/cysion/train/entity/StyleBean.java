@@ -65,4 +65,9 @@ public class StyleBean {
     public void setCdate(String cdate) {
         this.cdate = cdate;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

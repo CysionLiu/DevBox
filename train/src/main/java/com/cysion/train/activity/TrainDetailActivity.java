@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.IntentUtils;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
@@ -26,6 +27,7 @@ import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.helper.LoginHelper;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.logic.UserLogic;
+import com.cysion.train.view.MyToast;
 import com.cysion.train.view.MyUltranViewPager;
 import com.cysion.train.view.SimpleWebview;
 
@@ -85,7 +87,6 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
 
     private String mId;
     private TrainCourseBean mCurCourseBean;
-    public static final int TO_LOGIN = 711;
 
     //type，机构or专家；id，打开本页面
     public static void start(Activity aActivity, TrainCourseBean aTrainCourseBean) {
@@ -121,6 +122,8 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         mVpTrainDetail.setAutoScroll(100000000);
         setupData(courseBean);
         mTvCollect.setOnClickListener(this);
+        mIvToShare.setOnClickListener(this);
+        mTvPhone.setOnClickListener(this);
     }
 
 
@@ -228,6 +231,14 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
                     UserLogic.obj().decol(mCurCourseBean.getId(), colListener);
                 }
                 break;
+            case R.id.iv_to_share:
+                MyToast.quickShow("功能未完成");
+                break;
+            case R.id.tv_phone:
+                Intent myIntent = IntentUtils.getCallIntent(Constant.HOTLINE_NUMBER);
+                startActivity(myIntent);
+                break;
+
             default:
                 break;
         }

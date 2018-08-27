@@ -70,8 +70,8 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public void switchToList(String period,int type) {
+    public void switchToList(String style,int type) {
         mTablayoutMain.getTabAt(1).select();
-        ((MainListFragment) mFragments.get(1)).fromOuter("", period, "", type);
+        ((MainListFragment) mFragments.get(1)).fromOuter(style, "", type);
     }
 }

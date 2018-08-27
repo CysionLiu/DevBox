@@ -66,6 +66,7 @@ public class HomeFragment extends BaseFragment {
     MyUltranViewPager mVpHomeTop;
     @BindView(R.id.smr_refresj)
     MySmartRefreshLayout mSmrRefresj;
+    public static final String HOME_DATA_CACHE = "";
 
     private List<HomeTopBean> mHomeTopBeans = new ArrayList<>();
     private List<StyleBean> mStyleBeans = new ArrayList<>();
@@ -203,7 +204,6 @@ public class HomeFragment extends BaseFragment {
         getAllData();
     }
 
-    public static final String HOME_DATA_CACHE = "";
 
     public void getAllData() {
         HomeLogic.obj().getAllData(new PureListener<HomeDataBean>() {
@@ -224,7 +224,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void refreshDataList(HomeDataBean result) {
-//轮播图
+        //轮播图
         List<HomeTopBean> revisedHome = result.getHome();
         mHomeTopBeans.clear();
         mHomeTopBeans.addAll(revisedHome);

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * 地域解析类
@@ -20,6 +22,8 @@ public class AreaUtil {
     private List<AreaBean> mProvince;
     private Map<String, List<AreaBean>> mCities;
     private Map<String, List<AreaBean>> mCounties;
+    private List<List<AreaBean>> mCityList;
+    private List<List<List<AreaBean>>> mCountyList;
 
     private AreaUtil() {
     }
@@ -52,11 +56,12 @@ public class AreaUtil {
         return mProvince;
     }
 
+    //根据省，获取市
     public List<AreaBean> getCity(String provinceId) {
         if (mCities != null) {
             return mCities.get(provinceId);
         }
-        mCities = new HashMap<>();
+        mCities = new TreeMap<>();
         InputStream inputStream = null;
         try {
             inputStream = Box.res().getAssets().open("city.json");
@@ -71,6 +76,21 @@ public class AreaUtil {
             return new ArrayList<>();
         }
         return new ArrayList<>();
+    }
+
+    //获取所有省的市
+    public List<List<AreaBean>> getCities() {
+        if (mCityList != null) {
+            return mCityList;
+        }
+        //读取城市数据
+        getCity("1");
+        mCityList = new ArrayList<>();
+        Set<String> strings = mCities.keySet();
+        for (String string : strings) {
+            mCityList.add(mCities.get(string));
+        }
+        return mCityList;
     }
 
     public List<AreaBean> getCounty(String cityId) {
@@ -92,5 +112,35 @@ public class AreaUtil {
             return new ArrayList<>();
         }
         return new ArrayList<>();
+    }
+
+    public List<List<List<AreaBean>>> getCounties() {
+        if (mCountyList != null) {
+            return mCountyList;
+        }
+        //读取文件的所有数据，包括省，市，县
+        getProvince();
+        getCities();
+        getCounty("");
+        mCountyList = new ArrayList<>();
+        int pSize = mProvince.size();
+        //遍历省
+        for (int i = 0; i < pSize; i++) {
+            //某个省里，所有市的[县区集合]
+            List<List<AreaBean>> tmp = new ArrayList<>();
+            //某个省的市的集合
+            List<AreaBean> city = mCities.get(mProvince.get(i).getId());
+            if (city==null) {
+                continue;
+            }
+            int cSize = city.size();
+            for (int j = 0; j < cSize; j++) {
+                //某个城市的县区集合
+                List<AreaBean> county = mCounties.get(city.get(j).getId());
+                tmp.add(county);
+            }
+            mCountyList.add(tmp);
+        }
+        return mCountyList;
     }
 }
