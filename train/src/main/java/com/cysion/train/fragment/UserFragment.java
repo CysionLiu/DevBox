@@ -58,7 +58,7 @@ public class UserFragment extends BaseFragment {
                     Intent myIntent = new Intent(mActivity, CollectActivity.class);
                     startActivity(myIntent);
                 } else if (options.getType() == Constant.MY_HOTLINE) {
-                    Intent myIntent = IntentUtils.getCallIntent(options.getMsg1());
+                    Intent myIntent = IntentUtils.getDialIntent(options.getMsg1());
                     startActivity(myIntent);
                 } else {
                     MyToast.quickShow("功能未完成");

@@ -22,22 +22,21 @@
             <com.cysion.train.view.MyUltranViewPager
                 android:id="@+id/vp_home_top"
                 android:layout_width="match_parent"
-                android:layout_height="162dp"
-                android:layout_marginLeft="-6dp"
-                android:layout_marginRight="-6dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="-8dp"
+                android:layout_marginRight="-8dp"
                 android:layout_marginTop="0dp"></com.cysion.train.view.MyUltranViewPager>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_top_styles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"></android.support.v7.widget.RecyclerView>
+                android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="24dp"
                 android:text="@string/str_train_opt"
                 android:textColor="@color/main_text"
                 android:textSize="@dimen/header2"
@@ -57,8 +56,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
-                android:layout_marginTop="38dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/str_train_org"
                 android:textColor="@color/main_text"
                 android:textSize="@dimen/header2"
@@ -75,8 +74,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
-                android:layout_marginTop="38dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="22dp"
                 android:text="@string/str_train_expert"
                 android:textColor="@color/main_text"
                 android:textSize="@dimen/header2"
@@ -92,7 +91,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
+                android:layout_marginLeft="24dp"
                 android:layout_marginTop="22dp"
                 android:text="@string/str_train_recent"
                 android:textColor="@color/main_text"
@@ -115,7 +114,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="38dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/tech_mark"
                 android:text="技术支持"/>

@@ -166,21 +166,18 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
             mAreaPvOptions = new OptionsPickerBuilder(mActivity, new OnOptionsSelectListener() {
                 @Override
                 public void onOptionsSelect(int options1, int option2, int options3, View v) {
+                    mSearchArea = "";
                     //返回的分别是三个级别的选中位置
                     AreaBean p = AreaUtil.obj().getProvince().get(options1);
-                    if (p != null) {
-                        mTopbarListMeeting.setLeftText(p.getName());
-                        mSearchArea = p.getId();
-                    }
                     AreaBean city = AreaUtil.obj().getCities().get(options1).get(option2);
-                    if (city != null && option2 > 0) {
-                        mTopbarListMeeting.setLeftText(city.getName());
-                        mSearchArea = city.getId();
-                    }
                     AreaBean county = AreaUtil.obj().getCounties().get(options1).get(option2).get(options3);
-                    if (county != null && options3 > 0) {
+                    mSearchArea = p.getId() + "," + city.getId() + "," + county.getId();
+                    mTopbarListMeeting.setLeftText(p.getName());
+                    if (option2 > 0) {
+                        mTopbarListMeeting.setLeftText(city.getName());
+                    }
+                    if (options3 > 0) {
                         mTopbarListMeeting.setLeftText(county.getName());
-                        mSearchArea = county.getId();
                     }
                     getData();
                 }

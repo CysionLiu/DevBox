@@ -23,7 +23,8 @@
         <item name="android:paddingRight">40dp</item>
         <item name="android:paddingLeft">40dp</item>
         <item name="android:paddingTop">6dp</item>
-        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginTop">34dp</item>
+        <item name="android:layout_marginBottom">34dp</item>
         <item name="android:paddingBottom">6dp</item>
         <item name="android:background">@drawable/shape_text_more</item>
     </style>

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    android:layout_marginTop="22dp"
+    android:layout_marginTop="19dp"
     android:fitsSystemWindows="true"
     app:cardCornerRadius="8dp"
     app:cardElevation="0dp"
@@ -50,7 +50,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="18dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="18dp"
@@ -61,8 +60,8 @@
                 android:layout_width="216dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:maxLines="2"
                 android:lineSpacingMultiplier="1.1"
-                android:lines="2"
                 android:textColor="@color/main_text"
                 android:textSize="@dimen/text_large"
                 android:textStyle="bold"
@@ -74,11 +73,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="3dp"
                 android:gravity="bottom"
                 android:lineSpacingMultiplier="1.1"
                 android:textColor="@color/red_text"
-                android:textSize="@dimen/text_small"
+                android:textSize="12dp"
                 tools:text="起"/>
 
             <TextView
@@ -89,7 +88,7 @@
                 android:gravity="bottom"
                 android:lineSpacingMultiplier="1.1"
                 android:textColor="@color/red_text"
-                android:textSize="@dimen/text_main"
+                android:textSize="15dp"
                 tools:text="10000"/>
 
         </RelativeLayout>
@@ -99,6 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
+            android:layout_marginTop="18dp"
             android:paddingRight="10dp"
             >
 
@@ -106,13 +106,12 @@
                 android:id="@+id/tv_train_tags"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:lineSpacingMultiplier="1.1"
                 android:lines="1"
                 android:paddingRight="20dp"
                 android:textColor="@color/sub_text"
-                android:textSize="@dimen/text_small"
+                android:textSize="13dp"
                 tools:text="标签"/>
 
             <TextView
@@ -120,12 +119,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:lineSpacingMultiplier="1.1"
                 android:lines="1"
                 android:textColor="@color/sub_text"
-                android:textSize="@dimen/text_small"
+                android:textSize="13dp"
                 tools:text="时间地点"/>
         </RelativeLayout>
 

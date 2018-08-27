@@ -235,7 +235,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
                 MyToast.quickShow("功能未完成");
                 break;
             case R.id.tv_phone:
-                Intent myIntent = IntentUtils.getCallIntent(Constant.HOTLINE_NUMBER);
+                Intent myIntent = IntentUtils.getDialIntent(Constant.HOTLINE_NUMBER);
                 startActivity(myIntent);
                 break;
 

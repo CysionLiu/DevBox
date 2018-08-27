@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="15dp"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
@@ -11,7 +11,7 @@
 
     <ImageView
         android:id="@+id/iv_home_style"
-        android:layout_width="@dimen/icon_bbb"
+        android:layout_width="47dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:gravity="center"
         android:textColor="@color/main_text"
-        android:textSize="@dimen/text_small"
+        android:textSize="13dp"
         tools:text="标签"/>
 </LinearLayout>
