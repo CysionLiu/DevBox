@@ -7,6 +7,7 @@ import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,7 +65,7 @@ public class MyJsonUtil {
 
     public Gson gson() {
         if (gson == null) {
-            gson = new Gson();
+            gson = new GsonBuilder().create();
         }
         return gson;
     }
