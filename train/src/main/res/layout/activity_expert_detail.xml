@@ -12,10 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cysion.baselib.ui.TopBar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:background="@color/sub_background"></View>
 
     <android.support.v4.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,15 +32,15 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
                 <ImageView
                     android:id="@+id/iv_expert_logo"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="15dp"
                     android:scaleType="fitXY"
                     android:src="@mipmap/test2"/>
 
@@ -55,6 +51,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_toRightOf="@id/iv_expert_logo"
                     android:textSize="@dimen/text_larger"
+                    android:textColor="@color/main_text"
                     tools:text="名字"/>
 
                 <TextView
@@ -81,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="参与会议"
-                        android:textSize="@dimen/text_smaller"/>
+                        android:textSize="@dimen/text_small"/>
 
                     <TextView
                         android:id="@+id/tv_meeting_count"
@@ -96,14 +93,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="场"
-                        android:textSize="@dimen/text_smaller"/>
+                        android:textSize="@dimen/text_small"/>
 
                 </LinearLayout>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="12dp"
+                android:layout_height="10dp"
                 android:background="@color/sub_background"></View>
 
 

@@ -181,7 +181,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
                     }
                     getData();
                 }
-            }).setCancelColor(Color.GRAY).build();
+            }).setContentTextSize(18).setCancelColor(Color.GRAY).setSubmitColor(Box.color(R.color.main_tag)).build();
             mAreaPvOptions.setPicker(AreaUtil.obj().getProvince(), AreaUtil.obj().getCities()
                     , AreaUtil.obj().getCounties());
         }
@@ -203,7 +203,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
                         mTopbarListMeeting.setTitle(Box.str(R.string.str_style));
                     }
                 }
-            }).setCancelColor(Color.GRAY).build();
+            }).setContentTextSize(18).setCancelColor(Color.GRAY).setSubmitColor(Box.color(R.color.main_tag)).build();
             if (mStyleBeans != null) {
                 StyleBean bean = new StyleBean();
                 bean.setId("");
@@ -223,7 +223,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
                 public void onOptionsSelect(int options1, int options2, int options3, View v) {
 
                 }
-            }).setCancelColor(Color.GRAY).build();
+            }).setContentTextSize(18).setCancelColor(Color.GRAY).setSubmitColor(Box.color(R.color.main_tag)).build();
             mPeriod.add("不限");
             mPeriodPcOptions.setPicker(mPeriod);
         }

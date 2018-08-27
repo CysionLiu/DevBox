@@ -54,9 +54,10 @@
             android:id="@+id/tv_train_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingMultiplier="1.3"
+            android:lineSpacingMultiplier="1.2"
             android:textColor="@color/main_text"
             android:textSize="@dimen/text_main"
+            android:includeFontPadding="false"
             tools:text="名称"/>
 
         <TextView
@@ -65,7 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_train_name"
             android:layout_marginTop="10dp"
-            android:lineSpacingMultiplier="1.3"
+            android:lineSpacingMultiplier="1.2"
+            android:includeFontPadding="false"
             android:paddingRight="20dp"
             android:textColor="@color/sub_text"
             android:textSize="@dimen/text_small"
@@ -78,7 +80,7 @@
             android:layout_below="@id/tv_train_tags"
             android:layout_marginTop="10dp"
             android:ellipsize="end"
-            android:lineSpacingMultiplier="1.3"
+            android:lineSpacingMultiplier="1.2"
             android:lines="1"
             android:textColor="@color/sub_text"
             android:textSize="@dimen/text_small"
@@ -91,11 +93,11 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/tv_train_price"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="11dp"
             android:gravity="bottom"
-            android:lineSpacingMultiplier="1.3"
+            android:lineSpacingMultiplier="1.2"
             android:textColor="@color/red_text"
-            android:textSize="@dimen/text_small"
+            android:textSize="11dp"
             tools:text="起"/>
 
         <TextView
@@ -104,8 +106,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_train_tags"
             android:layout_marginTop="10dp"
+            android:includeFontPadding="false"
             android:layout_toLeftOf="@id/tv_price_ext"
-            android:lineSpacingMultiplier="1.3"
+            android:lineSpacingMultiplier="1.2"
             android:textColor="@color/red_text"
             android:textSize="@dimen/text_main"
             tools:text="10000"/>
