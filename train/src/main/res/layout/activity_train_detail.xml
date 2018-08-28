@@ -130,6 +130,7 @@
                     android:background="@color/sub_background"></View>
 
                 <RelativeLayout
+                    android:id="@+id/rl_address_box"
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
                     android:layout_marginLeft="14dp"
@@ -156,11 +157,12 @@
 
                     <TextView
                         android:id="@+id/tv_address"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="6dp"
                         android:layout_toRightOf="@id/tv_address_fix"
+                        android:maxWidth="200dp"
                         android:textSize="@dimen/text_main"
                         tools:text="北京 天坛公园"/>
 
@@ -241,34 +243,37 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
                     android:layout_marginTop="12dp"></com.cysion.train.view.SimpleWebview>
+
                 <View
-                    android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="6dp"
+                    android:layout_marginTop="4dp"
                     android:background="@color/sub_background"></View>
+
                 <TextView
-                    android:gravity="center"
-                    android:layout_margin="10dp"
-                    android:text="推荐会议"
-                    android:textColor="@color/min_tag"
-                    android:drawableLeft="@mipmap/hot_selected"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@mipmap/hot_selected"
                     android:drawablePadding="10dp"
-                    android:layout_height="wrap_content"/>
+                    android:gravity="center"
+                    android:text="推荐会议"
+                    android:textColor="@color/min_tag"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_recommand"
-                    android:paddingBottom="6dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="6dp"></android.support.v7.widget.RecyclerView>
+
                 <TextView
-                    android:gravity="center"
-                    android:background="@color/sub_background"
-                    android:text="————已经到底了————"
-                    android:textColor="@color/min_background"
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"/>
+                    android:layout_height="42dp"
+                    android:background="@color/sub_background"
+                    android:gravity="center"
+                    android:text="————已经到底了————"
+                    android:textColor="@color/min_background"/>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 

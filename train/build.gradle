@@ -3,7 +3,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        applicationId "com.cysion.train"
+        applicationId "com.chengmao.meeting"
         minSdkVersion 21
         targetSdkVersion 22
         //年+月+日+序列号（1-9）

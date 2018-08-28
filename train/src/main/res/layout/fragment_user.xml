@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@mipmap/test2"/>
+            android:src="@mipmap/app_icon"/>
 
         <ImageView
             android:id="@+id/iv_user_avatar"

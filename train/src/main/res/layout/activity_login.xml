@@ -8,83 +8,66 @@
     android:background="@color/main_background"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
     tools:context=".activity.SplashActivity">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/close_cross"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp">
 
         <ImageView
-            android:layout_width="80dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:adjustViewBounds="true"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/app_logo"/>
 
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="橙猫培训平台"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/text_large"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp">
-
-        <TextView
-            android:id="@+id/tv_phone_fix"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="手机号:"/>
+        android:layout_height="42dp"
+        android:layout_marginTop="28dp">
 
         <EditText
             android:id="@+id/et_phone"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/tv_phone_fix"
+            android:background="@null"
             android:hint="请输入手机号"
             android:inputType="number"
-            android:textSize="@dimen/text_small"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/min_background"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="46dp">
-
-        <TextView
-            android:id="@+id/tv_sms_fix"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="验证码:"/>
-
-        <EditText
-            android:id="@+id/et_smscode"
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/tv_sms_fix"
-            android:inputType="number"
-            android:hint="请输入短信验证码"
-            android:textSize="@dimen/text_small"/>
+            android:textSize="@dimen/text_main"/>
 
         <Button
             android:id="@+id/btn_get_code"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:layout_toRightOf="@id/et_smscode"
-            android:text="点击获取验证码"
+            android:layout_toRightOf="@id/et_phone"
+            android:background="@null"
+            android:text="获取验证码"
             android:textAllCaps="false"
-            android:textSize="@dimen/text_small"/>
-
+            android:textColor="@color/sub_text"
+            android:textSize="@dimen/text_main"/>
     </RelativeLayout>
 
     <View
@@ -94,23 +77,70 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="42dp">
+
+        <EditText
+            android:id="@+id/et_smscode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:textSize="@dimen/text_main"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/min_background"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/selector_login_btn"
+        android:enabled="false"
+        android:text="立即登录"
+        android:textAllCaps="false"
+        android:textColor="@color/main_background"
+        android:textSize="@dimen/text_large"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@mipmap/selected_protol"/>
+
+        <TextView
+            android:id="@+id/tv_approval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:includeFontPadding="false"
+            android:text="同意并接受「橙猫」"
+            android:textColor="@color/min_background"
+            android:textSize="11dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="一些说明"/>
-    </RelativeLayout>
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_approval"
+            android:includeFontPadding="false"
+            android:text="《用户注册协议》"
+            android:textColor="@color/main_tag"
+            android:textSize="11dp"/>
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="登录"
-        android:textAllCaps="false"/>
+    </RelativeLayout>
 </LinearLayout>

@@ -28,7 +28,7 @@
             <ImageView
                 android:id="@+id/iv_train_top"
                 android:layout_width="match_parent"
-                android:layout_height="86dp"
+                android:layout_height="92dp"
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:scaleType="fitXY"
@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:drawableLeft="@mipmap/phone"
+            android:drawableLeft="@mipmap/share"
             android:drawablePadding="10dp"
             android:text="分享"/>
 
@@ -135,9 +135,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:drawableLeft="@mipmap/phone"
+            android:drawableLeft="@mipmap/del"
             android:drawablePadding="10dp"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:text="删除"/>
 
     </RelativeLayout>

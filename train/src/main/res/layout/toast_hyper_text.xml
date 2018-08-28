@@ -24,6 +24,6 @@
         android:layout_margin="10dp"
         android:gravity="center"
         android:textColor="@color/main_background"
-        android:textSize="@dimen/header1"
+        android:textSize="@dimen/text_large"
         tools:text="toast"/>
 </LinearLayout>

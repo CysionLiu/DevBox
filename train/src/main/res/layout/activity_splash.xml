@@ -9,13 +9,9 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.SplashActivity">
 
-
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:text="学而时习之"
-        android:textSize="32dp"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/splash"/>
 </FrameLayout>

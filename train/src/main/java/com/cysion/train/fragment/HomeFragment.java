@@ -32,6 +32,7 @@ import com.cysion.train.entity.HomeTopBean;
 import com.cysion.train.entity.StyleBean;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.HomeLogic;
+import com.cysion.train.utils.Alert;
 import com.cysion.train.view.MySmartRefreshLayout;
 import com.cysion.train.view.MyToast;
 import com.cysion.train.view.MyUltranViewPager;
@@ -201,6 +202,7 @@ public class HomeFragment extends BaseFragment {
         }
 
         //远程获取
+        Alert.obj().loading(mActivity);
         getAllData();
     }
 
@@ -212,11 +214,13 @@ public class HomeFragment extends BaseFragment {
                 mSmrRefresj.finishRefresh();
                 Logger.d(result);
                 refreshDataList(result);
+                Alert.obj().loaded();
             }
 
             @Override
             public void dont(int flag, String msg) {
                 Logger.d(msg);
+                Alert.obj().loaded();
                 mSmrRefresj.finishRefresh(0, false);
                 MyToast.quickShow(msg);
             }

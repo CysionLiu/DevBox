@@ -16,6 +16,7 @@ import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.holder.train.CollectTrainHolder;
 import com.cysion.train.logic.UserLogic;
+import com.cysion.train.utils.Alert;
 import com.cysion.train.view.MyToast;
 
 import java.util.ArrayList;
@@ -61,16 +62,19 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
 
     @Override
     protected void initData() {
+        Alert.obj().loading(this);
         UserLogic.obj().getColList(new PureListener<List<TrainCourseBean>>() {
             @Override
             public void done(List<TrainCourseBean> result) {
                 dataList.clear();
                 dataList.addAll(result);
                 mTrainAdapter.notifyDataSetChanged();
+                Alert.obj().loaded();
             }
 
             @Override
             public void dont(int flag, String msg) {
+                Alert.obj().loaded();
 
             }
         });

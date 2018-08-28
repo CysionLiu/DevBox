@@ -2,6 +2,7 @@ package com.cysion.train.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.widget.TextView;
 
 import com.cysion.baselib.base.BaseActivity;
@@ -12,6 +13,7 @@ import com.cysion.train.fragment.MainListFragment;
 import com.cysion.train.helper.HomeHelper;
 import com.cysion.train.simple.SimpleTabSelectListener;
 import com.cysion.train.view.CustomHomeViewPager;
+import com.cysion.train.view.MyToast;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -30,6 +32,8 @@ public class MainActivity extends BaseActivity {
     private List<Fragment> mFragments;
     private List<String> mTitles;
     private CustomHomePageAdapter mPageAdapter;
+    private long currentBackPressedTime = 0;
+    private static final int BACK_PRESSED_INTERVAL = 2000;
 
     @Override
     protected int getLayoutId() {
@@ -70,8 +74,22 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public void switchToList(String style,int type) {
+    public void switchToList(String style, int type) {
         mTablayoutMain.getTabAt(1).select();
         ((MainListFragment) mFragments.get(1)).fromOuter(style, "", type);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - currentBackPressedTime > BACK_PRESSED_INTERVAL) {
+            currentBackPressedTime = System.currentTimeMillis();
+            MyToast.builder().gravity(Gravity.BOTTOM)
+                    .text("再按一次即可退出应用")
+                    .yOffset(100)
+                    .textSize(12)
+                    .buildToShow();
+        } else {
+            finish();
+        }
     }
 }

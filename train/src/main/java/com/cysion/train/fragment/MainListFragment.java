@@ -27,6 +27,7 @@ import com.cysion.train.entity.HomeDataBean;
 import com.cysion.train.entity.StyleBean;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.TrainLogic;
+import com.cysion.train.utils.Alert;
 import com.cysion.train.utils.AreaUtil;
 import com.cysion.train.view.MySmartRefreshLayout;
 import com.cysion.train.view.MyToast;
@@ -120,6 +121,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
+        Alert.obj().loading(mActivity);
         getData();
     }
 
@@ -135,6 +137,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
                 mTrainAdapter.setEntities(result);
                 mTrainAdapter.notifyDataSetChanged();
                 changeLayout();
+                Alert.obj().loaded();
             }
 
             @Override
@@ -142,6 +145,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
                 mSmrRefresj.finishRefresh(0, false);
                 new MyToast.Builder().text(msg).buildToShow();
                 changeLayout();
+                Alert.obj().loaded();
             }
         }, mSearchArea, mSearchStyle, mSearchTime, mSearchType);
     }

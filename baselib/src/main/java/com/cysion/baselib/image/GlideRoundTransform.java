@@ -48,7 +48,7 @@ public class GlideRoundTransform extends BitmapTransformation {
     private static Bitmap roundCrop(BitmapPool pool, Bitmap source) {
         if (source == null) return null;
         if (radius == 0) {
-            radius = source.getWidth() / (Box.density() * 10);
+            radius = source.getWidth() / (Box.density() * 12);
         }
         Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
         if (result == null) {

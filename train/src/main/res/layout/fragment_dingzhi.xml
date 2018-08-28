@@ -11,7 +11,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/test1"
+        android:background="@mipmap/place_detail"
         android:paddingBottom="100dp"
         android:paddingTop="100dp"
         tools:context=".activity.SplashActivity">

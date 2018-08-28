@@ -18,6 +18,7 @@ public class MyToast {
     int gravity = -1;
     int yOffset = -1;
     int duration = -1;
+    int textDp = 14;
 
 
     public static class Builder {
@@ -26,6 +27,7 @@ public class MyToast {
         int gravity = -1;
         int yOffset = -1;
         int duration = -1;
+        int textDp = 14;
 
         public Builder iconId(int aIconId) {
             iconId = aIconId;
@@ -47,6 +49,11 @@ public class MyToast {
             return this;
         }
 
+        public Builder textSize(int aSize) {
+            textDp = aSize;
+            return this;
+        }
+
         public Builder text(String aText) {
             text = aText;
             return this;
@@ -55,6 +62,8 @@ public class MyToast {
         public MyToast buildToShow() {
             return new MyToast(this);
         }
+
+
     }
 
 
@@ -75,9 +84,11 @@ public class MyToast {
             duration = Toast.LENGTH_LONG;
         }
         duration = aBuilder.duration;
+        textDp = aBuilder.textDp;
         if (iconId < 0) {
             View v = LayoutInflater.from(Box.ctx()).inflate(R.layout.toast_text, null);
             TextView textView = v.findViewById(R.id.tv_show);
+            textView.setTextSize(textDp);
             textView.setText(text);
             mToast = new Toast(Box.ctx());
             mToast.setGravity(gravity, 0, yOffset);
@@ -89,6 +100,7 @@ public class MyToast {
             TextView textView = v.findViewById(R.id.tv_show);
             ImageView imageView = v.findViewById(R.id.iv_show);
             imageView.setImageResource(iconId);
+            textView.setTextSize(textDp);
             textView.setText(text);
             mToast = new Toast(Box.ctx());
             mToast.setGravity(gravity, 0, yOffset);

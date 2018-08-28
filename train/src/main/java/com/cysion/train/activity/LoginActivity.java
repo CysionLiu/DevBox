@@ -7,35 +7,43 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.logic.UserLogic;
+import com.cysion.train.simple.SimpleEditListener;
 import com.cysion.train.view.MyToast;
 
 import butterknife.BindView;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
-
-    @BindView(R.id.tv_phone_fix)
-    TextView mTvPhoneFix;
     @BindView(R.id.et_phone)
     EditText mEtPhone;
-    @BindView(R.id.tv_sms_fix)
-    TextView mTvSmsFix;
     @BindView(R.id.et_smscode)
     EditText mEtSmscode;
     @BindView(R.id.btn_get_code)
     Button mBtnGetCode;
     @BindView(R.id.btn_login)
     Button mBtnLogin;
+
+    private SimpleEditListener mSimpleEditListener = new SimpleEditListener() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            super.onTextChanged(s, start, before, count);
+            String phone = mEtPhone.getText().toString().trim();
+            String code = mEtSmscode.getText().toString().trim();
+            if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(code)) {
+                mBtnLogin.setEnabled(true);
+            } else {
+                mBtnLogin.setEnabled(false);
+            }
+        }
+    };
 
     @Override
     protected int getLayoutId() {
@@ -44,9 +52,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this,true);
+        ShowUtil.darkAndWhite(this, true);
         mBtnLogin.setOnClickListener(this);
         mBtnGetCode.setOnClickListener(this);
+        mEtPhone.addTextChangedListener(mSimpleEditListener);
+        mEtSmscode.addTextChangedListener(mSimpleEditListener);
     }
 
     @Override
@@ -130,10 +140,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void onTick(long l) {
             //防止计时过程中重复点击
             if (mBtnGetCode != null) {
-                mBtnGetCode.setClickable(false);
-                mBtnGetCode.setText(l / 1000 + "s后重试");
-                mBtnGetCode.setTextColor(Box.color(R.color.main_background));
-                mBtnGetCode.setBackgroundColor(Box.color(R.color.min_background));
+                mBtnGetCode.setEnabled(false);
+                mBtnGetCode.setTextSize(12);
+                mBtnGetCode.setText(l / 1000 + "s后可重新发送");
             }
         }
 
@@ -142,11 +151,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void onFinish() {
             if (mBtnGetCode != null) {
                 //重新给Button设置文字
+                mBtnGetCode.setTextSize(14);
                 mBtnGetCode.setText("重新获取验证码");
-                mBtnGetCode.setClickable(true);
-                //设置可点击
-                mBtnGetCode.setTextColor(Box.color(R.color.main_background));
-                mBtnGetCode.setBackgroundColor(Box.color(R.color.colorPrimary));
+                mBtnGetCode.setEnabled(true);
             }
         }
     }

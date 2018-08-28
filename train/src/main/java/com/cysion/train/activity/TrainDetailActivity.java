@@ -2,6 +2,7 @@ package com.cysion.train.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +32,13 @@ import com.cysion.train.logic.UserLogic;
 import com.cysion.train.view.MyToast;
 import com.cysion.train.view.MyUltranViewPager;
 import com.cysion.train.view.SimpleWebview;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class TrainDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -84,6 +88,8 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
     TextView mTvPriceFix;
     @BindView(R.id.rv_recommand)
     RecyclerView mRvRecommand;
+    @BindView(R.id.rl_address_box)
+    RelativeLayout mRlAddressBox;
 
     private String mId;
     private TrainCourseBean mCurCourseBean;
@@ -124,6 +130,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         mTvCollect.setOnClickListener(this);
         mIvToShare.setOnClickListener(this);
         mTvPhone.setOnClickListener(this);
+        mTvAddress.setOnClickListener(this);
     }
 
 
@@ -200,10 +207,12 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         mTvTime.setText(mCurCourseBean.getStart() + " - " + mCurCourseBean.getEnd());
         String map = mCurCourseBean.getMap();
         if (TextUtils.isEmpty(map)) {
-            map = "";
+            mRlAddressBox.setVisibility(View.GONE);
+        } else {
+            mRlAddressBox.setVisibility(View.VISIBLE);
+            String loc = map.split(",")[0];
+            mTvAddress.setText(loc);
         }
-        String loc = map.split(",")[0];
-        mTvAddress.setText(loc);
         if (mCurCourseBean.getPrice() != null) {
             mTvPrice.setText(mCurCourseBean.getPrice().getMin());
         }
@@ -238,7 +247,14 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
                 Intent myIntent = IntentUtils.getDialIntent(Constant.HOTLINE_NUMBER);
                 startActivity(myIntent);
                 break;
-
+            case R.id.tv_address:
+                String map = mCurCourseBean.getMap();
+                Logger.d(map);
+                String[] split = map.split(",");
+                if (split.length >= 3) {
+                    MapActivity.start(this, split[0], split[1], split[2]);
+                }
+                break;
             default:
                 break;
         }
@@ -275,4 +291,10 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

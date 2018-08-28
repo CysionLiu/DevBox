@@ -42,7 +42,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="15dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/test2"/>
+                    android:src="@mipmap/place_expert"/>
 
                 <TextView
                     android:id="@+id/tv_expert_name"
