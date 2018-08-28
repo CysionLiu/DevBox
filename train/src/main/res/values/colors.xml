@@ -10,6 +10,7 @@
     <color name="sub_background">#fff0f0f0</color>
     <color name="light_background">#ffe5e5e5</color>
     <color name="min_background">#ffaaaaaa</color>
+    <color name="yellow_background">#ffEE7636</color>
 
     <!--text-->
     <color name="main_text">#ff000000</color>

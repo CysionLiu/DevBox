@@ -12,44 +12,58 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_height="wrap_content">
+
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@mipmap/app_icon"/>
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/user_decor"/>
 
         <ImageView
             android:id="@+id/iv_user_avatar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
-            android:visibility="gone"/>
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/user_avatar_default"
+            android:visibility="visible"/>
 
         <TextView
             android:id="@+id/tv_logo_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:text="未登录"
-            android:textColor="@color/main_background"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="136dp"
+            android:text="未登录,请先登录"
+            android:textColor="@color/main_background"
+            android:textSize="@dimen/text_main"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="个人中心"
+            android:textColor="@color/main_background"
+            android:textSize="@dimen/text_larger"/>
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_user_options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:padding="20dp"></android.support.v7.widget.RecyclerView>
+
     <TextView
         android:id="@+id/tv_to_logout"
-        android:layout_marginTop="20dp"
-        android:text="辅助：注销登录"
-        android:gravity="center"
-        android:background="@color/main_tag"
-        android:textColor="@color/main_background"
         android:layout_width="match_parent"
-        android:layout_height="42dp"/>
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/main_tag"
+        android:gravity="center"
+        android:text="辅助：注销登录"
+        android:textColor="@color/main_background"/>
 </LinearLayout>

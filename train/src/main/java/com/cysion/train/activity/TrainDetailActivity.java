@@ -2,7 +2,6 @@ package com.cysion.train.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.IntentUtils;
+import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
+import com.cysion.baselib.base.BusEvent;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
@@ -34,11 +35,13 @@ import com.cysion.train.view.MyUltranViewPager;
 import com.cysion.train.view.SimpleWebview;
 import com.orhanobut.logger.Logger;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class TrainDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -160,6 +163,8 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
                 mRvRecommand.setAdapter(new TrainAdapter(result, TrainDetailActivity.this, new OnTypeClickListener() {
                     @Override
                     public void onClicked(Object obj, int position, int flag) {
+                        TrainCourseBean bean = (TrainCourseBean) obj;
+                        TrainDetailActivity.start(TrainDetailActivity.this, bean);
                     }
                 }));
             }
@@ -181,10 +186,11 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
             style = "";
         }
         mTvTrainStyle.setText(style);
-        int c = style.length();
-        String div = "";
-        for (int i = 0; i < c + 1; i++) {
-            div = div + "   ";
+        int width = (int) mTvTrainStyle.getPaint().measureText(style);
+        int c = (int) (width / (4 * Box.density()));
+        String div = "  ";//padding
+        for (int i = 0; i < c; i++) {
+            div = div + " ";
         }
         mTvTrainName.setText(div + mCurCourseBean.getName());
         resetColState();
@@ -291,10 +297,10 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void fromEventBus(BusEvent event) {
+        if (event.getTag() == PageConstant.LOGIN_SUCCESS) {
+            initData();
+        }
     }
 }

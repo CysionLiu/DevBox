@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.IntentUtils;
 import com.cysion.baselib.base.BaseFragment;
+import com.cysion.baselib.base.BusEvent;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.train.Constant;
+import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.activity.CollectActivity;
 import com.cysion.train.adapter.UserOptionAdapter;
@@ -19,11 +21,13 @@ import com.cysion.train.helper.LoginHelper;
 import com.cysion.train.helper.UserCache;
 import com.cysion.train.view.MyToast;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 public class UserFragment extends BaseFragment {
     @BindView(R.id.rv_user_options)
@@ -35,7 +39,6 @@ public class UserFragment extends BaseFragment {
     TextView mTvLogoName;
     @BindView(R.id.tv_to_logout)
     TextView mTvToLogout;
-    Unbinder unbinder;
 
     @Override
     protected int getLayoutId() {
@@ -80,6 +83,10 @@ public class UserFragment extends BaseFragment {
             }
         });
         refreshPage();
+    }
+
+    @Override
+    protected void initData() {
 
     }
 
@@ -119,14 +126,11 @@ public class UserFragment extends BaseFragment {
         return tmp;
     }
 
-    @Override
-    protected void initData() {
 
-    }
-
-    @Override
-    protected void visibleAgain() {
-        super.visibleAgain();
-        refreshPage();
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void fromEventBus(BusEvent event) {
+        if (event.getTag() == PageConstant.LOGIN_SUCCESS) {
+            refreshPage();
+        }
     }
 }

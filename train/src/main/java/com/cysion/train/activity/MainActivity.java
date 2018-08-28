@@ -3,8 +3,10 @@ package com.cysion.train.activity;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 
+import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.R;
@@ -61,6 +63,13 @@ public class MainActivity extends BaseActivity {
                 super.onTabSelected(tab);
                 Logger.d(tab.getPosition());
                 mTvTopTitle.setText(HomeHelper.obj().getTopTitles().get(tab.getPosition()));
+                if (tab.getPosition() == 3) {
+                    ShowUtil.yellow(MainActivity.this, Box.color(R.color.yellow_background));
+                    mTvTopTitle.setVisibility(View.GONE);
+                } else {
+                    ShowUtil.darkAndWhite(MainActivity.this, true);
+                    mTvTopTitle.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

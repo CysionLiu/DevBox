@@ -1,5 +1,6 @@
 package com.cysion.train.activity;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -7,9 +8,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cysion.baselib.base.BaseActivity;
+import com.cysion.baselib.base.BusEvent;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.PageConstant;
@@ -18,7 +22,10 @@ import com.cysion.train.logic.UserLogic;
 import com.cysion.train.simple.SimpleEditListener;
 import com.cysion.train.view.MyToast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -30,6 +37,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     Button mBtnGetCode;
     @BindView(R.id.btn_login)
     Button mBtnLogin;
+    @BindView(R.id.iv_close)
+    ImageView mIvClose;
+    @BindView(R.id.tv_user_protocol)
+    TextView mTvUserProtocol;
 
     private SimpleEditListener mSimpleEditListener = new SimpleEditListener() {
         @Override
@@ -55,6 +66,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         ShowUtil.darkAndWhite(this, true);
         mBtnLogin.setOnClickListener(this);
         mBtnGetCode.setOnClickListener(this);
+        mIvClose.setOnClickListener(this);
         mEtPhone.addTextChangedListener(mSimpleEditListener);
         mEtSmscode.addTextChangedListener(mSimpleEditListener);
     }
@@ -72,6 +84,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 String trim = invalidateMobile();
                 if (trim == null) return;
                 getSmsCode(trim);
+                break;
+            case R.id.iv_close:
+                finish();
                 break;
             case R.id.btn_login:
                 String mobile = invalidateMobile();
@@ -94,8 +109,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void done(String result) {
                 new MyToast.Builder().text("登录成功").buildToShow();
-                setResult(PageConstant.RESULT_OK);
                 finish();
+                EventBus.getDefault().post(new BusEvent().tag(PageConstant.LOGIN_SUCCESS).arg(PageConstant.LOGIN_DIRECT));
             }
 
             @Override
@@ -126,6 +141,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         myCountDownTimer.start();
         Toast.makeText(LoginActivity.this, "功能未开放", Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     //复写倒计时
