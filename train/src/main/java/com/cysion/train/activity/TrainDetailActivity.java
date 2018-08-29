@@ -134,6 +134,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         mIvToShare.setOnClickListener(this);
         mTvPhone.setOnClickListener(this);
         mTvAddress.setOnClickListener(this);
+        mTvEnroll.setOnClickListener(this);
     }
 
 
@@ -252,6 +253,13 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.tv_phone:
                 Intent myIntent = IntentUtils.getDialIntent(Constant.HOTLINE_NUMBER);
                 startActivity(myIntent);
+                break;
+            case R.id.tv_enroll:
+                //是否登录
+                if (LoginHelper.obj().toLoginPage(this)) {
+                    return;
+                }
+                MyToast.quickShow("功能未完成");
                 break;
             case R.id.tv_address:
                 String map = mCurCourseBean.getMap();

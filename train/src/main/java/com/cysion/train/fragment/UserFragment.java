@@ -72,7 +72,17 @@ public class UserFragment extends BaseFragment {
         mTvLogoName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (LoginHelper.obj().toLoginPage(mActivity)) {
+                    return;
+                }
+            }
+        });
+        mIvUserAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (LoginHelper.obj().toLoginPage(mActivity)) {
+                    return;
+                }
             }
         });
         mTvToLogout.setOnClickListener(new View.OnClickListener() {
