@@ -35,6 +35,7 @@ import com.cysion.train.view.MyUltranViewPager;
 import com.cysion.train.view.SimpleWebview;
 import com.orhanobut.logger.Logger;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -229,6 +230,8 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         mTvCollect.setSelected(false);
         if (mCurCourseBean.getStates() == Constant.COLLECTED_STATE) {
             mTvCollect.setSelected(true);
+        } else {
+            EventBus.getDefault().post(new BusEvent().tag(PageConstant.DEL_COLLECT));
         }
     }
 

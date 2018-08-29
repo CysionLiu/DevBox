@@ -24,9 +24,15 @@ public class PageConstant {
     //所有页面请求结果成功码
     public static final int RESULT_OK = 200;
 
+
+    /**
+     * EventBus事件
+     */
     //登录成功
     public static final int LOGIN_SUCCESS = 1000;
     //直接登录
     public static final int LOGIN_DIRECT = 1001;
+    //取消收藏
+    public static final int DEL_COLLECT = 1002;
 
 }

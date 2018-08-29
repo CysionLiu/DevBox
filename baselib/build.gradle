@@ -68,7 +68,5 @@ dependencies {
      * 音视频区------------------------
      */
     //GSY视频播放框架
-    //    api 'com.shuyu:GSYVideoPlayer:5.0.2'
-        api 'com.shuyu:gsyVideoPlayer-java:5.0.2'
-        api 'com.shuyu:gsyVideoPlayer-armv7a:5.0.2'
+
 }

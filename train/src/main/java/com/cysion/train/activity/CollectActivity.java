@@ -6,11 +6,13 @@ import android.view.View;
 
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.base.BaseViewHolder;
+import com.cysion.baselib.base.BusEvent;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.Constant;
+import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.entity.TrainCourseBean;
@@ -18,6 +20,9 @@ import com.cysion.train.holder.train.CollectTrainHolder;
 import com.cysion.train.logic.UserLogic;
 import com.cysion.train.utils.Alert;
 import com.cysion.train.view.MyToast;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,16 +71,15 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
         UserLogic.obj().getColList(new PureListener<List<TrainCourseBean>>() {
             @Override
             public void done(List<TrainCourseBean> result) {
+                Alert.obj().loaded();
                 dataList.clear();
                 dataList.addAll(result);
                 mTrainAdapter.notifyDataSetChanged();
-                Alert.obj().loaded();
             }
 
             @Override
             public void dont(int flag, String msg) {
                 Alert.obj().loaded();
-
             }
         });
     }
@@ -113,5 +117,12 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
 
     private void toShare(String aId) {
         MyToast.quickShow("功能未完成");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void fromEventBus(BusEvent event) {
+        if (event.getTag() == PageConstant.DEL_COLLECT) {
+            initData();
+        }
     }
 }

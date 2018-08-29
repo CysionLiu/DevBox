@@ -105,6 +105,10 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
 
     @Override
     protected void initData() {
+        initStyles();
+    }
+
+    private void initStyles() {
         //读取Style列表的缓存数据
         try {
             String body = ACache.get(Box.ctx()).getAsString(HomeFragment.HOME_DATA_CACHE);
@@ -236,6 +240,9 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
 
     //别的页面跳入本页面，携带筛选条件
     public void fromOuter(String style, String period, int type) {
+        if (mStyleBeans == null || mStyleBeans.size() == 0) {
+            initStyles();
+        }
         mSearchArea = "";
         mSearchStyle = style;
         mSearchTime = period;
@@ -246,11 +253,18 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
             mTopbarListMeeting.setTitle(Box.str(R.string.str_style));
             return;
         }
-        for (StyleBean styleBean : mStyleBeans) {
-            if (style.equals(styleBean.getId())) {
-                mTopbarListMeeting.setTitle(styleBean.getName());
+        for (int i = 0; i < mStyleBeans.size(); i++) {
+            StyleBean bean = mStyleBeans.get(i);
+            if (style.equals(bean.getId())) {
+                mTopbarListMeeting.setTitle(bean.getName());
+                if (mStylePcOptions != null) {
+                    mStylePcOptions.setSelectOptions(i);
+                }
                 break;
             }
+        }
+        for (StyleBean styleBean : mStyleBeans) {
+
         }
         mTopbarListMeeting.setLeftText(Box.str(R.string.str_area));
     }
