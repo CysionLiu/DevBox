@@ -29,4 +29,19 @@
         <item name="android:background">@drawable/shape_text_more</item>
     </style>
 
+    <!--用户资料页面，容器-->
+    <style name="user_info_rl">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+    <!--用户资料页面，通用文本-->
+    <style name="user_info_desc">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/main_text</item>
+        <item name="android:textSize">@dimen/text_main</item>
+    </style>
+
 </resources>

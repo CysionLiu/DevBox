@@ -11,8 +11,8 @@
         android:id="@+id/img_left_topbar"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_weight="1"
-        android:padding="11dp"
+        android:layout_weight="1.5"
+        android:padding="13dp"
         android:src="@drawable/back"
         />
 
@@ -24,18 +24,36 @@
         android:layout_weight="7"
         android:ellipsize="end"
         android:gravity="center"
-        android:textStyle="bold"
         android:lines="1"
         android:text=""
         android:textColor="#ff000000"
         android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="标题"/>
 
-    <ImageView
-        android:id="@+id/img_right_topbar"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_weight="1"
-        android:padding="8dp"
-        />
+        android:layout_weight="1.5"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/img_right_topbar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            />
+
+        <TextView
+            android:id="@+id/tv_right_topbar"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="#ff333333"
+            android:text="保存"
+            android:visibility="gone"
+            android:layout_height="46dp"
+            />
+    </FrameLayout>
 </LinearLayout>

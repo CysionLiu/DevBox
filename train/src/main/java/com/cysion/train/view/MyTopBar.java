@@ -1,6 +1,7 @@
 package com.cysion.train.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,5 +113,15 @@ public class MyTopBar extends RelativeLayout {
 
     public void setRightText(String msg) {
         mTvRight.setText(msg);
+    }
+
+    public void setLeftDrawable(Drawable aLeftDrawable) {
+        aLeftDrawable.setBounds(0, 0, aLeftDrawable.getIntrinsicWidth(), aLeftDrawable.getIntrinsicHeight());
+        mTvLeft.setCompoundDrawables(aLeftDrawable, null, null, null);
+    }
+    public void clearDrawable(){
+        mTvLeft.setCompoundDrawables(null,null,null,null);
+        mTxtTitle.setCompoundDrawables(null,null,null,null);
+        mTvRight.setCompoundDrawables(null,null,null,null);
     }
 }

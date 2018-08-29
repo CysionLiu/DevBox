@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:orientation="vertical">
+
+    <com.cysion.baselib.ui.TopBar
+        android:id="@+id/bar_train"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cysion.baselib.ui.TopBar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/sub_background"
+                android:gravity="center|left"
+                android:paddingLeft="14dp"
+                android:text="基础信息"
+                android:textSize="@dimen/text_large"></TextView>
+
+            <RelativeLayout
+                android:id="@+id/rl_head_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_user_avatar"
+                    android:layout_width="47dp"
+                    android:layout_height="47dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/user_avatar_default"/>
+
+                <TextView
+                    style="@style/user_info_desc"
+                    android:text="头像"/>
+                <ImageView
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/icon_expand"
+                    android:layout_width="14dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="14dp"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="15dp"
+                android:background="@color/sub_background"></View>
+
+            <RelativeLayout
+                style="@style/user_info_rl">
+
+                <TextView
+                    style="@style/user_info_desc"
+                    android:text="昵称"/>
+
+                <EditText
+                    android:id="@+id/et_nickname"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@null"
+                    android:hint="请输入"
+                    />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="15dp"
+                android:background="@color/sub_background"></View>
+
+            <RelativeLayout
+                style="@style/user_info_rl">
+
+                <TextView
+                    style="@style/user_info_desc"
+                    android:text="手机号"/>
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@null"
+                    android:inputType="number"
+                    tools:text="12312312312"
+                    />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="15dp"
+                android:background="@color/sub_background"></View>
+
+            <RelativeLayout
+                style="@style/user_info_rl">
+
+                <TextView
+                    style="@style/user_info_desc"
+                    android:text="所属行业"/>
+
+                <TextView
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:drawablePadding="12dp"
+                    android:drawableRight="@mipmap/icon_expand"
+                    android:text="请选择"
+                    android:textColor="@color/sub_text"
+                    />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/sub_background"
+                android:gravity="center|left"
+                android:paddingLeft="14dp"
+                android:text="联系人信息"
+                android:textSize="@dimen/text_large"></TextView>
+
+            <RelativeLayout
+                style="@style/user_info_rl">
+
+                <TextView
+                    style="@style/user_info_desc"
+                    android:drawableLeft="@mipmap/star_five"
+                    android:drawablePadding="3dp"
+                    android:text="联系人"/>
+
+                <EditText
+                    android:id="@+id/et_contactor"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@null"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入"
+                    android:textColor="@color/sub_text"
+                    />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="15dp"
+                android:background="@color/sub_background"></View>
+
+            <RelativeLayout
+                style="@style/user_info_rl">
+
+                <TextView
+
+                    style="@style/user_info_desc"
+                    android:drawableLeft="@mipmap/star_five"
+                    android:drawablePadding="3dp"
+                    android:text="联系人电话"/>
+
+                <EditText
+                    android:id="@+id/et_contact_phone"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@null"
+                    android:drawablePadding="12dp"
+                    android:inputType="number"
+                    android:hint="请输入"
+                    android:maxWidth="160dp"
+                    android:textColor="@color/sub_text"
+                    />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/sub_background"
+                android:gravity="center|left"
+                android:paddingLeft="14dp"
+                android:text="发票信息"
+                android:textSize="@dimen/text_large"></TextView>
+
+            <RelativeLayout
+                style="@style/user_info_rl">
+
+                <TextView
+                    android:id="@+id/tv_fix_taitou"
+                    style="@style/user_info_desc"
+                    android:drawablePadding="3dp"
+                    android:text="抬头类型"/>
+
+                <TextView
+                    android:id="@+id/tv_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_toRightOf="@id/tv_fix_taitou"
+                    android:drawableLeft="@drawable/selector_small_select"
+                    android:drawablePadding="10dp"
+                    android:text="企业单位"
+                    android:textColor="@drawable/selector_fapiao_text"/>
+
+                <TextView
+                    android:id="@+id/tv_not_company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_toRightOf="@id/tv_company"
+                    android:drawableLeft="@drawable/selector_small_select"
+                    android:drawablePadding="10dp"
+                    android:text="个人/非企业单位"
+                    android:textColor="@drawable/selector_fapiao_text"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="15dp"
+                android:background="@color/sub_background"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+
+                    style="@style/user_info_desc"
+                    android:drawablePadding="3dp"
+                    android:text="发票抬头"/>
+
+                <EditText
+                    android:id="@+id/et_taitou_fapiao"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@null"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入"
+                    android:maxWidth="200dp"
+                    android:textColor="@color/sub_text"
+                    />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="15dp"
+                android:background="@color/sub_background"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_suihao_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+
+                    style="@style/user_info_desc"
+                    android:drawablePadding="3dp"
+                    android:text="税号"/>
+
+                <EditText
+                    android:id="@+id/et_suihao"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@null"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入"
+                    android:maxWidth="200dp"
+                    android:textColor="@color/sub_text"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -15,6 +15,7 @@ import com.cysion.train.Constant;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.activity.CollectActivity;
+import com.cysion.train.activity.PersonActivity;
 import com.cysion.train.adapter.UserOptionAdapter;
 import com.cysion.train.entity.UserOptions;
 import com.cysion.train.helper.LoginHelper;
@@ -62,6 +63,12 @@ public class UserFragment extends BaseFragment {
                     startActivity(myIntent);
                 } else if (options.getType() == Constant.MY_HOTLINE) {
                     Intent myIntent = IntentUtils.getDialIntent(options.getMsg1());
+                    startActivity(myIntent);
+                } else if (options.getType() == Constant.MY_PROFILE) {
+                    if (LoginHelper.obj().toLoginPage(mActivity)) {
+                        return;
+                    }
+                    Intent myIntent = new Intent(mActivity, PersonActivity.class);
                     startActivity(myIntent);
                 } else {
                     MyToast.quickShow("功能未完成");

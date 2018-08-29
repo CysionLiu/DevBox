@@ -65,6 +65,9 @@
         </activity>
         <activity
             android:name=".activity.MapActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.PersonActivity"
             android:screenOrientation="portrait"
             >
         </activity>

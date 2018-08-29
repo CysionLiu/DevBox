@@ -21,6 +21,7 @@ public class TopBar extends RelativeLayout {
     private TextView mTxtTitle;
     private ImageView mImgRight;
     private ImageView mImgLeft;
+    private TextView mTvRight;
     private OnTopBarClickListener mOnTopBarClickListener = new OnTopBarClickListener() {
         @Override
         public void onIconClicked(View aView, Pos aPosition) {
@@ -37,9 +38,11 @@ public class TopBar extends RelativeLayout {
             int viewId = v.getId();
             if (viewId == R.id.img_left_topbar) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.LEFT);
-            }else if(viewId == R.id.txt_title_topbar){
+            } else if (viewId == R.id.txt_title_topbar) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.MIDDLE);
-            }else if(viewId == R.id.img_right_topbar){
+            } else if (viewId == R.id.img_right_topbar) {
+                mOnTopBarClickListener.onIconClicked(v, Pos.RIGHT);
+            } else if (viewId == R.id.tv_right_topbar) {
                 mOnTopBarClickListener.onIconClicked(v, Pos.RIGHT);
             }
         }
@@ -77,9 +80,11 @@ public class TopBar extends RelativeLayout {
         mImgLeft = (ImageView) mRootView.findViewById(R.id.img_left_topbar);
         mImgRight = (ImageView) mRootView.findViewById(R.id.img_right_topbar);
         mTxtTitle = (TextView) mRootView.findViewById(R.id.txt_title_topbar);
+        mTvRight = (TextView) mRootView.findViewById(R.id.tv_right_topbar);
         mImgLeft.setOnClickListener(mOnClickListener);
         mTxtTitle.setOnClickListener(mOnClickListener);
         mImgRight.setOnClickListener(mOnClickListener);
+        mTvRight.setOnClickListener(mOnClickListener);
     }
 
     public void setOnTopBarClickListener(OnTopBarClickListener aOnTopBarClickListener) {
@@ -114,5 +119,13 @@ public class TopBar extends RelativeLayout {
                 return mImgRight;
         }
         return null;
+    }
+
+    public void imageRight(boolean yes) {
+        if (!yes) {
+            mTvRight.setVisibility(VISIBLE);
+            mImgRight.setVisibility(GONE);
+        }
+
     }
 }
