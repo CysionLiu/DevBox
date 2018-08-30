@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.cysion.train.activity.LoginActivity;
+import com.cysion.train.logic.UserCache;
 
 public class LoginHelper {
     private static volatile LoginHelper instance;

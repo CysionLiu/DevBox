@@ -9,7 +9,6 @@ import com.cysion.train.R;
 import com.cysion.train.api.TrainApi;
 import com.cysion.train.entity.ExpertBean;
 import com.cysion.train.entity.TrainCourseBean;
-import com.cysion.train.helper.UserCache;
 import com.cysion.train.utils.MyJsonUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

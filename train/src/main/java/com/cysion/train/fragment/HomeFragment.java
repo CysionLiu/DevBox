@@ -32,6 +32,7 @@ import com.cysion.train.entity.HomeTopBean;
 import com.cysion.train.entity.StyleBean;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.HomeLogic;
+import com.cysion.train.logic.UserLogic;
 import com.cysion.train.utils.Alert;
 import com.cysion.train.view.MySmartRefreshLayout;
 import com.cysion.train.view.MyToast;
@@ -282,4 +283,23 @@ public class HomeFragment extends BaseFragment {
             }
         }
     };
+
+    //获取用户信息
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+        PureListener<String> t = new PureListener<String>() {
+            @Override
+            public void done(String result) {
+
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+                MyToast.quickShow(msg);
+            }
+        };
+        UserLogic.obj().getUserInfo(t);
+        UserLogic.obj().getClientInfo(t);
+    }
 }

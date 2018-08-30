@@ -1,7 +1,11 @@
 package com.cysion.train.api;
 
+import java.util.Map;
+
 import retrofit2.Call;
+import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface UserApi {
@@ -23,7 +27,7 @@ public interface UserApi {
     //获得用户信息
     @GET("v1/app.user")
     Call<String> getUser(@Query("json") int json, @Query("appid") int appid,
-                             @Query("uid") String uid, @Query("session") String session);
+                         @Query("uid") String uid, @Query("session") String session);
 
 
     //更新用户信息
@@ -47,17 +51,23 @@ public interface UserApi {
     //收藏会议
     @GET("content/?l=api.collect")
     Call<String> col(@Query("json") int json, @Query("appid") int appid,
-                         @Query("uid") String uid, @Query("type") String type,
+                     @Query("uid") String uid, @Query("type") String type,
                      @Query("col_id") String col_id);
 
     //取消收藏会议
     @GET("content/?l=api.collect")
     Call<String> decol(@Query("json") int json, @Query("appid") int appid,
-                         @Query("uid") String uid, @Query("type") String type,
-                     @Query("col_id") String col_id);
+                       @Query("uid") String uid, @Query("type") String type,
+                       @Query("col_id") String col_id);
 
 
     //获得收藏列表
     @GET("content/?l=api.mycollect")
     Call<String> getCollects(@Query("json") int json, @Query("appid") int appid, @Query("uid") String uid);
+
+    @POST("content/?l=api.renew")
+    Call<String> updateClientInfo(@FieldMap Map<String, String> param);
+
+    @GET("content/?l=api.stuff")
+    Call<String> getClientInfo(@Query("json") int json, @Query("appid") int appid, @Query("uid") String uid);
 }

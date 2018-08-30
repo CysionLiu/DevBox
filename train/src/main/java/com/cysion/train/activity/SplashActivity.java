@@ -5,7 +5,7 @@ import android.os.Handler;
 
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.train.R;
-import com.cysion.train.helper.UserCache;
+import com.cysion.train.logic.UserCache;
 
 
 public class SplashActivity extends BaseActivity {

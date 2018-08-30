@@ -103,6 +103,8 @@ public class TrainOrgActivity extends BaseActivity {
     protected void initData() {
         if (PageConstant.IS_EXPERT.equals(mType)) {
             mBarExpert.setTitle("专家介绍");
+            mTvMeetingListName.setText("参与会议");
+            mTvMeetingListNameOld.setVisibility(View.GONE);
             mWebSimple.loadUrl(EXPERT_URL + mId);
             TrainLogic.obj().getExpertDetail(mId, mBeanPureListener);
         } else {
@@ -147,7 +149,7 @@ public class TrainOrgActivity extends BaseActivity {
                 @Override
                 public void onClicked(Object obj, int position, int flag) {
                     TrainCourseBean bean = (TrainCourseBean) obj;
-                    TrainDetailActivity.start(TrainOrgActivity.this,  bean);
+                    TrainDetailActivity.start(TrainOrgActivity.this, bean);
                 }
             });
             mRvRecentTrainOld.setAdapter(adapter);
@@ -167,7 +169,7 @@ public class TrainOrgActivity extends BaseActivity {
                 @Override
                 public void onClicked(Object obj, int position, int flag) {
                     TrainCourseBean bean = (TrainCourseBean) obj;
-                    TrainDetailActivity.start(TrainOrgActivity.this,  bean);
+                    TrainDetailActivity.start(TrainOrgActivity.this, bean);
                 }
             });
             mRvRecentTrain.setAdapter(adapter);

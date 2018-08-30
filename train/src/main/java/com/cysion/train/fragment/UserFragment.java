@@ -3,23 +3,29 @@ package com.cysion.train.fragment;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.IntentUtils;
+import com.bumptech.glide.Glide;
 import com.cysion.baselib.base.BaseFragment;
 import com.cysion.baselib.base.BusEvent;
+import com.cysion.baselib.image.GlideCircleTransform;
 import com.cysion.baselib.listener.OnTypeClickListener;
+import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.Constant;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.activity.CollectActivity;
 import com.cysion.train.activity.PersonActivity;
 import com.cysion.train.adapter.UserOptionAdapter;
+import com.cysion.train.entity.UserEntity;
 import com.cysion.train.entity.UserOptions;
 import com.cysion.train.helper.LoginHelper;
-import com.cysion.train.helper.UserCache;
+import com.cysion.train.logic.UserCache;
+import com.cysion.train.logic.UserLogic;
 import com.cysion.train.view.MyToast;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -99,7 +105,6 @@ public class UserFragment extends BaseFragment {
                 refreshPage();
             }
         });
-        refreshPage();
     }
 
     @Override
@@ -110,11 +115,21 @@ public class UserFragment extends BaseFragment {
     private void refreshPage() {
         if (UserCache.obj().isLogin()) {
             mTvToLogout.setVisibility(View.VISIBLE);
-            mTvLogoName.setText("已登录");
+            UserEntity userEntity = UserCache.obj().getUserEntity();
+            if (userEntity != null) {
+                if (!TextUtils.isEmpty(userEntity.getPic())) {
+                    Glide.with(this).load(userEntity.getPic())
+                            .placeholder(R.drawable.user_avatar_default)
+                            .transform(new GlideCircleTransform(mActivity))
+                            .into(mIvUserAvatar);
+                }
+                mTvLogoName.setText(userEntity.getName());
+            }
         } else {
             mTvToLogout.setVisibility(View.GONE);
             mTvLogoName.setText("未登录");
         }
+
     }
 
     private List<UserOptions> getOptions() {
@@ -149,5 +164,31 @@ public class UserFragment extends BaseFragment {
         if (event.getTag() == PageConstant.LOGIN_SUCCESS) {
             refreshPage();
         }
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+        refreshPage();
+    }
+
+    @Override
+    protected void visibleAgain() {
+        super.visibleAgain();
+        //每次重现，更新用户信息
+        PureListener<String> t = new PureListener<String>() {
+            @Override
+            public void done(String result) {
+
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+                MyToast.quickShow(msg);
+            }
+        };
+        UserLogic.obj().getUserInfo(t);
+        UserLogic.obj().getClientInfo(t);
+        refreshPage();
     }
 }

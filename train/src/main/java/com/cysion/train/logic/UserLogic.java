@@ -9,19 +9,23 @@ import com.cysion.baselib.net.Caller;
 import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.api.UserApi;
+import com.cysion.train.entity.ClientEntity;
 import com.cysion.train.entity.CollectEntity;
 import com.cysion.train.entity.TrainCourseBean;
-import com.cysion.train.helper.UserCache;
+import com.cysion.train.entity.UserEntity;
 import com.cysion.train.simple.UserCaller;
 import com.cysion.train.utils.MyJsonUtil;
 import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -181,7 +185,6 @@ public class UserLogic {
                     aE.printStackTrace();
                     aPureListener.dont(404, Box.str(R.string.str_invalid_data));
                 }
-
             }
 
             @Override
@@ -189,6 +192,153 @@ public class UserLogic {
                 aPureListener.dont(404, t.getMessage());
             }
         });
+    }
+
+    //获取成功后，通过UserCache调用
+    public void getUserInfo(final PureListener<String> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
+        UserCaller.obj().load(UserApi.class)
+                .getUser(Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID,
+                        UserCache.obj().getUid(), UserCache.obj().getSession())
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String body = response.body();
+                        Logger.d(body);
+                        try {
+                            JSONObject jsonObject = MyJsonUtil.obj().handleCommonObj(body, aPureListener);
+                            if (jsonObject == null) {
+                                return;
+                            }
+                            String s = jsonObject.toString();
+                            UserEntity entity = MyJsonUtil.obj().gson().fromJson(s, UserEntity.class);
+                            UserCache.obj().mUserEntity = entity;
+                            aPureListener.done("成功");
+
+                        } catch (JSONException aE) {
+                            aE.printStackTrace();
+                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        aPureListener.dont(404, t.getMessage());
+                    }
+                });
+    }
+
+    public void updateUserInfo(String name, String pic, String gender, final PureListener<String> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
+        UserCaller.obj().load(UserApi.class)
+                .updateUser(Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID,
+                        UserCache.obj().getUid(), UserCache.obj().getSession(),
+                        name, pic, gender)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String body = response.body();
+                        Logger.d(body);
+                        try {
+                            JSONObject jsonObject = MyJsonUtil.obj().handleCommonObj(body, aPureListener);
+                            if (jsonObject == null) {
+                                return;
+                            }
+                            aPureListener.done("保存成功");
+
+                        } catch (JSONException aE) {
+                            aE.printStackTrace();
+                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        aPureListener.dont(404, t.getMessage());
+                    }
+                });
+
+    }
+
+    //获取成功后，通过UserCache调用
+    public void getClientInfo(final PureListener<String> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
+        Caller.obj().load(UserApi.class).getClientInfo(
+                Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID, UserCache.obj().getUid()
+        ).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String body = response.body();
+                try {
+                    JSONObject jsonObject = MyJsonUtil.obj().handleCommonObj(body, aPureListener);
+                    if (jsonObject == null) {
+                        return;
+                    }
+                    String s = jsonObject.toString();
+                    ClientEntity entity = MyJsonUtil.obj().gson().fromJson(s, ClientEntity.class);
+                    UserCache.obj().mClientEntity = entity;
+                    aPureListener.done("成功");
+
+                } catch (JSONException aE) {
+                    aE.printStackTrace();
+                    aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                aPureListener.dont(404, t.getMessage());
+            }
+        });
+
+    }
+
+    public void updateClientInfo(String contact, String phone, String bill, String billName, String billNum
+            , String tradeId, final PureListener<String> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
+        Map<String, String> params = new HashMap<>();
+        params.put("appid", Constant.COMMON_QUERY_APPID + "");
+        params.put("json", Constant.COMMON_QUERY_JSON + "");
+        params.put("uid", UserCache.obj().getUid());
+        params.put("name", contact);
+        params.put("phone", phone);
+        params.put("bill", bill);
+        params.put("bill_name", billName);
+        params.put("bill_num", billNum);
+        params.put("trade_id", tradeId);
+        Caller.obj().load(UserApi.class).updateClientInfo(params)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String body = response.body();
+                        Logger.d(body);
+                        try {
+                            JSONObject jsonObject = MyJsonUtil.obj().handleCommonObj(body, aPureListener);
+                            if (jsonObject == null) {
+                                return;
+                            }
+                            aPureListener.done("保存成功");
+
+                        } catch (JSONException aE) {
+                            aE.printStackTrace();
+                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        aPureListener.dont(404, t.getMessage());
+                    }
+                });
+
     }
 
 }

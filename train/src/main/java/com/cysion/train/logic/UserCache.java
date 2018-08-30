@@ -1,9 +1,10 @@
-package com.cysion.train.helper;
+package com.cysion.train.logic;
 
 import android.text.TextUtils;
 
 import com.cysion.baselib.Box;
 import com.cysion.baselib.cache.ACache;
+import com.cysion.train.entity.ClientEntity;
 import com.cysion.train.entity.UserEntity;
 
 public class UserCache {
@@ -11,7 +12,9 @@ public class UserCache {
     //用户的uid和session
     private String uid = "";
     private String session = "";
-    public UserEntity mUserEntity;
+
+    UserEntity mUserEntity;
+    ClientEntity mClientEntity;
     private static volatile UserCache instance;
     public static final String UID = "uid";
     public static final String SESSION = "session";
@@ -50,13 +53,24 @@ public class UserCache {
         session = ACache.get(Box.ctx()).getAsString(SESSION);
     }
 
-    public void clearCache(){
+    public UserEntity getUserEntity() {
+        return mUserEntity;
+    }
+
+    public ClientEntity getClientEntity() {
+        return mClientEntity;
+    }
+
+    public void clearCache() {
         uid = "";
         session = "";
+        mUserEntity = null;
+        mClientEntity = null;
         ACache.get(Box.ctx()).put(UID, uid);
         ACache.get(Box.ctx()).put(SESSION, session);
     }
-    public boolean isLogin(){
+
+    public boolean isLogin() {
         if (TextUtils.isEmpty(session)) {
             return false;
         }

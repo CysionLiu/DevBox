@@ -2,6 +2,7 @@ package com.cysion.train.entity;
 
 import java.io.Serializable;
 
+//纯个人信息
 public class UserEntity implements Serializable {
 
 
