@@ -280,7 +280,11 @@ public class UserLogic {
                     if (jsonObject == null) {
                         return;
                     }
-                    String s = jsonObject.toString();
+                    JSONObject userinfo = jsonObject.optJSONObject("userinfo");
+                    if (userinfo == null) {
+                        return;
+                    }
+                    String s = userinfo.toString();
                     ClientEntity entity = MyJsonUtil.obj().gson().fromJson(s, ClientEntity.class);
                     UserCache.obj().mClientEntity = entity;
                     aPureListener.done("成功");

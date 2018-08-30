@@ -1,15 +1,21 @@
 package com.cysion.train.activity;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cysion.baselib.base.BaseActivity;
+import com.cysion.baselib.image.GlideCircleTransform;
 import com.cysion.baselib.ui.TopBar;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.R;
+import com.cysion.train.entity.ClientEntity;
+import com.cysion.train.entity.UserEntity;
+import com.cysion.train.logic.UserCache;
 import com.cysion.train.view.MyToast;
 
 import butterknife.BindView;
@@ -62,16 +68,40 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
                 }
             }
         });
-        initFapiao();
+        showClientInfo();
+        showUserInfo();
         mRlHeadBox.setOnClickListener(this);
-
-    }
-
-    private void initFapiao() {
-        mTvCompany.setSelected(true);
-        mTvNotCompany.setSelected(false);
         mTvNotCompany.setOnClickListener(this);
         mTvCompany.setOnClickListener(this);
+    }
+
+    private void showUserInfo() {
+        UserEntity userEntity = UserCache.obj().getUserEntity();
+        if (userEntity != null) {
+            if (!TextUtils.isEmpty(userEntity.getPic())) {
+                Glide.with(this).load(userEntity.getPic())
+                        .placeholder(R.drawable.user_avatar_default)
+                        .transform(new GlideCircleTransform(this))
+                        .into(mIvUserAvatar);
+            }
+            mEtNickname.setText(userEntity.getName());
+            mTvPhone.setText(userEntity.getMobile());
+        }
+    }
+
+    private void showClientInfo() {
+        ClientEntity clientEntity = UserCache.obj().getClientEntity();
+        if (clientEntity != null) {
+            mEtContactor.setText(clientEntity.getName());
+            mEtContactPhone.setText(clientEntity.getPhone());
+            if ("1".equals(clientEntity.getBill())) {
+                isCompany();
+            } else {
+                notCompany();
+            }
+            mEtTaitouFapiao.setText(clientEntity.getBill_name());
+            mEtSuihao.setText(clientEntity.getBill_num());
+        }
     }
 
     @Override
@@ -85,16 +115,12 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
         switch (viewId) {
             case R.id.tv_company:
                 if (!mTvCompany.isSelected()) {
-                    mTvCompany.setSelected(true);
-                    mTvNotCompany.setSelected(false);
-                    mRlSuihaoBox.setVisibility(View.VISIBLE);
+                    isCompany();
                 }
                 break;
             case R.id.tv_not_company:
                 if (!mTvNotCompany.isSelected()) {
-                    mTvCompany.setSelected(false);
-                    mTvNotCompany.setSelected(true);
-                    mRlSuihaoBox.setVisibility(View.GONE);
+                    notCompany();
                 }
                 break;
             case R.id.rl_head_box:
@@ -104,5 +130,17 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
                 break;
         }
+    }
+
+    private void notCompany() {
+        mTvCompany.setSelected(false);
+        mTvNotCompany.setSelected(true);
+        mRlSuihaoBox.setVisibility(View.GONE);
+    }
+
+    private void isCompany() {
+        mTvCompany.setSelected(true);
+        mTvNotCompany.setSelected(false);
+        mRlSuihaoBox.setVisibility(View.VISIBLE);
     }
 }
