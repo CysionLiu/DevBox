@@ -11,6 +11,7 @@ import com.cysion.train.R;
 import com.cysion.train.api.UserApi;
 import com.cysion.train.entity.ClientEntity;
 import com.cysion.train.entity.CollectEntity;
+import com.cysion.train.entity.TradeEntity;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.entity.UserEntity;
 import com.cysion.train.simple.UserCaller;
@@ -287,6 +288,13 @@ public class UserLogic {
                     String s = userinfo.toString();
                     ClientEntity entity = MyJsonUtil.obj().gson().fromJson(s, ClientEntity.class);
                     UserCache.obj().mClientEntity = entity;
+                    JSONArray trade = jsonObject.optJSONArray("trade");
+                    if (trade != null) {
+                        List<TradeEntity> entities = MyJsonUtil.obj().gson()
+                                .fromJson(trade.toString(), new TypeToken<List<TradeEntity>>() {
+                                }.getType());
+                        UserCache.obj().mTradeEntities = entities;
+                    }
                     aPureListener.done("成功");
 
                 } catch (JSONException aE) {
@@ -325,11 +333,15 @@ public class UserLogic {
                         String body = response.body();
                         Logger.d(body);
                         try {
-                            JSONObject jsonObject = MyJsonUtil.obj().handleCommonObj(body, aPureListener);
+                            JSONObject jsonObject = new JSONObject(body);
                             if (jsonObject == null) {
                                 return;
                             }
-                            aPureListener.done("保存成功");
+                            if (jsonObject.optBoolean("data")) {
+                                aPureListener.done("保存成功");
+                            } else {
+                                aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                            }
 
                         } catch (JSONException aE) {
                             aE.printStackTrace();

@@ -104,13 +104,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
+    //每次重现，更新用户信息
+    PureListener<String> userInfoListener = new PureListener<String>() {
+        @Override
+        public void done(String result) {
+            new MyToast.Builder().text("登录成功").buildToShow();
+            finish();
+            EventBus.getDefault().post(new BusEvent().tag(PageConstant.LOGIN_SUCCESS).arg(PageConstant.LOGIN_DIRECT));
+        }
+
+        @Override
+        public void dont(int flag, String msg) {
+            MyToast.quickShow(msg);
+        }
+    };
+
     private void toLogin(String aMobile, String aCode) {
         UserLogic.obj().login(aMobile, aCode, new PureListener<String>() {
             @Override
             public void done(String result) {
-                new MyToast.Builder().text("登录成功").buildToShow();
-                finish();
-                EventBus.getDefault().post(new BusEvent().tag(PageConstant.LOGIN_SUCCESS).arg(PageConstant.LOGIN_DIRECT));
+                UserLogic.obj().getUserInfo(userInfoListener);
+                UserLogic.obj().getClientInfo(PureListener.DEFAULT);
             }
 
             @Override
@@ -118,6 +132,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 new MyToast.Builder().text(msg).buildToShow();
             }
         });
+
+
     }
 
     @Nullable

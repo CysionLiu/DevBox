@@ -19,10 +19,10 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical">
 
             <TextView
@@ -51,12 +51,13 @@
                 <TextView
                     style="@style/user_info_desc"
                     android:text="头像"/>
+
                 <ImageView
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/icon_expand"
                     android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_height="14dp"/>
+                    android:src="@mipmap/icon_expand"/>
             </RelativeLayout>
 
             <View
@@ -76,9 +77,11 @@
                     android:id="@+id/et_nickname"
                     style="@style/user_info_desc"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginRight="8dp"
                     android:background="@null"
                     android:hint="请输入"
+                    android:lines="1"
+                    android:paddingRight="4dp"
                     />
 
             </RelativeLayout>
@@ -115,6 +118,7 @@
                 android:background="@color/sub_background"></View>
 
             <RelativeLayout
+                android:id="@+id/rl_trade_box"
                 style="@style/user_info_rl">
 
                 <TextView
@@ -122,14 +126,15 @@
                     android:text="所属行业"/>
 
                 <TextView
+                    android:id="@+id/tv_trade"
                     style="@style/user_info_desc"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="12dp"
                     android:drawablePadding="12dp"
                     android:drawableRight="@mipmap/icon_expand"
                     android:text="请选择"
-                    android:textColor="@color/sub_text"
-                    />
+                    android:textColor="@color/sub_text"/>
 
             </RelativeLayout>
 
@@ -155,10 +160,12 @@
                     android:id="@+id/et_contactor"
                     style="@style/user_info_desc"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginRight="8dp"
                     android:background="@null"
                     android:drawablePadding="12dp"
                     android:hint="请输入"
+                    android:lines="1"
+                    android:paddingRight="4dp"
                     android:textColor="@color/sub_text"
                     />
 
@@ -184,12 +191,14 @@
                     android:id="@+id/et_contact_phone"
                     style="@style/user_info_desc"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginRight="8dp"
                     android:background="@null"
                     android:drawablePadding="12dp"
-                    android:inputType="number"
                     android:hint="请输入"
+                    android:inputType="number"
+                    android:lines="1"
                     android:maxWidth="160dp"
+                    android:paddingRight="4dp"
                     android:textColor="@color/sub_text"
                     />
 
@@ -258,11 +267,13 @@
                     android:id="@+id/et_taitou_fapiao"
                     style="@style/user_info_desc"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginRight="8dp"
                     android:background="@null"
                     android:drawablePadding="12dp"
                     android:hint="请输入"
+                    android:lines="1"
                     android:maxWidth="200dp"
+                    android:paddingRight="4dp"
                     android:textColor="@color/sub_text"
                     />
             </RelativeLayout>
@@ -284,20 +295,33 @@
 
                     style="@style/user_info_desc"
                     android:drawablePadding="3dp"
+                    android:lines="1"
                     android:text="税号"/>
 
                 <EditText
                     android:id="@+id/et_suihao"
                     style="@style/user_info_desc"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginRight="8dp"
                     android:background="@null"
                     android:drawablePadding="12dp"
                     android:hint="请输入"
                     android:maxWidth="200dp"
+                    android:paddingRight="4dp"
                     android:textColor="@color/sub_text"
                     />
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_to_logout"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/main_tag"
+                android:gravity="center"
+                android:text="退出登录"
+                android:textColor="@color/main_background"/>
         </LinearLayout>
     </ScrollView>
 

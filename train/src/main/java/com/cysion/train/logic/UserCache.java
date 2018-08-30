@@ -5,7 +5,10 @@ import android.text.TextUtils;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.cache.ACache;
 import com.cysion.train.entity.ClientEntity;
+import com.cysion.train.entity.TradeEntity;
 import com.cysion.train.entity.UserEntity;
+
+import java.util.List;
 
 public class UserCache {
 
@@ -15,6 +18,12 @@ public class UserCache {
 
     UserEntity mUserEntity;
     ClientEntity mClientEntity;
+    List<TradeEntity> mTradeEntities;
+
+    public List<TradeEntity> getTradeEntities() {
+        return mTradeEntities;
+    }
+
     private static volatile UserCache instance;
     public static final String UID = "uid";
     public static final String SESSION = "session";

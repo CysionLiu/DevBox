@@ -68,6 +68,10 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
     @Override
     protected void initData() {
         Alert.obj().loading(this);
+        getDataList();
+    }
+
+    private void getDataList() {
         UserLogic.obj().getColList(new PureListener<List<TrainCourseBean>>() {
             @Override
             public void done(List<TrainCourseBean> result) {
@@ -122,7 +126,7 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void fromEventBus(BusEvent event) {
         if (event.getTag() == PageConstant.DEL_COLLECT) {
-            initData();
+            getDataList();
         }
     }
 }

@@ -11,12 +11,10 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.IntentUtils;
 import com.bumptech.glide.Glide;
 import com.cysion.baselib.base.BaseFragment;
-import com.cysion.baselib.base.BusEvent;
 import com.cysion.baselib.image.GlideCircleTransform;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.Constant;
-import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.activity.CollectActivity;
 import com.cysion.train.activity.PersonActivity;
@@ -27,9 +25,6 @@ import com.cysion.train.helper.LoginHelper;
 import com.cysion.train.logic.UserCache;
 import com.cysion.train.logic.UserLogic;
 import com.cysion.train.view.MyToast;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +39,7 @@ public class UserFragment extends BaseFragment {
     ImageView mIvUserAvatar;
     @BindView(R.id.tv_logo_name)
     TextView mTvLogoName;
-    @BindView(R.id.tv_to_logout)
-    TextView mTvToLogout;
+
 
     @Override
     protected int getLayoutId() {
@@ -56,7 +50,6 @@ public class UserFragment extends BaseFragment {
     protected void initViews() {
         mRvUserOptions.setLayoutManager(new LinearLayoutManager(mActivity));
         mUserOptions = getOptions();
-
         UserOptionAdapter userOptionAdapter = new UserOptionAdapter(mUserOptions, mActivity, new OnTypeClickListener() {
             @Override
             public void onClicked(Object obj, int position, int flag) {
@@ -96,15 +89,11 @@ public class UserFragment extends BaseFragment {
                 if (LoginHelper.obj().toLoginPage(mActivity)) {
                     return;
                 }
+                Intent myIntent = new Intent(mActivity, PersonActivity.class);
+                startActivity(myIntent);
             }
         });
-        mTvToLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UserCache.obj().clearCache();
-                refreshPage();
-            }
-        });
+
     }
 
     @Override
@@ -114,7 +103,6 @@ public class UserFragment extends BaseFragment {
 
     private void refreshPage() {
         if (UserCache.obj().isLogin()) {
-            mTvToLogout.setVisibility(View.VISIBLE);
             UserEntity userEntity = UserCache.obj().getUserEntity();
             if (userEntity != null) {
                 if (!TextUtils.isEmpty(userEntity.getPic())) {
@@ -126,7 +114,7 @@ public class UserFragment extends BaseFragment {
                 mTvLogoName.setText(userEntity.getName());
             }
         } else {
-            mTvToLogout.setVisibility(View.GONE);
+            mIvUserAvatar.setImageResource(R.drawable.user_avatar_default);
             mTvLogoName.setText("未登录");
         }
 
@@ -134,7 +122,6 @@ public class UserFragment extends BaseFragment {
 
     private List<UserOptions> getOptions() {
         List<UserOptions> tmp = new ArrayList<>();
-
         UserOptions userOptions0 = new UserOptions();
         userOptions0.setName(getString(R.string.str_my_profile));
         userOptions0.setType(Constant.MY_PROFILE);
@@ -158,14 +145,6 @@ public class UserFragment extends BaseFragment {
         return tmp;
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void fromEventBus(BusEvent event) {
-        if (event.getTag() == PageConstant.LOGIN_SUCCESS) {
-            refreshPage();
-        }
-    }
-
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
@@ -175,20 +154,14 @@ public class UserFragment extends BaseFragment {
     @Override
     protected void visibleAgain() {
         super.visibleAgain();
-        //每次重现，更新用户信息
-        PureListener<String> t = new PureListener<String>() {
-            @Override
-            public void done(String result) {
+        UserLogic.obj().getUserInfo(PureListener.DEFAULT);
+        UserLogic.obj().getClientInfo(PureListener.DEFAULT);
+        refreshPage();
+    }
 
-            }
-
-            @Override
-            public void dont(int flag, String msg) {
-                MyToast.quickShow(msg);
-            }
-        };
-        UserLogic.obj().getUserInfo(t);
-        UserLogic.obj().getClientInfo(t);
+    @Override
+    public void onResume() {
+        super.onResume();
         refreshPage();
     }
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -65,6 +66,7 @@ public interface UserApi {
     @GET("content/?l=api.mycollect")
     Call<String> getCollects(@Query("json") int json, @Query("appid") int appid, @Query("uid") String uid);
 
+    @FormUrlEncoded
     @POST("content/?l=api.renew")
     Call<String> updateClientInfo(@FieldMap Map<String, String> param);
 
