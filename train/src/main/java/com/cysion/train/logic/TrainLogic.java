@@ -206,4 +206,44 @@ public class TrainLogic {
     }
 
 
+    //获得会议报名信息
+    public void getEnrollInfo(String id, final PureListener<TrainCourseBean> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
+        Caller.obj().load(TrainApi.class)
+                .getEnrollInfo(Constant.COMMON_QUERY_JSON,
+                        Constant.COMMON_QUERY_APPID, id, UserCache.obj().getUid())
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String body = response.body();
+                        try {
+                            JSONObject jsonObject = new JSONObject(body);
+                            if (jsonObject.optInt("status") != Constant.STATUS_SUCCESS) {
+                                aPureListener.dont(404, jsonObject.optString("msg"));
+                                return;
+                            }
+                            JSONObject obj1 = jsonObject.optJSONObject("data");
+                            if (obj1 == null) {
+                                aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                                return;
+                            }
+                            String jsonList = obj1.toString();
+                            Logger.d(jsonList);
+                            TrainCourseBean ps = new Gson().fromJson(jsonList, TrainCourseBean.class);
+                            aPureListener.done(ps);
+                        } catch (Exception aE) {
+                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        aPureListener.dont(404, t.getMessage());
+                    }
+                });
+    }
+
+
 }

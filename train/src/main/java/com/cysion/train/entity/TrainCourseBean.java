@@ -47,7 +47,7 @@ public class TrainCourseBean implements Serializable {
     private String name;
     private String share_name;
     private String share_desc;
-    private Object title;
+    private String title;
     private String area;
     private String style_id;
     private String tag;
@@ -71,6 +71,8 @@ public class TrainCourseBean implements Serializable {
     private String starts;
     private int localType;
     private String week;
+    private List<SitBean> sit;
+
 
     public String getWeek() {
         return week;
@@ -91,6 +93,14 @@ public class TrainCourseBean implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public List<SitBean> getSit() {
+        return sit;
+    }
+
+    public void setSit(List<SitBean> aSit) {
+        sit = aSit;
     }
 
     public String getUid() {
@@ -125,12 +135,12 @@ public class TrainCourseBean implements Serializable {
         this.share_desc = share_desc;
     }
 
-    public Object getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(Object title) {
-        this.title = title;
+    public void setTitle(String aTitle) {
+        title = aTitle;
     }
 
     public String getArea() {
@@ -387,7 +397,7 @@ public class TrainCourseBean implements Serializable {
         }
     }
 
-    public static class CompanyBean {
+    public static class CompanyBean implements Serializable {
         /**
          * id : 1
          * name : 知学学院

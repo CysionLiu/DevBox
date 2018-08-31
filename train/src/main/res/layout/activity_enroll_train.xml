@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <com.cysion.baselib.ui.TopBar
+        android:id="@+id/tbar_enroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cysion.baselib.ui.TopBar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/tbar_enroll"
+        android:background="@color/light_background"></View>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tbar_enroll"
+        android:layout_marginBottom="46dp"
+        android:layout_marginTop="1px"
+        android:background="@color/light_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="@color/main_background"
+                android:fitsSystemWindows="true"
+                >
+
+                <RelativeLayout
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_train_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="86dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/place_list"/>
+
+                    <TextView
+                        android:id="@+id/tv_style_tag"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/shape_tag"
+                        android:gravity="center"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/sub_tag"
+                        android:textSize="@dimen/text_small"
+                        tools:text="样式用例"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="160dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_train_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:lineSpacingMultiplier="1.2"
+                        android:textColor="@color/main_text"
+                        android:textSize="@dimen/text_main"
+                        tools:text="名称"/>
+
+                    <TextView
+                        android:id="@+id/tv_train_tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_train_name"
+                        android:layout_marginTop="10dp"
+                        android:includeFontPadding="false"
+                        android:lineSpacingMultiplier="1.2"
+                        android:paddingRight="20dp"
+                        android:textColor="@color/sub_text"
+                        android:textSize="@dimen/text_small"
+                        tools:text="标签"/>
+
+                    <TextView
+                        android:id="@+id/tv_train_time_address"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_train_tags"
+                        android:layout_marginTop="10dp"
+                        android:ellipsize="end"
+                        android:lineSpacingMultiplier="1.2"
+                        android:lines="1"
+                        android:textColor="@color/sub_text"
+                        android:textSize="@dimen/text_small"
+                        tools:text="时间地点"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_price_ext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tv_train_price"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="11dp"
+                        android:gravity="bottom"
+                        android:lineSpacingMultiplier="1.2"
+                        android:textColor="@color/red_text"
+                        android:textSize="11dp"
+                        tools:text="起"/>
+
+                    <TextView
+                        android:id="@+id/tv_train_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/tv_train_tags"
+                        android:layout_marginTop="10dp"
+                        android:layout_toLeftOf="@id/tv_price_ext"
+                        android:includeFontPadding="false"
+                        android:lineSpacingMultiplier="1.2"
+                        android:textColor="@color/red_text"
+                        android:textSize="@dimen/text_main"
+                        tools:text="10000"/>
+                </RelativeLayout>
+            </FrameLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_sits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"></android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                style="@style/enroll_rl">
+
+                <TextView
+                    style="@style/enroll_rl_text_left"
+                    android:text="门票"/>
+
+                <TextView
+                    android:id="@+id/tv_gates_count"
+                    style="@style/enroll_rl_text_right"
+                    android:text="0张"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/min_background"></View>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/enroll_rl">
+
+                <TextView
+                    style="@style/enroll_rl_text_left"
+                    android:text="商品总价"/>
+
+                <TextView
+                    android:id="@+id/tv_total_price"
+                    style="@style/enroll_rl_text_right"
+                    android:text="¥0"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/min_background"></View>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_cheap_defer"
+                style="@style/enroll_rl"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/enroll_rl_text_left"
+                    android:text="限时优惠"/>
+
+                <TextView
+                    android:id="@+id/tv_cheap_num"
+                    style="@style/enroll_rl_text_right"
+                    android:text="立省0"
+                    android:textColor="@color/red_text"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/min_background"></View>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/enroll_rl">
+
+                <TextView
+                    android:id="@+id/tv_exact_price"
+                    style="@style/enroll_rl_text_right"
+                    android:text="¥0"
+                    android:textColor="@color/red_text"/>
+
+                <TextView
+                    style="@style/enroll_rl_text_right"
+                    android:layout_alignParentRight="false"
+                    android:layout_marginRight="6dp"
+                    android:layout_toLeftOf="@id/tv_exact_price"
+                    android:text="实付"
+                    />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/min_background"></View>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/enroll_rl"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    style="@style/enroll_rl_text_left"
+                    android:text="联系人信息"/>
+
+                <TextView
+                    style="@style/enroll_rl_text_right"
+                    android:background="@drawable/shape_tag3"
+                    android:padding="2dp"
+                    android:text="更新数据"
+                    android:textColor="@color/main_background"
+                    android:textSize="@dimen/text_small"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/enroll_rl">
+
+                <TextView
+                    style="@style/enroll_rl_text_left"
+                    android:drawableLeft="@mipmap/star_five"
+                    android:drawablePadding="3dp"
+                    android:text="联系人"/>
+
+                <EditText
+                    android:id="@+id/et_contactor"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@null"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入"
+                    android:lines="1"
+                    android:paddingRight="4dp"
+                    android:textColor="@color/sub_text"
+                    />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="15dp"
+                android:background="@color/sub_background"></View>
+
+            <RelativeLayout
+                style="@style/enroll_rl">
+
+                <TextView
+
+                    style="@style/enroll_rl_text_left"
+                    android:drawableLeft="@mipmap/star_five"
+                    android:drawablePadding="3dp"
+                    android:text="联系人电话"/>
+
+                <EditText
+                    android:id="@+id/et_contact_phone"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@null"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxWidth="160dp"
+                    android:paddingRight="4dp"
+                    android:textColor="@color/sub_text"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/enroll_rl"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    style="@style/enroll_rl_text_left"
+                    android:text="发票信息"/>
+
+                <TextView
+                    style="@style/enroll_rl_text_right"
+                    android:background="@drawable/shape_tag3"
+                    android:padding="2dp"
+                    android:text="更新数据"
+                    android:textColor="@color/main_background"
+                    android:textSize="@dimen/text_small"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/enroll_rl">
+
+                <TextView
+                    android:id="@+id/tv_fix_taitou"
+                    style="@style/user_info_desc"
+                    android:drawablePadding="3dp"
+                    android:text="抬头类型"/>
+
+                <TextView
+                    android:id="@+id/tv_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_toRightOf="@id/tv_fix_taitou"
+                    android:drawableLeft="@drawable/selector_small_select"
+                    android:drawablePadding="10dp"
+                    android:text="企业单位"
+                    android:textColor="@drawable/selector_fapiao_text"/>
+
+                <TextView
+                    android:id="@+id/tv_not_company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_toRightOf="@id/tv_company"
+                    android:drawableLeft="@drawable/selector_small_select"
+                    android:drawablePadding="10dp"
+                    android:text="个人/非企业单位"
+                    android:textColor="@drawable/selector_fapiao_text"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="15dp"
+                android:background="@color/sub_background"></View>
+
+            <RelativeLayout
+                style="@style/enroll_rl">
+
+                <TextView
+
+                    style="@style/user_info_desc"
+                    android:drawablePadding="3dp"
+                    android:text="发票抬头"/>
+
+                <EditText
+                    android:id="@+id/et_taitou_fapiao"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@null"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入"
+                    android:lines="1"
+                    android:maxWidth="200dp"
+                    android:paddingRight="4dp"
+                    android:textColor="@color/sub_text"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_suihao_box"
+                style="@style/enroll_rl">
+
+                <TextView
+                    style="@style/user_info_desc"
+                    android:drawablePadding="3dp"
+                    android:lines="1"
+                    android:text="税号"/>
+
+                <EditText
+                    android:id="@+id/et_suihao"
+                    style="@style/user_info_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@null"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入"
+                    android:maxWidth="200dp"
+                    android:paddingRight="4dp"
+                    android:textColor="@color/sub_text"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/enroll_rl">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="备注"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/enroll_rl"
+                >
+
+                <EditText
+                    android:id="@+id/et_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_textarea"
+                    android:gravity="top"
+                    android:hint="@string/str_enroll_tips"
+                    android:lines="3"
+                    android:maxLines="5"
+                    android:padding="5dp"
+                    android:textSize="@dimen/text_small"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                style="@style/enroll_rl"
+                android:paddingTop="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_user_service_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/icon_expand"
+                    android:drawablePadding="4dp"
+                    android:text="用户服务说明"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_small"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_background"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_total_price_bottom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.28"
+            android:gravity="center"
+            android:text="合计: ¥0"
+            android:textColor="@color/red_text"
+            android:textSize="@dimen/text_large"/>
+
+        <TextView
+            android:id="@+id/tv_submit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/min_background"
+            android:gravity="center"
+            android:text="提交订单"
+            android:textColor="@color/main_background"
+            android:textSize="@dimen/text_main"/>
+    </LinearLayout>
+</RelativeLayout>

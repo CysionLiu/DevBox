@@ -35,6 +35,8 @@
     <string name="str_collect">收藏</string>
     <string name="str_enroll">立即报名</string>
     <string name="str_meeting_detail">会议详情</string>
+    <string name="str_enroll_order">提交订单</string>
+    <string name="str_enroll_tips">如有特殊要求，可在此备注，提交订单成功后，专属服务和顾问会和你联系。</string>
 
 
 </resources>

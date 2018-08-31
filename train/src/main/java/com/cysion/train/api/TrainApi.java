@@ -38,4 +38,7 @@ public interface TrainApi {
     @GET("content/?l=api.matic")
     Call<String> getRecommandMeetings(@Query("json") int json, @Query("appid") int appid, @Query("id") String id);
 
+    //获得某个会议详情
+    @GET("content/?l=api.give")
+    Call<String> getEnrollInfo(@Query("json") int json, @Query("appid") int appid, @Query("id") String id, @Query("uid") String uid);
 }

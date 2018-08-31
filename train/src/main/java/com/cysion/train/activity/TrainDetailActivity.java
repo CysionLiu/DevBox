@@ -72,8 +72,8 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
     TextView mTvCollect;
     @BindView(R.id.tv_phone)
     TextView mTvPhone;
-    @BindView(R.id.tv_enroll)
-    TextView mTvEnroll;
+    @BindView(R.id.rl_enroll)
+    RelativeLayout mRlEnroll;
     @BindView(R.id.ll_bar_bottom)
     LinearLayout mLlBarBottom;
     @BindView(R.id.tv_enroll_end)
@@ -135,7 +135,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         mIvToShare.setOnClickListener(this);
         mTvPhone.setOnClickListener(this);
         mTvAddress.setOnClickListener(this);
-        mTvEnroll.setOnClickListener(this);
+        mRlEnroll.setOnClickListener(this);
     }
 
 
@@ -183,6 +183,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
             return;
         }
         mCurCourseBean = courseBean;
+        enrollEnded();
         String style = mCurCourseBean.getStyle();
         if (TextUtils.isEmpty(style)) {
             style = "";
@@ -226,6 +227,19 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    private void enrollEnded() {
+        String bao_end = mCurCourseBean.getBao_end();
+        try {
+            Long end = Long.valueOf(bao_end) * 1000;
+            if (end - System.currentTimeMillis() <= 0) {
+                mRlEnroll.setVisibility(View.GONE);
+                mTvEnrollEnd.setVisibility(View.VISIBLE);
+            }
+        } catch (Exception aE) {
+
+        }
+    }
+
     private void resetColState() {
         mTvCollect.setSelected(false);
         if (mCurCourseBean.getStates() == Constant.COLLECTED_STATE) {
@@ -257,12 +271,12 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
                 Intent myIntent = IntentUtils.getDialIntent(Constant.HOTLINE_NUMBER);
                 startActivity(myIntent);
                 break;
-            case R.id.tv_enroll:
+            case R.id.rl_enroll:
                 //是否登录
                 if (LoginHelper.obj().toLoginPage(this)) {
                     return;
                 }
-                MyToast.quickShow("功能未完成");
+                EnrollInfoActivity.start(this, mCurCourseBean);
                 break;
             case R.id.tv_address:
                 String map = mCurCourseBean.getMap();
