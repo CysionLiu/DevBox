@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.image.GlideRoundTransform;
 import com.cysion.baselib.listener.OnTypeClickListener;
@@ -22,10 +24,14 @@ import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.PageConstant;
 import com.cysion.train.R;
 import com.cysion.train.adapter.SitAdapter;
+import com.cysion.train.entity.ClientEntity;
 import com.cysion.train.entity.SitBean;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.logic.UserCache;
+import com.cysion.train.logic.UserLogic;
+import com.cysion.train.simple.SimpleEditListener;
+import com.cysion.train.view.MyToast;
 
 import java.util.List;
 
@@ -70,6 +76,26 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
     EditText mEtRemark;
     @BindView(R.id.tv_user_service_tip)
     TextView mTvUserServiceTip;
+    @BindView(R.id.tv_fix_taitou)
+    TextView mTvFixTaitou;
+    @BindView(R.id.tv_company)
+    TextView mTvCompany;
+    @BindView(R.id.tv_not_company)
+    TextView mTvNotCompany;
+    @BindView(R.id.et_taitou_fapiao)
+    EditText mEtTaitouFapiao;
+    @BindView(R.id.et_suihao)
+    EditText mEtSuihao;
+    @BindView(R.id.rl_suihao_box)
+    RelativeLayout mRlSuihaoBox;
+    @BindView(R.id.tv_total_price_bottom)
+    TextView mTvTotalPriceBottom;
+    @BindView(R.id.tv_submit)
+    TextView mTvSubmit;
+    @BindView(R.id.tv_refresh_contact)
+    TextView mTvRefreshContact;
+    @BindView(R.id.tv_refresh_fapiao)
+    TextView mTvRefreshFapiao;
     private String mId;
     private TrainCourseBean mCurCourseBean;
     private int mSelectCount = 0;
@@ -77,7 +103,6 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
     private int mOldTotalPrice = 0;
 
 
-    //type，机构or专家；id，打开本页面
     public static void start(Activity aActivity, TrainCourseBean aTrainCourseBean) {
         Intent myIntent = new Intent(aActivity, EnrollInfoActivity.class);
         myIntent.putExtra(PageConstant.TRAIN_ENTITY, aTrainCourseBean);
@@ -96,14 +121,16 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         initTopBar();
         initSitList();
         setupData();
-
+        initEvent();
     }
 
-    private void initSitList() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mRvSits.setLayoutManager(linearLayoutManager);
-        mRvSits.setAdapter(new SitAdapter(mCurCourseBean.getSit(), this, this));
-        mRvSits.setNestedScrollingEnabled(false);
+
+    private void getPageData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            mCurCourseBean = (TrainCourseBean) intent.getSerializableExtra(PageConstant.TRAIN_ENTITY);
+            mId = mCurCourseBean.getId();
+        }
     }
 
     private void initTopBar() {
@@ -116,14 +143,6 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
             }
         });
         mTbarEnroll.setTitle(getString(R.string.str_enroll_order));
-    }
-
-    private void getPageData() {
-        Intent intent = getIntent();
-        if (intent != null) {
-            mCurCourseBean = (TrainCourseBean) intent.getSerializableExtra(PageConstant.TRAIN_ENTITY);
-            mId = mCurCourseBean.getId();
-        }
     }
 
     @Override
@@ -143,6 +162,26 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                 Toast.makeText(EnrollInfoActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void initSitList() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRvSits.setLayoutManager(linearLayoutManager);
+        mRvSits.setAdapter(new SitAdapter(mCurCourseBean.getSit(), this, this));
+        mRvSits.setNestedScrollingEnabled(false);
+    }
+
+    private void initEvent() {
+        mTvSubmit.setOnClickListener(mOnClickListener);
+        mTvRefreshContact.setOnClickListener(mOnClickListener);
+        mTvRefreshFapiao.setOnClickListener(mOnClickListener);
+        mTvNotCompany.setOnClickListener(mOnClickListener);
+        mTvCompany.setOnClickListener(mOnClickListener);
+        mEtSuihao.addTextChangedListener(mTextWatcher);
+        mEtTaitouFapiao.addTextChangedListener(mTextWatcher);
+        mEtContactPhone.addTextChangedListener(mTextWatcher);
+        mEtContactor.addTextChangedListener(mTextWatcher);
+        mEtSuihao.addTextChangedListener(mTextWatcher);
     }
 
     //更新数据
@@ -184,18 +223,38 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
             mTvPriceExt.setText(price.getPrice_ext());
         }
         mTvTrainPrice.setText(priceStr);
-        mEtContactor.setText(UserCache.obj().getClientEntity().getName());
-        mEtContactPhone.setText(UserCache.obj().getClientEntity().getPhone());
+        ClientEntity clientEntity = UserCache.obj().getClientEntity();
+        mEtContactor.setText(clientEntity.getName());
+        mEtContactPhone.setText(clientEntity.getPhone());
+        if ("1".equals(clientEntity.getBill())) {
+            isCompany();
+        } else {
+            notCompany();
+        }
+        mEtTaitouFapiao.setText(clientEntity.getBill_name());
+        mEtSuihao.setText(clientEntity.getBill_num());
+        changeSubmitState();
     }
 
+    private void notCompany() {
+        mTvCompany.setSelected(false);
+        mTvNotCompany.setSelected(true);
+        mRlSuihaoBox.setVisibility(View.GONE);
+    }
+
+    private void isCompany() {
+        mTvCompany.setSelected(true);
+        mTvNotCompany.setSelected(false);
+        mRlSuihaoBox.setVisibility(View.VISIBLE);
+    }
+
+    //当列表item发生点击时
     @Override
     public void onClicked(Object obj, int position, int flag) {
-        SitBean bean = (SitBean) obj;
         List<SitBean> sit = mCurCourseBean.getSit();
         mSelectCount = 0;
         mNowTotalPrice = 0;
         mOldTotalPrice = 0;
-        int mDeferPrice = 0;
         for (SitBean sitBean : sit) {
             int nativecount = sitBean.getNativecount();
             if (nativecount > 0) {
@@ -216,6 +275,126 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         mTvExactPrice.setText("¥" + mNowTotalPrice);
         //优惠
         mTvCheapNum.setText("立省 " + (mOldTotalPrice - mNowTotalPrice));
+        mTvTotalPriceBottom.setText("¥" + mNowTotalPrice);
+        changeSubmitState();
+    }
+
+    //改变底部提交按钮的状态
+    private void changeSubmitState() {
+        boolean canSubmit = true;
+        if (mSelectCount == 0) {
+            canSubmit = false;
+        }
+        if (TextUtils.isEmpty(mEtContactor.getText().toString().trim())) {
+            canSubmit = false;
+        }
+        if (TextUtils.isEmpty(mEtContactPhone.getText().toString().trim())) {
+            canSubmit = false;
+        }
+//        if (TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
+//            canSubmit = false;
+//        }
+        //选了企业，但是没有税号
+        if (mTvCompany.isSelected() && TextUtils.isEmpty(mEtSuihao.getText().toString().trim())
+                & !TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
+            canSubmit = false;
+        }
+        if (canSubmit) {
+            mTvSubmit.setBackgroundColor(Box.color(R.color.main_tag));
+            mTvSubmit.setClickable(true);
+        } else {
+            mTvSubmit.setBackgroundColor(Box.color(R.color.light_background));
+            mTvSubmit.setClickable(false);
+        }
 
     }
+
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int viewId = v.getId();
+            switch (viewId) {
+                case R.id.tv_company:
+                    if (!mTvCompany.isSelected()) {
+                        isCompany();
+                    }
+                    break;
+                case R.id.tv_not_company:
+                    if (!mTvNotCompany.isSelected()) {
+                        notCompany();
+                    }
+                    break;
+                case R.id.tv_refresh_contact:
+                    refreshContact();
+                    break;
+                case R.id.tv_refresh_fapiao:
+                    refreshBill();
+                    break;
+                case R.id.tv_submit:
+                    submit();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    private void submit() {
+        TrainLogic.obj().enroll(mId, mEtContactor.getText().toString().trim(),
+                mEtContactPhone.getText().toString().trim(),
+                mTvCompany.isSelected() ? "1" : "2", mEtTaitouFapiao.getText().toString().trim(),
+                mEtSuihao.getText().toString().trim(), "", "",
+                mEtRemark.getText().toString().trim(), new PureListener<String>() {
+                    @Override
+                    public void done(String result) {
+                        MyToast.quickShow(result);
+                    }
+
+                    @Override
+                    public void dont(int flag, String msg) {
+                        MyToast.quickShow(msg);
+                    }
+                });
+
+    }
+
+    private void refreshBill() {
+        UserLogic.obj().updateClientInfo("",
+                "", mTvCompany.isSelected() ? "1" : "2", mEtTaitouFapiao.getText().toString().trim(),
+                mEtSuihao.getText().toString().trim(), "", new PureListener<String>() {
+                    @Override
+                    public void done(String result) {
+                        MyToast.quickShow("更新成功");
+                    }
+
+                    @Override
+                    public void dont(int flag, String msg) {
+                        MyToast.quickShow("更新失败");
+                    }
+                });
+    }
+
+    private void refreshContact() {
+        UserLogic.obj().updateClientInfo(mEtContactor.getText().toString().trim(),
+                mEtContactPhone.getText().toString().trim(),
+                "", "", "", "", new PureListener<String>() {
+                    @Override
+                    public void done(String result) {
+                        MyToast.quickShow("更新成功");
+                    }
+
+                    @Override
+                    public void dont(int flag, String msg) {
+                        MyToast.quickShow("更新失败");
+                    }
+                });
+    }
+
+    private TextWatcher mTextWatcher = new SimpleEditListener() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            super.onTextChanged(s, start, before, count);
+            changeSubmitState();
+        }
+    };
 }

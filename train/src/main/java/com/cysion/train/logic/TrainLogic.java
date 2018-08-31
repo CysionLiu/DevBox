@@ -17,7 +17,9 @@ import com.orhanobut.logger.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -246,4 +248,38 @@ public class TrainLogic {
     }
 
 
+    public void enroll(String mid, String contact, String phone, String bill, String billname
+            , String billnum, String sitType, String sitnum, String remarks, final PureListener<String> aPureListener) {
+
+        Map<String, String> param = new HashMap<>();
+        param.put("appid", Constant.COMMON_QUERY_APPID + "");
+        param.put("json", Constant.COMMON_QUERY_JSON + "");
+        param.put("uid", UserCache.UID);
+        param.put("id", mid);
+        param.put("share_id", UserCache.UID);
+        param.put("bill", bill);
+        param.put("bill_name", billname);
+        param.put("bill_num", billnum);
+        param.put("name", contact);
+        param.put("phone", phone);
+        param.put("sit", sitType);
+        param.put("sit_num", sitnum);
+        param.put("remark", remarks);
+        Caller.obj().load(TrainApi.class)
+                .enroll(param)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Logger.d(response.body());
+                        aPureListener.done(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        aPureListener.dont(404, t.getMessage());
+                    }
+                });
+
+
+    }
 }

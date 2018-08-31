@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_item_box"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:id="@+id/fl_item_box"
     android:layout_marginTop="8dp"
     android:background="@drawable/selector_enroll_item_border"
     android:fitsSystemWindows="true"
@@ -16,28 +16,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="14dp">
+        android:padding="15dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+            android:layout_marginTop="0dp">
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:includeFontPadding="false"
                 android:textColor="@color/main_text"
-                android:textSize="@dimen/text_main"
+                android:textSize="@dimen/text_large"
                 tools:text="举国同庆"/>
 
             <ImageView
                 android:id="@+id/iv_add"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_alignParentRight="true"
-                android:padding="3dp"
+                android:padding="4dp"
                 android:src="@drawable/selector_enroll_item_add"/>
 
             <TextView
@@ -46,19 +47,19 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="14dp"
-                android:layout_toLeftOf="@id/iv_add"
+                android:layout_toLeftOf="@+id/iv_add"
                 android:text="0"
                 android:textColor="@color/main_text"
-                android:textSize="@dimen/text_main"/>
+                android:textSize="@dimen/text_large"/>
 
 
             <ImageView
                 android:id="@+id/iv_minus"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginRight="14dp"
-                android:layout_toLeftOf="@id/tv_count"
-                android:padding="3dp"
+                android:layout_toLeftOf="@+id/tv_count"
+                android:padding="4dp"
                 android:src="@drawable/selector_enroll_item_minus"/>
 
         </RelativeLayout>
@@ -67,17 +68,18 @@
             android:id="@+id/tv_zhekou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:drawableLeft="@mipmap/zhehou"
-            android:drawablePadding="4dp"
+            android:drawablePadding="5dp"
+            android:includeFontPadding="false"
             android:textColor="@color/red_text"
-            android:textSize="@dimen/text_smaller"
+            android:textSize="@dimen/text_small"
             tools:text="限时8折"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:orientation="horizontal">
 
             <TextView
@@ -85,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:textColor="@color/main_text"
+                android:textColor="@color/red_text"
                 android:textSize="@dimen/text_large"
                 tools:text="¥7800"/>
 
@@ -101,6 +103,12 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="16dp"
+            android:background="@color/light_background"></View>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,10 +118,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/sub_text"
-                android:textSize="@dimen/text_main"
-                android:text="截止报名时间:"/>
+                android:layout_marginTop="14dp"
+                android:text="截止报名时间:"
+                android:includeFontPadding="false"
+                android:textColor="@color/light_text"
+                android:textSize="@dimen/text_main"/>
 
 
             <TextView
@@ -121,20 +130,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:includeFontPadding="false"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/sub_text"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/light_text"
                 android:textSize="@dimen/text_main"
                 tools:text="2020.01.01"/>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="14dp"
+            android:background="@color/light_background"></View>
         <TextView
             android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/sub_text"
+            android:layout_marginTop="14dp"
+            android:includeFontPadding="false"
+            android:textColor="@color/light_text"
             android:textSize="@dimen/text_main"
             tools:text="这是一段说明这是一段说明这是一段说明这是一段说明这是一段说明这是一段说明这是一段说明这是一段说明..."/>
 
@@ -142,7 +158,7 @@
 
     <ImageView
         android:id="@+id/iv_tri_select_state"
-        android:layout_width="20dp"
+        android:layout_width="28dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
         android:adjustViewBounds="true"

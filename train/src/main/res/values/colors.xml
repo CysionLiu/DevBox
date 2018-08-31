@@ -15,6 +15,7 @@
     <!--text-->
     <color name="main_text">#ff000000</color>
     <color name="sub_text">#ff666666</color>
+    <color name="light_text">#ff888888</color>
     <color name="gray_text">#ff333333</color>
     <color name="min_text">#ffC8C8C8</color>
     <color name="red_text">#fffc3733</color>

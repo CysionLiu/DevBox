@@ -1,7 +1,12 @@
 package com.cysion.train.api;
 
+import java.util.Map;
+
 import retrofit2.Call;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface TrainApi {
@@ -41,4 +46,8 @@ public interface TrainApi {
     //获得某个会议详情
     @GET("content/?l=api.give")
     Call<String> getEnrollInfo(@Query("json") int json, @Query("appid") int appid, @Query("id") String id, @Query("uid") String uid);
+
+    @FormUrlEncoded
+    @POST("content/?l=api.sign")
+    Call<String> enroll(@FieldMap Map<String, String> params);
 }
