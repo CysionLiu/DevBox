@@ -19,6 +19,7 @@ import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.holder.train.CollectTrainHolder;
 import com.cysion.train.logic.UserLogic;
 import com.cysion.train.utils.Alert;
+import com.cysion.train.utils.ShareUtil;
 import com.cysion.train.view.MyToast;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -120,7 +121,17 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
     }
 
     private void toShare(String aId) {
-        MyToast.quickShow("功能未完成");
+        ShareUtil.obj().popShareWindow(this, "", new PureListener<String>() {
+            @Override
+            public void done(String result) {
+                MyToast.quickShow(result);
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+
+            }
+        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

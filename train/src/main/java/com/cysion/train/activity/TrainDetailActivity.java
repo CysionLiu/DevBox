@@ -30,6 +30,7 @@ import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.helper.LoginHelper;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.logic.UserLogic;
+import com.cysion.train.utils.ShareUtil;
 import com.cysion.train.view.MyToast;
 import com.cysion.train.view.MyUltranViewPager;
 import com.cysion.train.view.SimpleWebview;
@@ -265,7 +266,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
                 }
                 break;
             case R.id.iv_to_share:
-                MyToast.quickShow("功能未完成");
+                toShare();
                 break;
             case R.id.tv_phone:
                 Intent myIntent = IntentUtils.getDialIntent(Constant.HOTLINE_NUMBER);
@@ -289,6 +290,20 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
             default:
                 break;
         }
+    }
+
+    private void toShare() {
+        ShareUtil.obj().popShareWindow(this, "", new PureListener<String>() {
+            @Override
+            public void done(String result) {
+                MyToast.quickShow(result);
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+
+            }
+        });
     }
 
     @Override

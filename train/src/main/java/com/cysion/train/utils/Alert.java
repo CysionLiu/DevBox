@@ -48,6 +48,7 @@ public class Alert {
         p.width = (int) (Box.w() * 1f);
         window.setAttributes(p);
         window.setDimAmount(0);
+        window.setBackgroundDrawable(null);
         dialog.getWindow().setContentView(view);//自定义布局应该在这里添加，要在dialog.show()的后面
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -76,6 +77,7 @@ public class Alert {
         //摆脱token的限制，注意清单文件alert权限
         WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
         window.getDecorView().setBackgroundColor(0X00000000);
+        window.setBackgroundDrawable(null);
         p.width = (int) (Box.w() * 0.85f);
         window.setAttributes(p);
         dialog.getWindow().setContentView(view);//自定义布局应该在这里添加，要在dialog.show()的后面
