@@ -7,7 +7,7 @@
 
      <!--background-->
     <color name="main_background">#ffFFFFFF</color>
-    <color name="sub_background">#fff0f0f0</color>
+    <color name="sub_background">#fff6f6f6</color>
     <color name="light_background">#ffe5e5e5</color>
     <color name="min_background">#ffaaaaaa</color>
     <color name="yellow_background">#ffEE7636</color>

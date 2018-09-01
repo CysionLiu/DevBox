@@ -10,4 +10,8 @@ public interface MultiApi {
     @GET("content/?l=api.home")
     Call<String> getHomeAllData(@Query("json") int json, @Query("appid") int appid);
 
+    //获取基础说明配置
+    @GET("content/?l=api.hotline")
+    Call<String> getConfig(@Query("json") int json, @Query("appid") int appid);
+
 }

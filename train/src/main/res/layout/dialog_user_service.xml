@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_margin="1dp"
+              android:background="@drawable/shape_textarea"
+              android:orientation="vertical"
+              android:padding="23dp"
+
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="用户服务说明"
+        android:textColor="@color/red_text"
+        android:textSize="@dimen/text_larger"/>
+
+
+    <LinearLayout
+        android:layout_marginTop="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLines="15"
+            android:textColor="@color/sub_text"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideOverlay"
+            android:fadeScrollbars="false"
+            android:scrollbarFadeDuration="2000"
+            android:textSize="@dimen/text_main"
+            tools:text="用户服务说明用户服务说明用户服务说明用户服务说明用户服务说明"/>
+
+    </LinearLayout>
+</LinearLayout>

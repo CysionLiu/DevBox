@@ -86,6 +86,7 @@ public class TrainCourseBean implements Serializable {
     private CompanyBean company;
     private int states;
     private List<TagsBean> tags;
+    private ConfigBean config;
 
     public String getId() {
         return id;
@@ -97,6 +98,14 @@ public class TrainCourseBean implements Serializable {
 
     public List<SitBean> getSit() {
         return sit;
+    }
+
+    public ConfigBean getConfig() {
+        return config;
+    }
+
+    public void setConfig(ConfigBean aConfig) {
+        config = aConfig;
     }
 
     public void setSit(List<SitBean> aSit) {

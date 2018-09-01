@@ -26,6 +26,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:paddingBottom="10dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -474,15 +475,22 @@
 
             <RelativeLayout
                 style="@style/enroll_rl"
-                android:paddingTop="20dp"
+                android:paddingTop="12dp"
                 >
+                <ImageView
+                    android:id="@+id/tv_user_service_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="6dp"
+                    android:src="@mipmap/small_unselected"
+                    />
 
                 <TextView
                     android:id="@+id/tv_user_service_tip"
+                    android:layout_toRightOf="@+id/tv_user_service_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/small_unselected"
-                    android:drawablePadding="4dp"
+                    android:padding="6dp"
                     android:text="用户服务说明"
                     android:textColor="@color/red_text"
                     android:textSize="@dimen/text_small"/>

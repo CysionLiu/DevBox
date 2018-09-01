@@ -27,10 +27,12 @@ import com.cysion.train.adapter.SitAdapter;
 import com.cysion.train.entity.ClientEntity;
 import com.cysion.train.entity.SitBean;
 import com.cysion.train.entity.TrainCourseBean;
+import com.cysion.train.logic.ConfigLogic;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.logic.UserCache;
 import com.cysion.train.logic.UserLogic;
 import com.cysion.train.simple.SimpleEditListener;
+import com.cysion.train.utils.Alert;
 import com.cysion.train.view.MyToast;
 
 import java.util.List;
@@ -76,6 +78,8 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
     EditText mEtRemark;
     @BindView(R.id.tv_user_service_tip)
     TextView mTvUserServiceTip;
+    @BindView(R.id.tv_user_service_img)
+    ImageView mTvUserServiceImg;
     @BindView(R.id.tv_fix_taitou)
     TextView mTvFixTaitou;
     @BindView(R.id.tv_company)
@@ -175,6 +179,8 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         mTvSubmit.setOnClickListener(mOnClickListener);
         mTvRefreshContact.setOnClickListener(mOnClickListener);
         mTvRefreshFapiao.setOnClickListener(mOnClickListener);
+        mTvUserServiceTip.setOnClickListener(mOnClickListener);
+        mTvUserServiceImg.setOnClickListener(mOnClickListener);
         mTvNotCompany.setOnClickListener(mOnClickListener);
         mTvCompany.setOnClickListener(mOnClickListener);
         mEtSuihao.addTextChangedListener(mTextWatcher);
@@ -272,7 +278,7 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         //原总价
         mTvTotalPrice.setText("¥" + mOldTotalPrice);
         //现在总价
-        mTvExactPrice.setText("¥" + mNowTotalPrice);
+        mTvExactPrice.setText("合计: ¥" + mNowTotalPrice);
         //优惠
         mTvCheapNum.setText("立省 " + (mOldTotalPrice - mNowTotalPrice));
         mTvTotalPriceBottom.setText("¥" + mNowTotalPrice);
@@ -333,6 +339,12 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                 case R.id.tv_submit:
                     submit();
                     break;
+                case R.id.tv_user_service_tip:
+                    Alert.obj().showUserService(EnrollInfoActivity.this, ConfigLogic.obj().sConfigBean.getServe());
+                    break;
+                case R.id.tv_user_service_img:
+                    Alert.obj().showUserService(EnrollInfoActivity.this, ConfigLogic.obj().sConfigBean.getServe());
+                    break;
                 default:
                     break;
             }
@@ -347,7 +359,9 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                 mEtRemark.getText().toString().trim(), new PureListener<String>() {
                     @Override
                     public void done(String result) {
-                        MyToast.quickShow(result);
+                        finish();
+                        Intent myIntent = new Intent(EnrollInfoActivity.this, EnrollSucessActivity.class);
+                        startActivity(myIntent);
                     }
 
                     @Override

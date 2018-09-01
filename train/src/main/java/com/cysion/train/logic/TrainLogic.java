@@ -234,6 +234,9 @@ public class TrainLogic {
                             String jsonList = obj1.toString();
                             Logger.d(jsonList);
                             TrainCourseBean ps = new Gson().fromJson(jsonList, TrainCourseBean.class);
+                            if (ps.getConfig() != null) {
+                                ConfigLogic.obj().sConfigBean = ps.getConfig();
+                            }
                             aPureListener.done(ps);
                         } catch (Exception aE) {
                             aPureListener.dont(404, Box.str(R.string.str_invalid_data));

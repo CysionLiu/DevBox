@@ -24,11 +24,12 @@
         android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--最大长宽比-->
+
+        <!-- 最大长宽比 -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1"/>
-        <!---->
+        <!--  -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value=""/>
@@ -75,7 +76,14 @@
         </activity>
         <activity
             android:name=".activity.EnrollInfoActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.EnrollSucessActivity"
+                  android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity android:name=".activity.PayDescActivity"
+                  android:screenOrientation="portrait"
             >
         </activity>
     </application>
