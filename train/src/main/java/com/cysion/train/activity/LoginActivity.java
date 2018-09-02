@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.RegexUtils;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.base.BusEvent;
 import com.cysion.baselib.listener.PureListener;
@@ -138,18 +138,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Nullable
     private String invalidateMobile() {
-        String trim = mEtPhone.getText().toString().trim();
-        if (TextUtils.isEmpty(trim)) {
+        String phone = mEtPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(phone)) {
             new MyToast.Builder()
                     .text("手机号为空")
                     .buildToShow();
             return null;
         }
-        if (trim.length() != 11) {
-            new MyToast.Builder().gravity(Gravity.CENTER).text("手机号格式不对").buildToShow();
+        if (!RegexUtils.isMobileExact(phone)) {
+            MyToast.quickShow(getString(R.string.str_error_phone));
             return null;
         }
-        return trim;
+        return phone;
     }
 
     private void getSmsCode(String aTrim) {

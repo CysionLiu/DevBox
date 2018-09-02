@@ -253,7 +253,7 @@ public class UserLogic {
 
                         } catch (JSONException aE) {
                             aE.printStackTrace();
-                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                            aPureListener.dont(404, Box.str(R.string.str_submit_fail));
                         }
                     }
 
@@ -340,12 +340,12 @@ public class UserLogic {
                             if (jsonObject.optBoolean("data")) {
                                 aPureListener.done("保存成功");
                             } else {
-                                aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                                aPureListener.dont(404, Box.str(R.string.str_submit_fail));
                             }
 
                         } catch (JSONException aE) {
                             aE.printStackTrace();
-                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                            aPureListener.dont(404, Box.str(R.string.str_submit_fail));
                         }
                     }
 

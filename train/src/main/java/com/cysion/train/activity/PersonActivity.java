@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.blankj.utilcode.util.RegexUtils;
 import com.bumptech.glide.Glide;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
@@ -222,6 +223,10 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
         String taitou = mEtTaitouFapiao.getText().toString().trim();
         String shuihao = mEtSuihao.getText().toString().trim();
         String bill = "1";
+        if (!RegexUtils.isMobileExact(cphone)) {
+            MyToast.quickShow(getString(R.string.str_error_phone));
+            return;
+        }
         if (!mTvCompany.isSelected()) {
             bill = "2";
         }

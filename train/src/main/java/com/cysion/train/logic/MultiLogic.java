@@ -12,10 +12,19 @@ import com.cysion.train.R;
 import com.cysion.train.api.MultiApi;
 import com.cysion.train.entity.HomeAllDataBean;
 import com.cysion.train.entity.HomeDataBean;
+import com.cysion.train.entity.PlanEntity;
 import com.cysion.train.fragment.HomeFragment;
+import com.cysion.train.utils.MyJsonUtil;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -100,5 +109,78 @@ public class MultiLogic {
                 aPureListener.dont(404, t.getMessage());
             }
         });
+    }
+
+    public void getPlans(final PureListener<List<PlanEntity>> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
+        Caller.obj().load(MultiApi.class)
+                .getPlans(Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String body = response.body();
+                        try {
+                            JSONObject obj1 = MyJsonUtil.obj().handleCommonObj(body, aPureListener);
+                            if (obj1 == null) return;
+                            JSONArray list = obj1.optJSONArray("plan");
+                            String jsonList = list.toString();
+                            Logger.d(jsonList);
+                            List<PlanEntity> ps = new Gson().fromJson(jsonList, new TypeToken<List<PlanEntity>>() {
+                            }.getType());
+                            aPureListener.done(ps);
+                        } catch (Exception aE) {
+                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    public void publishPlan(String planId, String name, String phone, String company, String area,
+                            String remark, final PureListener<Integer> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
+        Map<String, String> pa = new HashMap<>();
+        pa.put("json", Constant.COMMON_QUERY_JSON + "");
+        pa.put("appid", Constant.COMMON_QUERY_APPID + "");
+        pa.put("uid", UserCache.UID);
+        pa.put("title_id", planId);
+        pa.put("name", name);
+        pa.put("phone", phone);
+        pa.put("area", area);
+        pa.put("comname", company);
+        pa.put("remark", remark);
+        Caller.obj().load(MultiApi.class)
+                .publishPlan(pa)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String body = response.body();
+                        try {
+                            JSONObject jsonObject = new JSONObject(body);
+                            int data = jsonObject.optInt("data");
+                            if (data > 0) {
+                                aPureListener.done(data);
+                                return;
+                            }
+                            aPureListener.dont(404, Box.str(R.string.str_submit_fail));
+                        } catch (Exception aE) {
+                            aPureListener.dont(404, Box.str(R.string.str_submit_fail));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        aPureListener.dont(404, t.getMessage());
+                    }
+                });
+
     }
 }
