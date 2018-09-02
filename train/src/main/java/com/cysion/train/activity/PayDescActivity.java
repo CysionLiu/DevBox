@@ -83,6 +83,9 @@ public class PayDescActivity extends BaseActivity {
 
     private void fillView() {
         ConfigBean bean = ConfigLogic.obj().sConfigBean;
+        if (bean==null) {
+            return;
+        }
         mTvAccount.setText(bean.getAccount_num());
         mTvAccountBank.setText(bean.getAccount());
         mTvAccountName.setText(bean.getAccount_name());

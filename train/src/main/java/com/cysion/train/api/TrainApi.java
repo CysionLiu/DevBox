@@ -15,7 +15,7 @@ public interface TrainApi {
     @GET("content/?l=api.lists")
     Call<String> getTrainList(@Query("json") int json, @Query("appid") int appid,
                               @Query("search_area") String search_area, @Query("search_style") String search_style,
-                              @Query("search_period") String search_period, @Query("type") int type);
+                              @Query("search_period") String search_period, @Query("type") int type, @Query("pg") int pagenum);
 
     //获得某个会议详情
     @GET("content/?l=api.desc")

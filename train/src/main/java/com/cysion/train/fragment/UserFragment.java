@@ -17,6 +17,7 @@ import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.activity.CollectActivity;
+import com.cysion.train.activity.MyEnrollActivity;
 import com.cysion.train.activity.PersonActivity;
 import com.cysion.train.adapter.UserOptionAdapter;
 import com.cysion.train.entity.UserEntity;
@@ -24,7 +25,6 @@ import com.cysion.train.entity.UserOptions;
 import com.cysion.train.helper.LoginHelper;
 import com.cysion.train.logic.UserCache;
 import com.cysion.train.logic.UserLogic;
-import com.cysion.train.view.MyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +50,33 @@ public class UserFragment extends BaseFragment {
     protected void initViews() {
         mRvUserOptions.setLayoutManager(new LinearLayoutManager(mActivity));
         mUserOptions = getOptions();
+        initRvList();
+        initEvent();
+
+    }
+
+    private void initEvent() {
+        mTvLogoName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (LoginHelper.obj().toLoginPage(mActivity)) {
+                    return;
+                }
+            }
+        });
+        mIvUserAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (LoginHelper.obj().toLoginPage(mActivity)) {
+                    return;
+                }
+                Intent myIntent = new Intent(mActivity, PersonActivity.class);
+                startActivity(myIntent);
+            }
+        });
+    }
+
+    private void initRvList() {
         UserOptionAdapter userOptionAdapter = new UserOptionAdapter(mUserOptions, mActivity, new OnTypeClickListener() {
             @Override
             public void onClicked(Object obj, int position, int flag) {
@@ -70,30 +97,15 @@ public class UserFragment extends BaseFragment {
                     Intent myIntent = new Intent(mActivity, PersonActivity.class);
                     startActivity(myIntent);
                 } else {
-                    MyToast.quickShow("功能未完成");
+                    if (LoginHelper.obj().toLoginPage(mActivity)) {
+                        return;
+                    }
+                    Intent myIntent = new Intent(mActivity, MyEnrollActivity.class);
+                    startActivity(myIntent);
                 }
             }
         });
         mRvUserOptions.setAdapter(userOptionAdapter);
-        mTvLogoName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (LoginHelper.obj().toLoginPage(mActivity)) {
-                    return;
-                }
-            }
-        });
-        mIvUserAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (LoginHelper.obj().toLoginPage(mActivity)) {
-                    return;
-                }
-                Intent myIntent = new Intent(mActivity, PersonActivity.class);
-                startActivity(myIntent);
-            }
-        });
-
     }
 
     @Override
@@ -115,7 +127,7 @@ public class UserFragment extends BaseFragment {
             }
         } else {
             mIvUserAvatar.setImageResource(R.drawable.user_avatar_default);
-            mTvLogoName.setText("未登录");
+            mTvLogoName.setText("未登录，请先登录");
         }
 
     }

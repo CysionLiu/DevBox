@@ -105,6 +105,8 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
     private int mSelectCount = 0;
     private int mNowTotalPrice = 0;
     private int mOldTotalPrice = 0;
+    private String mSelectedSit = "";
+    private String mSitNums = "";
 
 
     public static void start(Activity aActivity, TrainCourseBean aTrainCourseBean) {
@@ -352,10 +354,22 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
     };
 
     private void submit() {
+        List<SitBean> sit = mCurCourseBean.getSit();
+        for (SitBean sitBean : sit) {
+            if (sitBean.getNativecount() > 0) {
+                if (TextUtils.isEmpty(mSelectedSit)) {
+                    mSelectedSit = sitBean.getId();
+                    mSitNums = sitBean.getNativecount() + "";
+                } else {
+                    mSelectedSit = mSelectedSit + "," + sitBean.getId();
+                    mSitNums = mSitNums + "," + sitBean.getNativecount();
+                }
+            }
+        }
         TrainLogic.obj().enroll(mId, mEtContactor.getText().toString().trim(),
                 mEtContactPhone.getText().toString().trim(),
                 mTvCompany.isSelected() ? "1" : "2", mEtTaitouFapiao.getText().toString().trim(),
-                mEtSuihao.getText().toString().trim(), "", "",
+                mEtSuihao.getText().toString().trim(), mSelectedSit, mSitNums,
                 mEtRemark.getText().toString().trim(), new PureListener<String>() {
                     @Override
                     public void done(String result) {

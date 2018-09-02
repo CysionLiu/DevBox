@@ -1,6 +1,5 @@
 package com.cysion.train.activity;
 
-import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -9,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.RegexUtils;
 import com.cysion.baselib.base.BaseActivity;
@@ -25,7 +23,6 @@ import com.cysion.train.view.MyToast;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -108,7 +105,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     PureListener<String> userInfoListener = new PureListener<String>() {
         @Override
         public void done(String result) {
-            new MyToast.Builder().text("登录成功").buildToShow();
+            MyToast.builder().iconId(R.drawable.login_success).buildToShow();
             finish();
             EventBus.getDefault().post(new BusEvent().tag(PageConstant.LOGIN_SUCCESS).arg(PageConstant.LOGIN_DIRECT));
         }
@@ -140,9 +137,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String invalidateMobile() {
         String phone = mEtPhone.getText().toString().trim();
         if (TextUtils.isEmpty(phone)) {
-            new MyToast.Builder()
-                    .text("手机号为空")
-                    .buildToShow();
+            MyToast.quickShow(getString(R.string.str_input_phone));
             return null;
         }
         if (!RegexUtils.isMobileExact(phone)) {
@@ -155,15 +150,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void getSmsCode(String aTrim) {
         final MyCountDownTimer myCountDownTimer = new MyCountDownTimer(60000, 1000);
         myCountDownTimer.start();
-        Toast.makeText(LoginActivity.this, "功能未开放", Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+        MyToast.quickShow("测试中，随便输入点验证码即可");
     }
 
     //复写倒计时

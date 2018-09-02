@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.cysion.baselib.Box;
+import com.cysion.baselib.listener.Action;
 import com.cysion.train.R;
 
 /**
@@ -83,6 +84,43 @@ public class Alert {
         dialog.getWindow().setContentView(view);//自定义布局应该在这里添加，要在dialog.show()的后面
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+    }
+
+    public void logoutDialog(final Activity src, final Action<String> aAction) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(src);
+        LayoutInflater inflater = LayoutInflater.from(src);
+        View view = inflater.inflate(R.layout.dialog_to_logout, null);
+
+
+        final AlertDialog dialog = builder.create();
+        Window window = dialog.getWindow();
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //摆脱token的限制，注意清单文件alert权限
+        WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
+        window.getDecorView().setBackgroundColor(0X00000000);
+        window.setBackgroundDrawable(null);
+        p.width = (int) (Box.w() * 0.8f);
+        window.setAttributes(p);
+        dialog.getWindow().setContentView(view);//自定义布局应该在这里添加，要在dialog.show()的后面
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        view.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        view.findViewById(R.id.tv_confirm).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                aAction.done("退出");
+            }
+        });
 
     }
 }

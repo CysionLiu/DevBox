@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.image.GlideCircleTransform;
+import com.cysion.baselib.listener.Action;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
 import com.cysion.baselib.utils.ShowUtil;
@@ -25,6 +26,7 @@ import com.cysion.train.entity.TradeEntity;
 import com.cysion.train.entity.UserEntity;
 import com.cysion.train.logic.UserCache;
 import com.cysion.train.logic.UserLogic;
+import com.cysion.train.utils.Alert;
 import com.cysion.train.view.MyToast;
 
 import java.util.List;
@@ -163,13 +165,22 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
                 onTradeClicked();
                 break;
             case R.id.tv_to_logout:
-                UserCache.obj().clearCache();
-                finish();
+                onLogoutClicked();
                 break;
             default:
 
                 break;
         }
+    }
+
+    private void onLogoutClicked() {
+        Alert.obj().logoutDialog(self, new Action<String>() {
+            @Override
+            public void done(String aS) {
+                UserCache.obj().clearCache();
+                finish();
+            }
+        });
     }
 
     OptionsPickerView mTradePickView;

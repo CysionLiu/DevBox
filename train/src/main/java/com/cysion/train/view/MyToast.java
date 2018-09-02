@@ -1,6 +1,7 @@
 package com.cysion.train.view;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +86,16 @@ public class MyToast {
         }
         duration = aBuilder.duration;
         textDp = aBuilder.textDp;
+        if (TextUtils.isEmpty(text)) {
+            ImageView img = new ImageView(Box.ctx());
+            img.setImageResource(R.drawable.login_success);
+            mToast = new Toast(Box.ctx());
+            mToast.setGravity(gravity, 0, yOffset);
+            mToast.setDuration(duration);
+            mToast.setView(img);
+            mToast.show();
+            return;
+        }
         if (iconId < 0) {
             View v = LayoutInflater.from(Box.ctx()).inflate(R.layout.toast_text, null);
             TextView textView = v.findViewById(R.id.tv_show);

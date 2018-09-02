@@ -64,7 +64,8 @@ public interface UserApi {
 
     //获得收藏列表
     @GET("content/?l=api.mycollect")
-    Call<String> getCollects(@Query("json") int json, @Query("appid") int appid, @Query("uid") String uid);
+    Call<String> getCollects(@Query("json") int json, @Query("appid") int appid, @Query("uid") String uid,
+                             @Query("pg") int page);
 
     @FormUrlEncoded
     @POST("content/?l=api.renew")

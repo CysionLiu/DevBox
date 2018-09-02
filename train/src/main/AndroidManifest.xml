@@ -86,7 +86,11 @@
             android:name=".activity.PayDescActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.SharePosterActivity"
+        <activity
+            android:name=".activity.SharePosterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.MyEnrollActivity"
                   android:screenOrientation="portrait"
             >
         </activity>

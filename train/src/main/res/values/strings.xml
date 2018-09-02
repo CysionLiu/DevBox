@@ -28,7 +28,7 @@
     <string name="str_recent_start">即将开始</string>
     <string name="str_ended_meeting">过往会议</string>
     <string name="str_get_dingzhi">立即提交，获取专属方案</string>
-    <string name="str_def_your_request">请简要描述你的需求...</string>
+    <string name="str_def_your_request">请简要描述您的其它需求，如偏好、附件服务等...</string>
     <string name="str_my_profile">我的资料</string>
     <string name="str_my_sign">我的报名</string>
     <string name="str_my_collect">我的收藏</string>
@@ -38,7 +38,11 @@
     <string name="str_meeting_detail">会议详情</string>
     <string name="str_enroll_order">提交订单</string>
     <string name="str_enroll_tips">如有特殊要求，可在此备注，提交订单成功后，专属服务和顾问会和你联系。</string>
-    <string name="str_error_phone">手机号格式不对</string>
+    <string name="str_error_phone">请输入正确的手机号</string>
+    <string name="str_send_code">验证码发送成功</string>
+    <string name="str_input_phone">请输入手机号</string>
+    <string name="str_cancel">取消</string>
+    <string name="str_confirm">确定</string>
 
 
 </resources>

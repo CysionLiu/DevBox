@@ -151,13 +151,13 @@ public class UserLogic {
                 });
     }
 
-    public void getColList(final PureListener<List<TrainCourseBean>> aPureListener) {
+    public void getColList(final PureListener<List<TrainCourseBean>> aPureListener, int page) {
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
         }
         Caller.obj().load(UserApi.class).getCollects(
                 Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID, UserCache.obj().getUid()
-        ).enqueue(new Callback<String>() {
+                , page).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String body = response.body();
@@ -197,9 +197,13 @@ public class UserLogic {
 
     //获取成功后，通过UserCache调用
     public void getUserInfo(final PureListener<String> aPureListener) {
+        if (!UserCache.obj().isLogin()) {
+            return;
+        }
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
         }
+
         UserCaller.obj().load(UserApi.class)
                 .getUser(Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID,
                         UserCache.obj().getUid(), UserCache.obj().getSession())
@@ -232,6 +236,9 @@ public class UserLogic {
     }
 
     public void updateUserInfo(String name, String pic, String gender, final PureListener<String> aPureListener) {
+        if (!UserCache.obj().isLogin()) {
+            return;
+        }
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
         }
@@ -267,6 +274,9 @@ public class UserLogic {
 
     //获取成功后，通过UserCache调用
     public void getClientInfo(final PureListener<String> aPureListener) {
+        if (!UserCache.obj().isLogin()) {
+            return;
+        }
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
         }
@@ -313,6 +323,9 @@ public class UserLogic {
 
     public void updateClientInfo(String contact, String phone, String bill, String billName, String billNum
             , String tradeId, final PureListener<String> aPureListener) {
+        if (!UserCache.obj().isLogin()) {
+            return;
+        }
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
         }

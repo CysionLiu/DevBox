@@ -157,7 +157,7 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
         }
         String phone = mEtPhone.getText().toString().trim();
         if (!RegexUtils.isMobileExact(phone)) {
-            MyToast.quickShow("手机号格式不对");
+            MyToast.quickShow(Box.str(R.string.str_error_phone));
             return;
         }
         String comname = mEtCompany.getText().toString().trim();

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:orientation="vertical">
+
+    <com.cysion.baselib.ui.TopBar
+        android:id="@+id/bar_expert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cysion.baselib.ui.TopBar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/sub_background"></View>
+
+    <com.cysion.train.view.MySmartMoreLayout
+        android:id="@+id/smr_loadmore"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_train"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="0dp"></android.support.v7.widget.RecyclerView>
+    </com.cysion.train.view.MySmartMoreLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/sub_background"
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:text="支付方式说明:"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/text_large"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingLeft="17dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="了解付款详情，请点击"
+                android:textColor="@color/light_text"
+                android:textSize="@dimen/text_small"/>
+
+            <TextView
+                android:id="@+id/tv_look"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="“立即查询”"
+                android:textColor="@color/red_text"
+                android:textSize="@dimen/text_small"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="前往"
+                android:textColor="@color/light_text"
+                android:textSize="@dimen/text_small"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

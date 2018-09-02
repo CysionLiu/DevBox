@@ -1,5 +1,6 @@
 package com.cysion.train.activity;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,7 +22,10 @@ import com.cysion.train.holder.train.CollectTrainHolder;
 import com.cysion.train.logic.UserLogic;
 import com.cysion.train.utils.Alert;
 import com.cysion.train.utils.ShareUtil;
+import com.cysion.train.view.MySmartMoreLayout;
 import com.cysion.train.view.MyToast;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -38,6 +42,9 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
     TopBar mBarExpert;
     @BindView(R.id.rv_train)
     RecyclerView mRvTrain;
+    @BindView(R.id.smr_loadmore)
+    MySmartMoreLayout mSmrLoadmore;
+    private int pageNum = 1;
 
     private List<TrainCourseBean> dataList;
     private TrainAdapter mTrainAdapter;
@@ -64,7 +71,30 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
                 }
             }
         });
+        mSmrLoadmore.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                loadMore();
+            }
+        });
 
+    }
+
+    private void loadMore() {
+        UserLogic.obj().getColList(new PureListener<List<TrainCourseBean>>() {
+            @Override
+            public void done(List<TrainCourseBean> result) {
+                mSmrLoadmore.finishLoadMore();
+                mTrainAdapter.addEntities(result);
+                mTrainAdapter.notifyDataSetChanged();
+                pageNum++;
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+                mSmrLoadmore.finishLoadMore();
+            }
+        },pageNum);
     }
 
     @Override
@@ -74,6 +104,7 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
     }
 
     private void getDataList() {
+        pageNum = 1;
         UserLogic.obj().getColList(new PureListener<List<TrainCourseBean>>() {
             @Override
             public void done(List<TrainCourseBean> result) {
@@ -81,13 +112,14 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
                 dataList.clear();
                 dataList.addAll(result);
                 mTrainAdapter.notifyDataSetChanged();
+                pageNum++;
             }
 
             @Override
             public void dont(int flag, String msg) {
                 Alert.obj().loaded();
             }
-        });
+        },pageNum);
     }
 
 
@@ -127,7 +159,7 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
             public void done(String result) {
                 if (ShareUtil.SHARE_ERWEIMA.equals(result)) {
                     SharePosterActivity.start(CollectActivity.this, aId);
-                }else if(ShareUtil.SHARE_WEIXIN.equals(result)){
+                } else if (ShareUtil.SHARE_WEIXIN.equals(result)) {
                     MyToast.quickShow("未获得微信Appid");
                 }
             }

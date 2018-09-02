@@ -34,6 +34,7 @@ import com.cysion.train.view.MyToast;
 import com.cysion.train.view.MyTopBar;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
     private OptionsPickerView mStylePcOptions;
     private OptionsPickerView mPeriodPcOptions;
     private List<String> mPeriod = new ArrayList<>();
+    private int pageNum = 1;
 
     @Override
     protected int getLayoutId() {
@@ -77,10 +79,17 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         mTrainAdapter = new TrainAdapter(new ArrayList<TrainCourseBean>(), mActivity, this);
         mRvTrainList.setLayoutManager(mLayoutManager);
         mRvTrainList.setAdapter(mTrainAdapter);
+        mSmrRefresj.setEnableLoadMore(true);
         mSmrRefresj.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 getData();
+            }
+        });
+        mSmrRefresj.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+loadMoreData();
             }
         });
         mTopbarListMeeting.setOnTopBarClickListener(new MyTopBar.OnTopBarClickListener() {
@@ -101,6 +110,27 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
                 }
             }
         });
+    }
+
+    private void loadMoreData() {
+        TrainLogic.obj().getTrainList(new PureListener<List<TrainCourseBean>>() {
+            @Override
+            public void done(List<TrainCourseBean> result) {
+                mSmrRefresj.finishLoadMore();
+                for (TrainCourseBean bean : result) {
+                    bean.setLocalType(Constant.MAIN_LIST);
+                }
+                mTrainAdapter.addEntities(result);
+                mTrainAdapter.notifyDataSetChanged();
+                pageNum++;
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+                mSmrRefresj.finishLoadMore();
+                MyToast.quickShow(msg);
+            }
+        }, mSearchArea, mSearchStyle, mSearchTime, mSearchType, pageNum);
     }
 
     @Override
@@ -129,8 +159,9 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         getData();
     }
 
-    //远程获取数据
+    //远程获取数据，获得第一页数据
     private void getData() {
+        pageNum = 1;
         TrainLogic.obj().getTrainList(new PureListener<List<TrainCourseBean>>() {
             @Override
             public void done(List<TrainCourseBean> result) {
@@ -142,6 +173,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
                 mTrainAdapter.notifyDataSetChanged();
                 changeLayout();
                 Alert.obj().loaded();
+                pageNum++;
             }
 
             @Override
@@ -151,7 +183,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
                 changeLayout();
                 Alert.obj().loaded();
             }
-        }, mSearchArea, mSearchStyle, mSearchTime, mSearchType);
+        }, mSearchArea, mSearchStyle, mSearchTime, mSearchType, pageNum);
     }
 
     //列表内元素点击事件，ITEM_CLICK默认为整个item

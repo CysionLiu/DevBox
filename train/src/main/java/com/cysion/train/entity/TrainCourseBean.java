@@ -73,6 +73,16 @@ public class TrainCourseBean implements Serializable {
     private String week;
     private List<SitBean> sit;
 
+    public List<TrainCourseBean> getMatic() {
+        return matic;
+    }
+
+    public void setMatic(List<TrainCourseBean> aMatic) {
+        matic = aMatic;
+    }
+
+    private List<TrainCourseBean> matic;
+
 
     public String getWeek() {
         return week;

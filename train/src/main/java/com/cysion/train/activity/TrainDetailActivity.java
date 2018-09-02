@@ -148,6 +148,9 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void done(TrainCourseBean result) {
                 setupData(result);
+                List<TrainCourseBean> matic = result.getMatic();
+                setupMaticData(matic);
+
             }
 
             @Override
@@ -155,28 +158,21 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
                 Toast.makeText(TrainDetailActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
-        //获取推荐会议
-        TrainLogic.obj().getTrainRecommand(mId, new PureListener<List<TrainCourseBean>>() {
-            @Override
-            public void done(List<TrainCourseBean> result) {
-                for (TrainCourseBean courseBean : result) {
-                    courseBean.setLocalType(Constant.RECOMMAND_LIST);
-                }
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(TrainDetailActivity.this, 2);
-                mRvRecommand.setLayoutManager(gridLayoutManager);
-                mRvRecommand.setAdapter(new TrainAdapter(result, TrainDetailActivity.this, new OnTypeClickListener() {
-                    @Override
-                    public void onClicked(Object obj, int position, int flag) {
-                        TrainCourseBean bean = (TrainCourseBean) obj;
-                        TrainDetailActivity.start(TrainDetailActivity.this, bean);
-                    }
-                }));
-            }
+    }
 
+    private void setupMaticData(List<TrainCourseBean> result) {
+        for (TrainCourseBean courseBean : result) {
+            courseBean.setLocalType(Constant.RECOMMAND_LIST);
+        }
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(TrainDetailActivity.this, 2);
+        mRvRecommand.setLayoutManager(gridLayoutManager);
+        mRvRecommand.setAdapter(new TrainAdapter(result, TrainDetailActivity.this, new OnTypeClickListener() {
             @Override
-            public void dont(int flag, String msg) {
+            public void onClicked(Object obj, int position, int flag) {
+                TrainCourseBean bean = (TrainCourseBean) obj;
+                TrainDetailActivity.start(TrainDetailActivity.this, bean);
             }
-        });
+        }));
     }
 
     //更新数据
@@ -299,7 +295,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
             public void done(String result) {
                 if (ShareUtil.SHARE_ERWEIMA.equals(result)) {
                     SharePosterActivity.start(self, mId);
-                }else if(ShareUtil.SHARE_WEIXIN.equals(result)){
+                } else if (ShareUtil.SHARE_WEIXIN.equals(result)) {
                     MyToast.quickShow("未获得微信Appid");
                 }
             }

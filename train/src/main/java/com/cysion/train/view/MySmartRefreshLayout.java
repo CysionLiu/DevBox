@@ -20,6 +20,4 @@ public class MySmartRefreshLayout extends SmartRefreshLayout {
         super(context, attrs, defStyleAttr);
         setEnableLoadMore(false);
     }
-
-
 }

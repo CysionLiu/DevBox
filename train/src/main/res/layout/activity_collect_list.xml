@@ -17,11 +17,16 @@
         android:layout_height="1dp"
         android:background="@color/sub_background"></View>
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_train"
+    <com.cysion.train.view.MySmartMoreLayout
+        android:id="@+id/smr_loadmore"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="0dp"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_train"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="0dp"></android.support.v7.widget.RecyclerView>
+    </com.cysion.train.view.MySmartMoreLayout>
 
 </LinearLayout>

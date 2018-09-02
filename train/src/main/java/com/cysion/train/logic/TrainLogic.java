@@ -39,13 +39,14 @@ public class TrainLogic {
         return instance;
     }
 
-    public void getTrainList(final PureListener<List<TrainCourseBean>> aPureListener, String area, String style, String period, int type) {
+    public void getTrainList(final PureListener<List<TrainCourseBean>> aPureListener, String area,
+                             String style, String period, int type,int page) {
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
         }
         Caller.obj().load(TrainApi.class).getTrainList(
                 Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID,
-                area, style, period, type
+                area, style, period, type,page
         ).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -174,38 +175,39 @@ public class TrainLogic {
                 });
     }
 
-    public void getTrainRecommand(String id, final PureListener<List<TrainCourseBean>> aPureListener) {
-        if (!NetworkUtils.isConnected()) {
-            aPureListener.dont(404, Box.str(R.string.str_no_net));
-        }
-        Caller.obj().load(TrainApi.class)
-                .getRecommandMeetings(Constant.COMMON_QUERY_JSON,
-                        Constant.COMMON_QUERY_APPID, id)
-                .enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        String body = response.body();
-                        try {
-                            JSONArray jsonArray = MyJsonUtil.obj().handleCommonArray(body, aPureListener);
-                            if (jsonArray == null) {
-                                return;
-                            }
-                            String jsonList = jsonArray.toString();
-                            Logger.d(jsonList);
-                            List<TrainCourseBean> ps = new Gson().fromJson(jsonList, new TypeToken<List<TrainCourseBean>>() {
-                            }.getType());
-                            aPureListener.done(ps);
-                        } catch (Exception aE) {
-                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        aPureListener.dont(404, t.getMessage());
-                    }
-                });
-    }
+    //暂时废弃
+//    public void getTrainRecommand(String id, final PureListener<List<TrainCourseBean>> aPureListener) {
+//        if (!NetworkUtils.isConnected()) {
+//            aPureListener.dont(404, Box.str(R.string.str_no_net));
+//        }
+//        Caller.obj().load(TrainApi.class)
+//                .getRecommandMeetings(Constant.COMMON_QUERY_JSON,
+//                        Constant.COMMON_QUERY_APPID, id)
+//                .enqueue(new Callback<String>() {
+//                    @Override
+//                    public void onResponse(Call<String> call, Response<String> response) {
+//                        String body = response.body();
+//                        try {
+//                            JSONArray jsonArray = MyJsonUtil.obj().handleCommonArray(body, aPureListener);
+//                            if (jsonArray == null) {
+//                                return;
+//                            }
+//                            String jsonList = jsonArray.toString();
+//                            Logger.d(jsonList);
+//                            List<TrainCourseBean> ps = new Gson().fromJson(jsonList, new TypeToken<List<TrainCourseBean>>() {
+//                            }.getType());
+//                            aPureListener.done(ps);
+//                        } catch (Exception aE) {
+//                            aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<String> call, Throwable t) {
+//                        aPureListener.dont(404, t.getMessage());
+//                    }
+//                });
+//    }
 
 
     //获得会议报名信息
