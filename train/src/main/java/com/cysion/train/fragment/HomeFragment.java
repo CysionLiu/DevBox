@@ -31,7 +31,7 @@ import com.cysion.train.entity.HomeDataBean;
 import com.cysion.train.entity.HomeTopBean;
 import com.cysion.train.entity.StyleBean;
 import com.cysion.train.entity.TrainCourseBean;
-import com.cysion.train.logic.HomeLogic;
+import com.cysion.train.logic.MultiLogic;
 import com.cysion.train.logic.UserLogic;
 import com.cysion.train.utils.Alert;
 import com.cysion.train.view.MySmartRefreshLayout;
@@ -209,7 +209,7 @@ public class HomeFragment extends BaseFragment {
 
 
     public void getAllData() {
-        HomeLogic.obj().getAllData(new PureListener<HomeDataBean>() {
+        MultiLogic.obj().getAllData(new PureListener<HomeDataBean>() {
             @Override
             public void done(HomeDataBean result) {
                 mSmrRefresj.finishRefresh();

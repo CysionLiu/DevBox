@@ -7,6 +7,7 @@ import android.view.View;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.base.BaseViewHolder;
 import com.cysion.baselib.base.BusEvent;
+import com.cysion.baselib.listener.Action;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
@@ -120,16 +121,15 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
         });
     }
 
-    private void toShare(String aId) {
-        ShareUtil.obj().popShareWindow(this, "", new PureListener<String>() {
+    private void toShare(final String aId) {
+        ShareUtil.obj().popShareWindow(this, "", new Action<String>() {
             @Override
             public void done(String result) {
-                MyToast.quickShow(result);
-            }
-
-            @Override
-            public void dont(int flag, String msg) {
-
+                if (ShareUtil.SHARE_ERWEIMA.equals(result)) {
+                    SharePosterActivity.start(CollectActivity.this, aId);
+                }else if(ShareUtil.SHARE_WEIXIN.equals(result)){
+                    MyToast.quickShow("未获得微信Appid");
+                }
             }
         });
     }

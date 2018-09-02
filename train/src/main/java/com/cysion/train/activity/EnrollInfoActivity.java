@@ -278,10 +278,10 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         //原总价
         mTvTotalPrice.setText("¥" + mOldTotalPrice);
         //现在总价
-        mTvExactPrice.setText("合计: ¥" + mNowTotalPrice);
+        mTvExactPrice.setText("¥" + mNowTotalPrice);
         //优惠
         mTvCheapNum.setText("立省 " + (mOldTotalPrice - mNowTotalPrice));
-        mTvTotalPriceBottom.setText("¥" + mNowTotalPrice);
+        mTvTotalPriceBottom.setText("合计: ¥" + mNowTotalPrice);
         changeSubmitState();
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 
 import com.cysion.baselib.base.BaseActivity;
+import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.train.R;
 import com.cysion.train.logic.UserCache;
 
@@ -17,6 +18,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        ShowUtil.darkAndWhite(this,false);
 
     }
 
@@ -25,12 +27,12 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                UserCache.obj().outCache();
                 Intent myIntent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(myIntent);
                 finish();
+                UserCache.obj().outCache();
             }
-        }, 200);
+        }, 10);
 
     }
 }

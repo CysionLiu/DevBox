@@ -14,4 +14,7 @@ public interface MultiApi {
     @GET("content/?l=api.hotline")
     Call<String> getConfig(@Query("json") int json, @Query("appid") int appid);
 
+    @GET("content/?l=api.poster")
+    Call<String> getPoster(@Query("json") int json, @Query("appid") int appid,
+                           @Query("uid") String uid, @Query("id") String id);
 }

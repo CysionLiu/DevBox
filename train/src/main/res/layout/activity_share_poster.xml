@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:orientation="vertical">
+
+    <com.cysion.baselib.ui.TopBar
+        android:id="@+id/bar_poster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cysion.baselib.ui.TopBar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/sub_background"></View>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="21dp"
+        android:paddingLeft="42dp"
+        android:paddingRight="42dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_poster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/poster_place"
+                />
+
+            <TextView
+                android:id="@+id/tv_download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:background="@drawable/shape_tag3"
+                android:gravity="center"
+                android:padding="8dp"
+                android:includeFontPadding="false"
+                android:text="下载海报，分享到朋友圈"
+                android:textColor="@color/main_background"
+                android:textSize="@dimen/text_larger"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

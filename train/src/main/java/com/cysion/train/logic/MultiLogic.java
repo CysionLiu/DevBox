@@ -1,5 +1,7 @@
 package com.cysion.train.logic;
 
+import android.text.TextUtils;
+
 import com.blankj.utilcode.util.NetworkUtils;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.cache.ACache;
@@ -19,17 +21,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeLogic {
+public class MultiLogic {
 
 
-    private static volatile HomeLogic instance;
+    private static volatile MultiLogic instance;
 
-    private HomeLogic() {
+    private MultiLogic() {
     }
 
-    public static synchronized HomeLogic obj() {
+    public static synchronized MultiLogic obj() {
         if (instance == null) {
-            instance = new HomeLogic();
+            instance = new MultiLogic();
         }
         return instance;
     }
@@ -67,6 +69,35 @@ public class HomeLogic {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 aHashMapPureListener.dont(404, t.getMessage());
+            }
+        });
+    }
+
+    public void getPoster(String mid, final PureListener<String> aPureListener) {
+        if (!NetworkUtils.isConnected()) {
+            aPureListener.dont(404, Box.str(R.string.str_no_net));
+        }
+        Caller.obj().load(MultiApi.class).getPoster(Constant.COMMON_QUERY_JSON
+                , Constant.COMMON_QUERY_APPID, UserCache.UID, mid).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String body = response.body();
+                try {
+                    JSONObject jsonObject = new JSONObject(body);
+                    String imgUrl = jsonObject.optString("data");
+                    if (TextUtils.isEmpty(imgUrl)) {
+                        aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                        return;
+                    }
+                    aPureListener.done(imgUrl);
+                } catch (Exception aE) {
+                    aPureListener.dont(404, Box.str(R.string.str_invalid_data));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                aPureListener.dont(404, t.getMessage());
             }
         });
     }

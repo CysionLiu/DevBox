@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:layout_gravity="bottom"
+                android:background="@color/main_background"
+                android:paddingTop="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_marginRight="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/close_cube"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="分享"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/text_larger"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_weixin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_weixin"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/weixin_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_weixin"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="分享给好友"
+                android:textColor="@color/sub_text"
+                android:textSize="@dimen/text_main"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_xquode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_quode"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/xquode"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_quode"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="生成海报"
+                android:textColor="@color/sub_text"
+                android:textSize="@dimen/text_main"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -78,11 +78,15 @@
             android:name=".activity.EnrollInfoActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.EnrollSucessActivity"
-                  android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".activity.EnrollSucessActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.PayDescActivity"
+        <activity
+            android:name=".activity.PayDescActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.SharePosterActivity"
                   android:screenOrientation="portrait"
             >
         </activity>

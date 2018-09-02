@@ -1,5 +1,6 @@
 package com.cysion.baselib.base;
 
+import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +15,12 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Unbinder mUnbind;
+    protected Activity self;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        self = this;
         int layoutId = getLayoutId();
         if (layoutId != 0) {
             setContentView(layoutId);

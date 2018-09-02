@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.IntentUtils;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.base.BusEvent;
+import com.cysion.baselib.listener.Action;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
@@ -293,15 +294,14 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void toShare() {
-        ShareUtil.obj().popShareWindow(this, "", new PureListener<String>() {
+        ShareUtil.obj().popShareWindow(this, "", new Action<String>() {
             @Override
             public void done(String result) {
-                MyToast.quickShow(result);
-            }
-
-            @Override
-            public void dont(int flag, String msg) {
-
+                if (ShareUtil.SHARE_ERWEIMA.equals(result)) {
+                    SharePosterActivity.start(self, mId);
+                }else if(ShareUtil.SHARE_WEIXIN.equals(result)){
+                    MyToast.quickShow("未获得微信Appid");
+                }
             }
         });
     }
