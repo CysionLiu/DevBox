@@ -29,10 +29,11 @@ import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.adapter.TrainDetailPageAdapter;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.helper.LoginHelper;
+import com.cysion.train.logic.MultiLogic;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.logic.UserLogic;
+import com.cysion.train.utils.Alert;
 import com.cysion.train.utils.ShareUtil;
-import com.cysion.train.view.MyToast;
 import com.cysion.train.view.MyUltranViewPager;
 import com.cysion.train.view.SimpleWebview;
 import com.orhanobut.logger.Logger;
@@ -290,14 +291,33 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void toShare() {
+        createPoster(false);//加速海报生成
         ShareUtil.obj().popShareWindow(this, "", new Action<String>() {
             @Override
             public void done(String result) {
                 if (ShareUtil.SHARE_ERWEIMA.equals(result)) {
                     SharePosterActivity.start(self, mId);
                 } else if (ShareUtil.SHARE_WEIXIN.equals(result)) {
-                    MyToast.quickShow("未获得微信Appid");
+                    Alert.obj().loading(self);
+                    createPoster(true);
                 }
+            }
+        });
+    }
+
+    private void createPoster(final boolean toShare) {
+        MultiLogic.obj().getPoster(mId, new PureListener<String>() {
+            @Override
+            public void done(String result) {
+                Alert.obj().loaded();
+                if (toShare) {
+                    ShareUtil.obj().shareToWein(self, result);
+                }
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+                Alert.obj().loaded();
             }
         });
     }

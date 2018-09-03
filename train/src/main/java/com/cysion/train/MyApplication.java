@@ -13,6 +13,7 @@ import com.cysion.baselib.net.AInjector;
 import com.cysion.baselib.net.Caller;
 import com.cysion.baselib.simplify.AppLifeCallBacker;
 import com.cysion.train.simple.UserCaller;
+import com.cysion.train.utils.ShareUtil;
 import com.cysion.train.view.MySmartRefreshLayout;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -66,6 +67,7 @@ public class MyApplication extends Application {
         registerActivityLifecycleCallbacks(new AppLifeCallBacker());
         //初始化网络请求
         initCaller();
+        ShareUtil.obj().initShare();
 
     }
 

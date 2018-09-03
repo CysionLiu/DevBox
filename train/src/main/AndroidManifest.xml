@@ -90,10 +90,15 @@
             android:name=".activity.SharePosterActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.MyEnrollActivity"
-                  android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".activity.MyEnrollActivity"
+            android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

@@ -18,8 +18,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this,false);
-
+        ShowUtil.darkAndWhite(this,true);
     }
 
     @Override

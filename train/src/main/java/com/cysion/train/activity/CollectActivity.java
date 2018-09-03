@@ -19,6 +19,7 @@ import com.cysion.train.R;
 import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.holder.train.CollectTrainHolder;
+import com.cysion.train.logic.MultiLogic;
 import com.cysion.train.logic.UserLogic;
 import com.cysion.train.utils.Alert;
 import com.cysion.train.utils.ShareUtil;
@@ -94,7 +95,7 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
             public void dont(int flag, String msg) {
                 mSmrLoadmore.finishLoadMore();
             }
-        },pageNum);
+        }, pageNum);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
             public void dont(int flag, String msg) {
                 Alert.obj().loaded();
             }
-        },pageNum);
+        }, pageNum);
     }
 
 
@@ -154,16 +155,36 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
     }
 
     private void toShare(final String aId) {
+        createPoster(false, aId);//加速海报生成
         ShareUtil.obj().popShareWindow(this, "", new Action<String>() {
             @Override
             public void done(String result) {
                 if (ShareUtil.SHARE_ERWEIMA.equals(result)) {
                     SharePosterActivity.start(CollectActivity.this, aId);
                 } else if (ShareUtil.SHARE_WEIXIN.equals(result)) {
-                    MyToast.quickShow("未获得微信Appid");
+                    Alert.obj().loading(self);
+                    createPoster(true, aId);
                 }
             }
         });
+    }
+
+    private void createPoster(final boolean toShare, String mId) {
+        MultiLogic.obj().getPoster(mId, new PureListener<String>() {
+            @Override
+            public void done(String result) {
+                Alert.obj().loaded();
+                if (toShare) {
+                    ShareUtil.obj().shareToWein(self, result);
+                }
+            }
+
+            @Override
+            public void dont(int flag, String msg) {
+                Alert.obj().loaded();
+            }
+        });
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

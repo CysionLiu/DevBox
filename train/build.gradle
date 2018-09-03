@@ -11,6 +11,27 @@ android {
         versionName "1.0.0"
 
     }
+//    signingConfigs {
+////        keystore {
+////            storeFile file('E:\\refer\\GQ24Android-develop-b40e486f5f261c08e304791bac5d3741d6a5f361\\GQ24\\app\\docs\\gq24.keystore')
+////            storePassword '123'
+////            keyAlias '123'
+////            keyPassword '123'
+////        }
+//    }
+
+    buildTypes {
+        debug {
+//            signingConfig signingConfigs.keystore
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+//            signingConfig signingConfigs.keystore
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
     buildTypes {
         release {

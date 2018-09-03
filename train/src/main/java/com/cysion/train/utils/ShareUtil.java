@@ -11,6 +11,12 @@ import android.view.WindowManager;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.listener.Action;
 import com.cysion.train.R;
+import com.cysion.train.simple.SimpleShareCallBack;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 public class ShareUtil {
 
@@ -68,7 +74,7 @@ public class ShareUtil {
         WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
         window.getDecorView().setBackgroundColor(0X00000000);
         p.width = WindowManager.LayoutParams.MATCH_PARENT;
-        p.height = (int) (Box.density()*145);
+        p.height = (int) (Box.density() * 145);
         p.gravity = Gravity.BOTTOM;
         window.setBackgroundDrawable(null);
         window.setAttributes(p);
@@ -76,5 +82,18 @@ public class ShareUtil {
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
+    }
+
+    public void initShare() {
+        UMConfigure.init(Box.ctx(), "appid"
+                , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+        PlatformConfig.setWeixin("appid", "appsecret");
+    }
+
+    public void shareToWein(Activity aActivity,String imgUrl){
+        UMImage image = new UMImage(aActivity, imgUrl);
+        new ShareAction(aActivity).setPlatform(SHARE_MEDIA.WEIXIN)
+                .withMedia(image).withText("分享海报")
+                .setCallback(new SimpleShareCallBack()).share();
     }
 }
