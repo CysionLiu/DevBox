@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="180dp"
                     android:gravity="center"
-                    android:text="@string/str_invalid_data"
+                    android:text="@string/str_no_data"
                     android:textColor="@color/sub_tag"
                     android:textSize="@dimen/header1"/>
             </RelativeLayout>

@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.RegexUtils;
 import com.bumptech.glide.Glide;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
@@ -302,10 +303,17 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
 //        if (TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
 //            canSubmit = false;
 //        }
-        //选了企业，但是没有税号
-        if (mTvCompany.isSelected() && TextUtils.isEmpty(mEtSuihao.getText().toString().trim())
-                & !TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
+        if (!mTvCompany.isSelected() && !mTvNotCompany.isSelected()) {
             canSubmit = false;
+        }
+        //选了企业，但是没有抬头和税号
+        if (mTvCompany.isSelected() && TextUtils.isEmpty(mEtSuihao.getText().toString().trim())
+                || TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
+            canSubmit = false;
+        } else {
+            if (TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
+                canSubmit = false;
+            }
         }
         if (canSubmit) {
             mTvSubmit.setBackgroundColor(Box.color(R.color.main_tag));
@@ -326,11 +334,13 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                     if (!mTvCompany.isSelected()) {
                         isCompany();
                     }
+                    changeSubmitState();
                     break;
                 case R.id.tv_not_company:
                     if (!mTvNotCompany.isSelected()) {
                         notCompany();
                     }
+                    changeSubmitState();
                     break;
                 case R.id.tv_refresh_contact:
                     refreshContact();
@@ -354,6 +364,9 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
     };
 
     private void submit() {
+        if (!RegexUtils.isMobileExact(mEtContactPhone.getText().toString().trim())) {
+            MyToast.quickShow(Box.str(R.string.str_error_phone));
+        }
         List<SitBean> sit = mCurCourseBean.getSit();
         for (SitBean sitBean : sit) {
             if (sitBean.getNativecount() > 0) {

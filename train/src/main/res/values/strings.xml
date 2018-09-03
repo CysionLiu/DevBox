@@ -14,6 +14,7 @@
     <string name="str_net_error">网络访问异常</string>
     <string name="str_no_net">网络已断开</string>
     <string name="str_submit_fail">提交数据失败</string>
+    <string name="str_no_data">没有获得数据，UI还未提供怎么展示</string>
 
     <!--首页-->
     <string name="str_train_opt">优选培训</string>

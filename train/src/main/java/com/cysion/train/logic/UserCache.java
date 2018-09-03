@@ -8,6 +8,7 @@ import com.cysion.train.entity.ClientEntity;
 import com.cysion.train.entity.TradeEntity;
 import com.cysion.train.entity.UserEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserCache {
@@ -21,6 +22,9 @@ public class UserCache {
     List<TradeEntity> mTradeEntities;
 
     public List<TradeEntity> getTradeEntities() {
+        if (mTradeEntities==null) {
+            return new ArrayList<>();
+        }
         return mTradeEntities;
     }
 
@@ -63,10 +67,16 @@ public class UserCache {
     }
 
     public UserEntity getUserEntity() {
+        if (mUserEntity == null) {
+            mUserEntity = new UserEntity();
+        }
         return mUserEntity;
     }
 
     public ClientEntity getClientEntity() {
+        if (mClientEntity == null) {
+            mClientEntity = new ClientEntity();
+        }
         return mClientEntity;
     }
 

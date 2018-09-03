@@ -89,7 +89,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         mSmrRefresj.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-loadMoreData();
+                loadMoreData();
             }
         });
         mTopbarListMeeting.setOnTopBarClickListener(new MyTopBar.OnTopBarClickListener() {
@@ -281,12 +281,16 @@ loadMoreData();
         mSearchType = type;
         getData();
         mSearchType = 0;
+        mTopbarListMeeting.setLeftText(Box.str(R.string.str_area));
         if (TextUtils.isEmpty(style)) {
             mTopbarListMeeting.setTitle(Box.str(R.string.str_style));
             return;
         }
         for (int i = 0; i < mStyleBeans.size(); i++) {
             StyleBean bean = mStyleBeans.get(i);
+            if (bean == null) {
+                continue;
+            }
             if (style.equals(bean.getId())) {
                 mTopbarListMeeting.setTitle(bean.getName());
                 if (mStylePcOptions != null) {
@@ -295,10 +299,6 @@ loadMoreData();
                 break;
             }
         }
-        for (StyleBean styleBean : mStyleBeans) {
-
-        }
-        mTopbarListMeeting.setLeftText(Box.str(R.string.str_area));
     }
 
     //数据列视图和空视图切换

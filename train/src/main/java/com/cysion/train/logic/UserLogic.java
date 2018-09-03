@@ -338,6 +338,9 @@ public class UserLogic {
         params.put("bill", bill);
         params.put("bill_name", billName);
         params.put("bill_num", billNum);
+        if (TextUtils.isEmpty(tradeId)) {
+            tradeId = "";
+        }
         params.put("trade_id", tradeId);
         Caller.obj().load(UserApi.class).updateClientInfo(params)
                 .enqueue(new Callback<String>() {
