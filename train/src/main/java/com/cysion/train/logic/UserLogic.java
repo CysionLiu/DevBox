@@ -257,7 +257,7 @@ public class UserLogic {
                                 return;
                             }
                             aPureListener.done("保存成功");
-
+                            UserLogic.obj().getUserInfo(PureListener.DEFAULT);
                         } catch (JSONException aE) {
                             aE.printStackTrace();
                             aPureListener.dont(404, Box.str(R.string.str_submit_fail));
@@ -355,6 +355,7 @@ public class UserLogic {
                             }
                             if (jsonObject.optBoolean("data")) {
                                 aPureListener.done("保存成功");
+                                UserLogic.obj().getClientInfo(PureListener.DEFAULT);
                             } else {
                                 aPureListener.dont(404, Box.str(R.string.str_submit_fail));
                             }

@@ -87,7 +87,7 @@ public class MyEnrollActivity extends BaseActivity implements OnTypeClickListene
                 finish();
             }
         });
-        mBarExpert.setTitle("我的报名");
+        mBarExpert.setTitle("我的报名-接口未定");
     }
     @Override
     protected void initData() {

@@ -17,10 +17,8 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.blankj.utilcode.util.RegexUtils;
 import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseFragment;
-import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.R;
-import com.cysion.train.adapter.PlanAdapter;
 import com.cysion.train.entity.AreaBean;
 import com.cysion.train.entity.PlanEntity;
 import com.cysion.train.logic.MultiLogic;
@@ -41,6 +39,8 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
     TextView mTvAddress;
     @BindView(R.id.iv_right_arrow1)
     ImageView mIvRightArrow1;
+    @BindView(R.id.iv_dingzhi_right_now)
+    ImageView mIvDingzhiRightNow;
     @BindView(R.id.tv_plans)
     TextView mTvPlans;
     @BindView(R.id.et_company)
@@ -75,20 +75,21 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
 
     //设置方案列表
     private void initList() {
+
         if (mPlanEntities == null) {
             return;
         }
         LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
         mRvPlans.setLayoutManager(layoutManager);
-        mRvPlans.setAdapter(new PlanAdapter(mPlanEntities, mActivity, new OnTypeClickListener() {
-            @Override
-            public void onClicked(Object obj, int position, int flag) {
-                PlanEntity entity = (PlanEntity) obj;
-                mSelectPlanId = entity.getId();
-                mTvPlans.setText(entity.getName());
-                mScBox.scrollTo(0, 3000);
-            }
-        }));
+//        mRvPlans.setAdapter(new PlanAdapter(mPlanEntities, mActivity, new OnTypeClickListener() {
+//            @Override
+//            public void onClicked(Object obj, int position, int flag) {
+//                PlanEntity entity = (PlanEntity) obj;
+//                mSelectPlanId = entity.getId();
+//                mTvPlans.setText(entity.getName());
+//                mScBox.scrollTo(0, 3000);
+//            }
+//        }));
     }
 
     private void initEvent() {
@@ -97,6 +98,7 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
         mIvRightArrow1.setOnClickListener(this);
         mIvRightArrow2.setOnClickListener(this);
         mBtnSubmit.setOnClickListener(this);
+        mIvDingzhiRightNow.setOnClickListener(this);
     }
 
     @Override
@@ -142,6 +144,9 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
                 break;
             case R.id.btn_submit:
                 toSubmit();
+                break;
+            case R.id.iv_dingzhi_right_now:
+                mScBox.scrollTo(0, 5000);
                 break;
             default:
                 break;
@@ -212,10 +217,10 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
                         area = p.getName();
                     }
                     if (option2 > 0) {
-                        area = area + "-"+city.getName();
+                        area = area + "-" + city.getName();
                     }
                     if (options3 > 0) {
-                        area = area + "-"+county.getName();
+                        area = area + "-" + county.getName();
                     }
                     mTvAddress.setText(area);
                 }

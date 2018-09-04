@@ -130,17 +130,21 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
         if (BaseViewHolder.ITEM_CLICK == flag) {
             TrainDetailActivity.start(this, bean);
         } else if (CollectTrainHolder.DEL == flag) {
-            delCol(bean.getId());
+            delCol(bean.getId(),position);
         } else if (CollectTrainHolder.SHARE == flag) {
             toShare(bean.getId());
         }
     }
 
 
-    private void delCol(String aId) {
+    private void delCol(String aId, final int pos) {
         UserLogic.obj().decol(aId, new PureListener<Integer>() {
             @Override
             public void done(Integer result) {
+                dataList.remove(pos);
+                if (mTrainAdapter != null) {
+                    mTrainAdapter.notifyDataSetChanged();
+                }
                 //取消成功
                 if (result == Constant.NOT_COLLECTED_STATE) {
                     initData();
