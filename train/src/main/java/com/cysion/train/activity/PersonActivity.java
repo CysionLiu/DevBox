@@ -187,14 +187,18 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
     private void onTradeClicked() {
         if (mTradePickView == null) {
+            final List<TradeEntity> tradeEntities = UserCache.obj().getTradeEntities();
             mTradePickView = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
                 @Override
                 public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                    mTradeId = UserCache.obj().getTradeEntities().get(options1).getId();
-                    mTvTrade.setText(UserCache.obj().getTradeEntities().get(options1).getName());
+                    if (tradeEntities.size()<1) {
+                        return;
+                    }
+                    mTradeId = tradeEntities.get(options1).getId();
+                    mTvTrade.setText(tradeEntities.get(options1).getName());
                 }
             }).setContentTextSize(18).setCancelColor(Color.GRAY).setSubmitColor(Box.color(R.color.main_tag)).build();
-            mTradePickView.setPicker(UserCache.obj().getTradeEntities());
+            mTradePickView.setPicker(tradeEntities);
         }
         mTradePickView.show();
     }
