@@ -195,6 +195,7 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
 
     //更新数据
     private void setupData() {
+        mTvUserServiceImg.setSelected(true);
         if (mCurCourseBean == null) {
             return;
         }
@@ -294,6 +295,9 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         if (mSelectCount == 0) {
             canSubmit = false;
         }
+        if (!mTvUserServiceImg.isSelected()) {
+            canSubmit = false;
+        }
         if (TextUtils.isEmpty(mEtContactor.getText().toString().trim())) {
             canSubmit = false;
         }
@@ -316,11 +320,9 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
             }
         }
         if (canSubmit) {
-            mTvSubmit.setBackgroundColor(Box.color(R.color.main_tag));
-            mTvSubmit.setClickable(true);
+            mTvSubmit.setEnabled(true);
         } else {
-            mTvSubmit.setBackgroundColor(Box.color(R.color.light_background));
-            mTvSubmit.setClickable(false);
+            mTvSubmit.setEnabled(false);
         }
 
     }
@@ -355,7 +357,8 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                     Alert.obj().showUserService(EnrollInfoActivity.this, ConfigLogic.obj().sConfigBean.getServe());
                     break;
                 case R.id.tv_user_service_img:
-                    Alert.obj().showUserService(EnrollInfoActivity.this, ConfigLogic.obj().sConfigBean.getServe());
+                    mTvUserServiceImg.setSelected(!mTvUserServiceImg.isSelected());
+                    changeSubmitState();
                     break;
                 default:
                     break;

@@ -106,5 +106,5 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initViews();
 
-    protected abstract void initData();
+    protected  void initData(){};
 }

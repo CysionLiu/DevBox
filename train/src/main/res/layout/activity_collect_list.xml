@@ -20,12 +20,13 @@
     <com.cysion.train.view.MySmartMoreLayout
         android:id="@+id/smr_loadmore"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_train"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:background="@color/sub_background"
+            android:layout_height="match_parent"
             android:paddingRight="0dp"></android.support.v7.widget.RecyclerView>
     </com.cysion.train.view.MySmartMoreLayout>
 

@@ -346,7 +346,9 @@
                 android:id="@+id/rl_enroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/main_tag">
+                android:background="@drawable/selector_enroll_submit"
+
+                >
 
                 <TextView
                     android:id="@+id/tv_enroll"

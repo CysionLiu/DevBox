@@ -133,11 +133,6 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         }, mSearchArea, mSearchStyle, mSearchTime, mSearchType, pageNum);
     }
 
-    @Override
-    protected void initData() {
-        initStyles();
-    }
-
     private void initStyles() {
         //读取Style列表的缓存数据
         try {
@@ -157,6 +152,15 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
         super.lazyLoad();
         Alert.obj().loading(mActivity);
         getData();
+        initStyles();
+    }
+
+    @Override
+    protected void visibleAgain() {
+        super.visibleAgain();
+        if (mStyleBeans == null || mStyleBeans.size() < 2) {
+            initStyles();
+        }
     }
 
     //远程获取数据，获得第一页数据
@@ -272,7 +276,7 @@ public class MainListFragment extends BaseFragment implements OnTypeClickListene
 
     //别的页面跳入本页面，携带筛选条件
     public void fromOuter(String style, String period, int type) {
-        if (mStyleBeans == null || mStyleBeans.size() == 0) {
+        if (mStyleBeans == null || mStyleBeans.size() <2) {
             initStyles();
         }
         mSearchArea = "";

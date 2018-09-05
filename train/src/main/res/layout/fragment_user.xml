@@ -35,7 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="136dp"
+            android:layout_marginTop="130dp"
+            android:ellipsize="end"
+            android:maxWidth="150dp"
+            android:lines="1"
             android:text="未登录,请先登录"
             android:textColor="@color/main_background"
             android:textSize="@dimen/text_main"/>

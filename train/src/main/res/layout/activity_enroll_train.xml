@@ -482,7 +482,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:padding="6dp"
-                    android:src="@mipmap/small_unselected"
+                    android:src="@drawable/user_servcie_selector"
                     />
 
                 <TextView
@@ -522,7 +522,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/min_background"
+            android:background="@drawable/selector_enroll_submit"
             android:gravity="center"
             android:text="提交订单"
             android:textColor="@color/main_background"

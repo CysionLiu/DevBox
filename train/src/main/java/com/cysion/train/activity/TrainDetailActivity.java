@@ -81,6 +81,8 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
     LinearLayout mLlBarBottom;
     @BindView(R.id.tv_enroll_end)
     TextView mTvEnrollEnd;
+    @BindView(R.id.tv_enroll)
+    TextView mTvEnroll;
     @BindView(R.id.iv_time)
     ImageView mIvTime;
     @BindView(R.id.tv_time_fix)
@@ -228,6 +230,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
 
     private void enrollEnded() {
         String bao_end = mCurCourseBean.getBao_end();
+        mTvEnroll.setEnabled(true);
         try {
             Long end = Long.valueOf(bao_end) * 1000;
             if (end - System.currentTimeMillis() <= 0) {

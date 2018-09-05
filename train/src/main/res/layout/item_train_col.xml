@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="14dp"
     android:background="@color/main_background"
+    android:layout_marginBottom="8dp"
     android:orientation="vertical">
 
     <FrameLayout
@@ -52,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="160dp"
+            android:layout_marginTop="6dp"
             android:padding="8dp">
 
             <TextView

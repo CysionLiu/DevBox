@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
+    android:background="#fff7f7f7"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:paddingLeft="25dp"
@@ -60,16 +60,18 @@
             android:textSize="@dimen/text_main"/>
 
         <Button
+            android:includeFontPadding="false"
             android:id="@+id/btn_get_code"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
+            android:gravity="right|center"
             android:layout_toRightOf="@id/et_phone"
             android:background="@null"
             android:text="获取验证码"
             android:textAllCaps="false"
             android:textColor="@color/sub_text"
-            android:textSize="@dimen/text_main"/>
+            android:textSize="@dimen/text_large"/>
     </RelativeLayout>
 
     <View
