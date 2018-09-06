@@ -17,17 +17,30 @@
         android:layout_height="1dp"
         android:background="@color/sub_background"></View>
 
-    <com.cysion.train.view.MySmartMoreLayout
-        android:id="@+id/smr_loadmore"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_train"
+        <com.cysion.train.view.MySmartMoreLayout
+            android:id="@+id/smr_loadmore"
             android:layout_width="match_parent"
-            android:background="@color/sub_background"
-            android:layout_height="match_parent"
-            android:paddingRight="0dp"></android.support.v7.widget.RecyclerView>
-    </com.cysion.train.view.MySmartMoreLayout>
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_train"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/sub_background"
+                android:paddingRight="0dp"></android.support.v7.widget.RecyclerView>
+        </com.cysion.train.view.MySmartMoreLayout>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/empty_view"/>
+    </FrameLayout>
 
 </LinearLayout>

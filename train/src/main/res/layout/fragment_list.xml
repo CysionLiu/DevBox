@@ -35,14 +35,11 @@
                 android:layout_height="match_parent"
                 android:visibility="invisible">
 
-                <TextView
+                <ImageView
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/empty_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="180dp"
-                    android:gravity="center"
-                    android:text="@string/str_no_data"
-                    android:textColor="@color/sub_tag"
-                    android:textSize="@dimen/header1"/>
+                    android:layout_height="wrap_content"/>
             </RelativeLayout>
         </FrameLayout>
     </com.cysion.train.view.MySmartRefreshLayout>

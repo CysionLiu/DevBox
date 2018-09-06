@@ -1,9 +1,11 @@
 package com.cysion.train.activity;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.base.BaseViewHolder;
@@ -35,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CollectActivity extends BaseActivity implements OnTypeClickListener {
 
@@ -45,6 +48,8 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
     RecyclerView mRvTrain;
     @BindView(R.id.smr_loadmore)
     MySmartMoreLayout mSmrLoadmore;
+    @BindView(R.id.iv_empty_view)
+    ImageView mIvEmptyView;
     private int pageNum = 1;
 
     private List<TrainCourseBean> dataList;
@@ -114,15 +119,26 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
                 dataList.addAll(result);
                 mTrainAdapter.notifyDataSetChanged();
                 pageNum++;
+                changeLayout();
             }
 
             @Override
             public void dont(int flag, String msg) {
                 Alert.obj().loaded();
+                changeLayout();
             }
         }, pageNum);
     }
 
+    public void changeLayout() {
+        if (dataList.size() > 0) {
+            mSmrLoadmore.setVisibility(View.VISIBLE);
+            mIvEmptyView.setVisibility(View.GONE);
+        } else {
+            mSmrLoadmore.setVisibility(View.GONE);
+            mIvEmptyView.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onClicked(Object obj, int position, int flag) {
@@ -130,7 +146,7 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
         if (BaseViewHolder.ITEM_CLICK == flag) {
             TrainDetailActivity.start(this, bean);
         } else if (CollectTrainHolder.DEL == flag) {
-            delCol(bean.getId(),position);
+            delCol(bean.getId(), position);
         } else if (CollectTrainHolder.SHARE == flag) {
             toShare(bean.getId());
         }
@@ -196,5 +212,12 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
         if (event.getTag() == PageConstant.DEL_COLLECT) {
             getDataList();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

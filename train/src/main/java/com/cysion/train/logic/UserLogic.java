@@ -293,18 +293,13 @@ public class UserLogic {
                     }
                     JSONObject userinfo = jsonObject.optJSONObject("userinfo");
                     if (userinfo == null) {
+                        initTrades(jsonObject);
                         return;
                     }
                     String s = userinfo.toString();
                     ClientEntity entity = MyJsonUtil.obj().gson().fromJson(s, ClientEntity.class);
                     UserCache.obj().mClientEntity = entity;
-                    JSONArray trade = jsonObject.optJSONArray("trade");
-                    if (trade != null) {
-                        List<TradeEntity> entities = MyJsonUtil.obj().gson()
-                                .fromJson(trade.toString(), new TypeToken<List<TradeEntity>>() {
-                                }.getType());
-                        UserCache.obj().mTradeEntities = entities;
-                    }
+                    initTrades(jsonObject);
                     aPureListener.done("成功");
 
                 } catch (JSONException aE) {
@@ -319,6 +314,16 @@ public class UserLogic {
             }
         });
 
+    }
+
+    private void initTrades(JSONObject aJsonObject) {
+        JSONArray trade = aJsonObject.optJSONArray("trade");
+        if (trade != null) {
+            List<TradeEntity> entities = MyJsonUtil.obj().gson()
+                    .fromJson(trade.toString(), new TypeToken<List<TradeEntity>>() {
+                    }.getType());
+            UserCache.obj().mTradeEntities = entities;
+        }
     }
 
     public void updateClientInfo(String contact, String phone, String bill, String billName, String billNum
