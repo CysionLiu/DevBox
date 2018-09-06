@@ -87,7 +87,7 @@ public class MultiLogic {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
         }
         Caller.obj().load(MultiApi.class).getPoster(Constant.COMMON_QUERY_JSON
-                , Constant.COMMON_QUERY_APPID, UserCache.UID, mid).enqueue(new Callback<String>() {
+                , Constant.COMMON_QUERY_APPID, UserCache.obj().getUid(), mid).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String body = response.body();
@@ -150,7 +150,7 @@ public class MultiLogic {
         Map<String, String> pa = new HashMap<>();
         pa.put("json", Constant.COMMON_QUERY_JSON + "");
         pa.put("appid", Constant.COMMON_QUERY_APPID + "");
-        pa.put("uid", UserCache.UID);
+        pa.put("uid", UserCache.obj().getUid());
         pa.put("title_id", planId);
         pa.put("name", name);
         pa.put("phone", phone);

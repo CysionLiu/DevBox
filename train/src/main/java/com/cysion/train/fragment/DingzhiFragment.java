@@ -56,8 +56,8 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
     @BindView(R.id.sc_box)
     NestedScrollView mScBox;
     private List<PlanEntity> mPlanEntities;
-    private String mSelectPlanId;
-    private String mSearchAreaId;
+    private String mSelectPlanId = "";
+    private String mSearchAreaId = "";
     private OptionsPickerView mAreaPvOptions;
     private OptionsPickerView mPlanOptions;
 
