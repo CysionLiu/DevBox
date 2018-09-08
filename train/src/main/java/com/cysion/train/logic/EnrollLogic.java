@@ -45,7 +45,7 @@ public class EnrollLogic {
         param.put("json", Constant.COMMON_QUERY_JSON + "");
         param.put("uid", UserCache.obj().getUid());
         param.put("id", mid);
-        param.put("share_id", UserCache.obj().getUid());
+        param.put("share_id", mid);
         param.put("bill", bill);
         param.put("bill_name", billname);
         param.put("bill_num", billnum);
@@ -110,6 +110,28 @@ public class EnrollLogic {
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         aPureListener.dont(404, t.getMessage());
+                    }
+                });
+    }
+
+    public void createTmpOrder(String mid, String shareId, PureListener aPureListener) {
+        Map<String, String> pa = new HashMap<>();
+        pa.put("uid", UserCache.obj().getUid());
+        pa.put("appid", Constant.COMMON_QUERY_APPID + "");
+        pa.put("id", mid);
+        pa.put("share_id", mid);
+        pa.put("json", Constant.COMMON_QUERY_JSON + "");
+        Caller.obj().load(TrainApi.class)
+                .tmpEnroll(pa)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
                     }
                 });
     }

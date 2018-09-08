@@ -47,9 +47,15 @@ public interface TrainApi {
     @GET("content/?l=api.give")
     Call<String> getEnrollInfo(@Query("json") int json, @Query("appid") int appid, @Query("id") String id, @Query("uid") String uid);
 
+    //生成订单
     @FormUrlEncoded
     @POST("content/?l=api.sign")
     Call<String> enroll(@FieldMap Map<String, String> params);
+
+    //生成临时订单
+    @FormUrlEncoded
+    @POST("content/?l=api.createOrder")
+    Call<String> tmpEnroll(@FieldMap Map<String, String> params);
 
 
     //获得报名列表

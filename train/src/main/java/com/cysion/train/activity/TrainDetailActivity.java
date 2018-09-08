@@ -29,6 +29,7 @@ import com.cysion.train.adapter.TrainAdapter;
 import com.cysion.train.adapter.TrainDetailPageAdapter;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.helper.LoginHelper;
+import com.cysion.train.logic.EnrollLogic;
 import com.cysion.train.logic.MultiLogic;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.logic.UserLogic;
@@ -262,6 +263,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
                 }
                 if (mCurCourseBean.getStates() != Constant.COLLECTED_STATE) {
                     UserLogic.obj().col(mCurCourseBean.getId(), colListener);
+                    EnrollLogic.obj().createTmpOrder(mCurCourseBean.getId(), mCurCourseBean.getId(), PureListener.DEFAULT);
                 } else {
                     UserLogic.obj().decol(mCurCourseBean.getId(), colListener);
                 }
