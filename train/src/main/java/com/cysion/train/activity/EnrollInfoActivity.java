@@ -29,6 +29,7 @@ import com.cysion.train.entity.ClientEntity;
 import com.cysion.train.entity.SitBean;
 import com.cysion.train.entity.TrainCourseBean;
 import com.cysion.train.logic.ConfigLogic;
+import com.cysion.train.logic.EnrollLogic;
 import com.cysion.train.logic.TrainLogic;
 import com.cysion.train.logic.UserCache;
 import com.cysion.train.logic.UserLogic;
@@ -382,7 +383,7 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                 }
             }
         }
-        TrainLogic.obj().enroll(mId, mEtContactor.getText().toString().trim(),
+        EnrollLogic.obj().enroll(mId, mEtContactor.getText().toString().trim(),
                 mEtContactPhone.getText().toString().trim(),
                 mTvCompany.isSelected() ? "1" : "2", mEtTaitouFapiao.getText().toString().trim(),
                 mEtSuihao.getText().toString().trim(), mSelectedSit, mSitNums,

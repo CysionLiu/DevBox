@@ -1,6 +1,5 @@
 package com.cysion.train.activity;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CollectActivity extends BaseActivity implements OnTypeClickListener {
 
@@ -212,12 +210,5 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
         if (event.getTag() == PageConstant.DEL_COLLECT) {
             getDataList();
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

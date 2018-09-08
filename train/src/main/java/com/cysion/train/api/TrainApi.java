@@ -50,4 +50,10 @@ public interface TrainApi {
     @FormUrlEncoded
     @POST("content/?l=api.sign")
     Call<String> enroll(@FieldMap Map<String, String> params);
+
+
+    //获得报名列表
+    @FormUrlEncoded
+    @POST("content/?l=api.myorder")
+    Call<String> getEnrollList(@FieldMap Map<String, String> params);
 }

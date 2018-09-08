@@ -5,17 +5,20 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.IntentUtils;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
 import com.cysion.baselib.utils.ShowUtil;
+import com.cysion.train.Constant;
 import com.cysion.train.R;
-import com.cysion.train.adapter.TrainAdapter;
-import com.cysion.train.entity.TrainCourseBean;
-import com.cysion.train.logic.UserLogic;
+import com.cysion.train.adapter.EnrollAdapter;
+import com.cysion.train.entity.EnrollEntity;
+import com.cysion.train.logic.EnrollLogic;
 import com.cysion.train.utils.Alert;
 import com.cysion.train.view.MySmartMoreLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -37,10 +40,12 @@ public class MyEnrollActivity extends BaseActivity implements OnTypeClickListene
     MySmartMoreLayout mSmrLoadmore;
     @BindView(R.id.tv_look)
     TextView mTvLook;
+    @BindView(R.id.iv_empty_view)
+    ImageView mIvEmptyView;
     private int pageNum = 1;
 
-    private List<TrainCourseBean> dataList;
-    private TrainAdapter mTrainAdapter;
+    private List<EnrollEntity> dataList;
+    private EnrollAdapter mTrainAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -53,7 +58,6 @@ public class MyEnrollActivity extends BaseActivity implements OnTypeClickListene
         initTopBar();
         initRvList();
         initEvent();
-
     }
 
     private void initEvent() {
@@ -70,13 +74,15 @@ public class MyEnrollActivity extends BaseActivity implements OnTypeClickListene
                 loadMore();
             }
         });
+        mSmrLoadmore.setNestedScrollingEnabled(false);
     }
 
     private void initRvList() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRvTrain.setLayoutManager(layoutManager);
+        mRvTrain.setNestedScrollingEnabled(false);
         dataList = new ArrayList<>();
-        mTrainAdapter = new TrainAdapter(dataList, this, this);
+        mTrainAdapter = new EnrollAdapter(dataList, this, this);
         mRvTrain.setAdapter(mTrainAdapter);
     }
 
@@ -87,8 +93,9 @@ public class MyEnrollActivity extends BaseActivity implements OnTypeClickListene
                 finish();
             }
         });
-        mBarExpert.setTitle("我的报名-接口未定");
+        mBarExpert.setTitle("我的报名");
     }
+
     @Override
     protected void initData() {
         Alert.obj().loading(this);
@@ -97,26 +104,29 @@ public class MyEnrollActivity extends BaseActivity implements OnTypeClickListene
 
     private void getDataList() {
         pageNum = 1;
-        UserLogic.obj().getColList(new PureListener<List<TrainCourseBean>>() {
+        EnrollLogic.obj().getEnrollList(new PureListener<List<EnrollEntity>>() {
             @Override
-            public void done(List<TrainCourseBean> result) {
+            public void done(List<EnrollEntity> result) {
                 Alert.obj().loaded();
                 dataList.clear();
                 dataList.addAll(result);
                 mTrainAdapter.notifyDataSetChanged();
                 pageNum++;
+                changeLayout();
             }
 
             @Override
             public void dont(int flag, String msg) {
                 Alert.obj().loaded();
+                changeLayout();
             }
-        },pageNum);
+        }, pageNum);
     }
+
     private void loadMore() {
-        UserLogic.obj().getColList(new PureListener<List<TrainCourseBean>>() {
+        EnrollLogic.obj().getEnrollList(new PureListener<List<EnrollEntity>>() {
             @Override
-            public void done(List<TrainCourseBean> result) {
+            public void done(List<EnrollEntity> result) {
                 mSmrLoadmore.finishLoadMore();
                 mTrainAdapter.addEntities(result);
                 mTrainAdapter.notifyDataSetChanged();
@@ -127,10 +137,27 @@ public class MyEnrollActivity extends BaseActivity implements OnTypeClickListene
             public void dont(int flag, String msg) {
                 mSmrLoadmore.finishLoadMore();
             }
-        },pageNum);
+        }, pageNum);
     }
+
     @Override
     public void onClicked(Object obj, int position, int flag) {
+        EnrollEntity e = (EnrollEntity) obj;
+        if (flag == EnrollAdapter.CONSULT) {
+            Intent myIntent = IntentUtils.getDialIntent(Constant.HOTLINE_NUMBER);
+            startActivity(myIntent);
+        } else if (flag == EnrollAdapter.TRAIN) {
+            TrainDetailActivity.start(self, e.getMeeting());
+        }
+    }
 
+    public void changeLayout() {
+        if (dataList.size() > 0) {
+            mSmrLoadmore.setVisibility(View.VISIBLE);
+            mIvEmptyView.setVisibility(View.GONE);
+        } else {
+            mSmrLoadmore.setVisibility(View.GONE);
+            mIvEmptyView.setVisibility(View.VISIBLE);
+        }
     }
 }

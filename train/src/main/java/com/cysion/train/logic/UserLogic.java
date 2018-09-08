@@ -154,6 +154,8 @@ public class UserLogic {
     public void getColList(final PureListener<List<TrainCourseBean>> aPureListener, int page) {
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
+            return;
+
         }
         Caller.obj().load(UserApi.class).getCollects(
                 Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID, UserCache.obj().getUid()
@@ -202,6 +204,8 @@ public class UserLogic {
         }
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
+            return;
+
         }
 
         UserCaller.obj().load(UserApi.class)
@@ -241,6 +245,8 @@ public class UserLogic {
         }
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
+            return;
+
         }
         UserCaller.obj().load(UserApi.class)
                 .updateUser(Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID,
@@ -279,6 +285,8 @@ public class UserLogic {
         }
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
+            return;
+
         }
         Caller.obj().load(UserApi.class).getClientInfo(
                 Constant.COMMON_QUERY_JSON, Constant.COMMON_QUERY_APPID, UserCache.obj().getUid()
@@ -333,6 +341,8 @@ public class UserLogic {
         }
         if (!NetworkUtils.isConnected()) {
             aPureListener.dont(404, Box.str(R.string.str_no_net));
+            return;
+
         }
         Map<String, String> params = new HashMap<>();
         params.put("appid", Constant.COMMON_QUERY_APPID + "");
