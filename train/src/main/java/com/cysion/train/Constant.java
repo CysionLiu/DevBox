@@ -7,6 +7,7 @@ public class Constant {
      */
     public static final String HOST = "https://trade.5dev.cn/cultivate/";
     public static final String PASSPORT_HOST = "https://cm.5dev.cn/applet/content/";
+    public static final String SAVE_PIC = "https://trade.5dev.cn/upload/upload/?save.start";
     public static final String HOTLINE_NUMBER = "400 026 3866";
 
     //是否返回json,1返回

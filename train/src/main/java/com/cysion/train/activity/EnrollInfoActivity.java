@@ -43,7 +43,6 @@ import butterknife.BindView;
 
 public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListener {
 
-
     @BindView(R.id.tbar_enroll)
     TopBar mTbarEnroll;
     @BindView(R.id.iv_train_top)
@@ -189,9 +188,10 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         mTvCompany.setOnClickListener(mOnClickListener);
         mEtSuihao.addTextChangedListener(mTextWatcher);
         mEtTaitouFapiao.addTextChangedListener(mTextWatcher);
-        mEtContactPhone.addTextChangedListener(mTextWatcher);
-        mEtContactor.addTextChangedListener(mTextWatcher);
+        mEtContactPhone.addTextChangedListener(mContactTextWatcher);
+        mEtContactor.addTextChangedListener(mContactTextWatcher);
         mEtSuihao.addTextChangedListener(mTextWatcher);
+
     }
 
     //更新数据
@@ -244,6 +244,8 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         }
         mEtTaitouFapiao.setText(clientEntity.getBill_name());
         mEtSuihao.setText(clientEntity.getBill_num());
+        mTvRefreshContact.setVisibility(View.GONE);
+        mTvRefreshFapiao.setVisibility(View.GONE);
         changeSubmitState();
     }
 
@@ -292,6 +294,7 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
 
     //改变底部提交按钮的状态
     private void changeSubmitState() {
+
         boolean canSubmit = true;
         if (mSelectCount == 0) {
             canSubmit = false;
@@ -305,21 +308,18 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         if (TextUtils.isEmpty(mEtContactPhone.getText().toString().trim())) {
             canSubmit = false;
         }
-//        if (TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
+//        if (!mTvCompany.isSelected() && !mTvNotCompany.isSelected()) {
 //            canSubmit = false;
 //        }
-        if (!mTvCompany.isSelected() && !mTvNotCompany.isSelected()) {
-            canSubmit = false;
-        }
         //选了企业，但是没有抬头和税号
-        if (mTvCompany.isSelected() && TextUtils.isEmpty(mEtSuihao.getText().toString().trim())
-                || TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
-            canSubmit = false;
-        } else {
-            if (TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
-                canSubmit = false;
-            }
-        }
+//        if (mTvCompany.isSelected() && TextUtils.isEmpty(mEtSuihao.getText().toString().trim())
+//                || TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
+//            canSubmit = false;
+//        } else {
+//            if (TextUtils.isEmpty(mEtTaitouFapiao.getText().toString().trim())) {
+//                canSubmit = false;
+//            }
+//        }
         if (canSubmit) {
             mTvSubmit.setEnabled(true);
         } else {
@@ -390,6 +390,9 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                 mEtRemark.getText().toString().trim(), new PureListener<String>() {
                     @Override
                     public void done(String result) {
+                        if (UserCache.obj().getClientEntity() == null) {
+                            autoRefresh();
+                        }
                         finish();
                         Intent myIntent = new Intent(EnrollInfoActivity.this, EnrollSucessActivity.class);
                         startActivity(myIntent);
@@ -401,6 +404,13 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                     }
                 });
 
+    }
+
+    private void autoRefresh() {
+        UserLogic.obj().updateClientInfo(mEtContactor.getText().toString().trim(),
+                mEtContactPhone.getText().toString().trim(), mTvCompany.isSelected() ? "1" : "2",
+                mEtTaitouFapiao.getText().toString().trim(),
+                mEtSuihao.getText().toString().trim(), "", PureListener.DEFAULT);
     }
 
     private void refreshBill() {
@@ -439,7 +449,16 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             super.onTextChanged(s, start, before, count);
+            mTvRefreshFapiao.setVisibility(View.VISIBLE);
             changeSubmitState();
+        }
+    };
+    private TextWatcher mContactTextWatcher = new SimpleEditListener() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            super.onTextChanged(s, start, before, count);
+            changeSubmitState();
+            mTvRefreshContact.setVisibility(View.VISIBLE);
         }
     };
 }

@@ -1,5 +1,6 @@
 package com.cysion.train.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,21 +21,29 @@ import com.cysion.baselib.listener.Action;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.baselib.ui.TopBar;
 import com.cysion.baselib.utils.ShowUtil;
+import com.cysion.train.Constant;
 import com.cysion.train.R;
 import com.cysion.train.entity.ClientEntity;
 import com.cysion.train.entity.TradeEntity;
 import com.cysion.train.entity.UserEntity;
 import com.cysion.train.logic.UserCache;
 import com.cysion.train.logic.UserLogic;
+import com.cysion.train.simple.SimpleInstaller;
 import com.cysion.train.utils.Alert;
+import com.cysion.train.utils.FileUpUtil;
 import com.cysion.train.view.MyToast;
+import com.yuyh.library.imgsel.ISNav;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
 public class PersonActivity extends BaseActivity implements View.OnClickListener {
 
+    public static final int TOCHOSEIMG = 63;
     @BindView(R.id.bar_train)
     TopBar mBarTrain;
     @BindView(R.id.iv_user_avatar)
@@ -85,7 +94,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
                 if (aPosition == TopBar.Pos.LEFT) {
                     PersonActivity.this.finish();
                 } else if (aPosition == TopBar.Pos.RIGHT) {
-                    saveUserInfo();
+                    uploadAvatar();
                 }
             }
         });
@@ -98,6 +107,24 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
         showClientInfo();
         showUserInfo();
         updateUserInfo();
+    }
+
+    private void uploadAvatar() {
+        Map<String, String> pa = new HashMap<>();
+        pa.put("key", "1");
+        FileUpUtil.obj().postFile(Constant.SAVE_PIC,
+                pa, new File(mAvatarUrl), new PureListener<String>() {
+                    @Override
+                    public void done(String result) {
+                        mAvatarUrl = result;
+                        saveUserInfo();
+                    }
+
+                    @Override
+                    public void dont(int flag, String msg) {
+
+                    }
+                });
     }
 
     private void showUserInfo() {
@@ -158,7 +185,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
                 }
                 break;
             case R.id.rl_head_box:
-                MyToast.quickShow("head");
+                ISNav.getInstance().toListActivity(this, SimpleInstaller.obj().initSingleSelect(), TOCHOSEIMG);
                 break;
             case R.id.tv_trade:
             case R.id.rl_trade_box:
@@ -191,7 +218,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             mTradePickView = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
                 @Override
                 public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                    if (tradeEntities.size()<1) {
+                    if (tradeEntities.size() < 1) {
                         return;
                     }
                     mTradeId = tradeEntities.get(options1).getId();
@@ -259,4 +286,22 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 图片选择结果回调
+        if (requestCode == TOCHOSEIMG && resultCode == RESULT_OK && data != null) {
+            List<String> pathList = data.getStringArrayListExtra("result");
+            if (pathList != null && pathList.size() > 0) {
+                mAvatarUrl = pathList.get(0);
+                Glide.with(this).load(mAvatarUrl)
+                        .placeholder(R.drawable.user_avatar_default)
+                        .transform(new GlideCircleTransform(this))
+                        .into(mIvUserAvatar);
+            } else {
+                MyToast.quickShow("未选取可用照片");
+            }
+
+        }
+    }
 }
