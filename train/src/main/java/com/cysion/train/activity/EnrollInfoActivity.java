@@ -390,7 +390,7 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
                 mEtRemark.getText().toString().trim(), new PureListener<String>() {
                     @Override
                     public void done(String result) {
-                        if (UserCache.obj().getClientEntity() == null) {
+                        if (UserCache.obj().getClientEntity().getPhone() == null) {
                             autoRefresh();
                         }
                         finish();
