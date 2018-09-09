@@ -99,6 +99,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             }
         });
         mRlHeadBox.setOnClickListener(this);
+
         mTvNotCompany.setOnClickListener(this);
         mTvCompany.setOnClickListener(this);
         mTvTrade.setOnClickListener(this);
@@ -112,6 +113,11 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
     private void uploadAvatar() {
         Map<String, String> pa = new HashMap<>();
         pa.put("key", "1");
+        Alert.obj().loading(self);
+        if (TextUtils.isEmpty(mAvatarUrl) || mAvatarUrl.startsWith("http")) {
+            saveUserInfo();
+            return;
+        }
         FileUpUtil.obj().postFile(Constant.SAVE_PIC,
                 pa, new File(mAvatarUrl), new PureListener<String>() {
                     @Override
@@ -122,7 +128,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
                     @Override
                     public void dont(int flag, String msg) {
-
+                        Alert.obj().loaded();
                     }
                 });
     }
@@ -249,11 +255,13 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void done(String result) {
                 saveClientInfo();
+                Alert.obj().loaded();
             }
 
             @Override
             public void dont(int flag, String msg) {
                 MyToast.quickShow(msg);
+                Alert.obj().loaded();
             }
         });
 

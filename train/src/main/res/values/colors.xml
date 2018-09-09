@@ -25,6 +25,10 @@
     <color name="sub_tag">#ffea5a05</color>
     <color name="min_tag">#ffff3333</color>
 
+    <!--图片选择第三方，覆盖用-->
+    <color name="bottom_bg">#ff000000</color>
+
+
 
 
 </resources>
