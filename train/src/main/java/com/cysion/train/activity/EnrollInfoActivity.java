@@ -370,6 +370,7 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
     private void submit() {
         if (!RegexUtils.isMobileExact(mEtContactPhone.getText().toString().trim())) {
             MyToast.quickShow(Box.str(R.string.str_error_phone));
+            return;
         }
         List<SitBean> sit = mCurCourseBean.getSit();
         for (SitBean sitBean : sit) {
