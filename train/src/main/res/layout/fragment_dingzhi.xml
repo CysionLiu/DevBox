@@ -360,8 +360,8 @@
         android:id="@+id/iv_dingzhi_right_now"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="120dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="430dp"
         android:layout_marginRight="15dp"
         android:adjustViewBounds="true"
         android:src="@drawable/dingzhi_right_now"/>
