@@ -180,7 +180,7 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
             return;
         }
         String phone = mEtPhone.getText().toString().trim();
-        if (!RegexUtils.isMobileExact(phone)) {
+        if (!RegexUtils.isMobileExact(phone)&&!RegexUtils.isTel(phone)) {
             MyToast.quickShow(Box.str(R.string.str_error_phone));
             return;
         }

@@ -273,7 +273,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
         String taitou = mEtTaitouFapiao.getText().toString().trim();
         String shuihao = mEtSuihao.getText().toString().trim();
         String bill = "1";
-        if (!RegexUtils.isMobileExact(cphone)) {
+        if (!RegexUtils.isMobileExact(cphone)&&!RegexUtils.isTel(cphone)) {
             MyToast.quickShow(getString(R.string.str_error_phone));
             return;
         }

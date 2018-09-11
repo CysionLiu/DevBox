@@ -368,7 +368,8 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
     };
 
     private void submit() {
-        if (!RegexUtils.isMobileExact(mEtContactPhone.getText().toString().trim())) {
+        String p = mEtContactPhone.getText().toString().trim();
+        if (!RegexUtils.isMobileExact(p)&&!RegexUtils.isTel(p)) {
             MyToast.quickShow(Box.str(R.string.str_error_phone));
             return;
         }
@@ -385,7 +386,7 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
             }
         }
         EnrollLogic.obj().enroll(mId, mEtContactor.getText().toString().trim(),
-                mEtContactPhone.getText().toString().trim(),
+                p,
                 mTvCompany.isSelected() ? "1" : "2", mEtTaitouFapiao.getText().toString().trim(),
                 mEtSuihao.getText().toString().trim(), mSelectedSit, mSitNums,
                 mEtRemark.getText().toString().trim(), new PureListener<String>() {

@@ -39,7 +39,7 @@
     <string name="str_meeting_detail">会议详情</string>
     <string name="str_enroll_order">提交订单</string>
     <string name="str_enroll_tips">如有特殊要求，可在此备注，提交订单成功后，专属服务和顾问会和你联系。</string>
-    <string name="str_error_phone">请输入正确的手机号</string>
+    <string name="str_error_phone">请输入正确的号码</string>
     <string name="str_send_code">验证码发送成功</string>
     <string name="str_input_phone">请输入手机号</string>
     <string name="str_cancel">取消</string>

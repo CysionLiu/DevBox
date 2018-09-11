@@ -199,7 +199,7 @@
                     android:background="@null"
                     android:drawablePadding="12dp"
                     android:hint="请输入"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:lines="1"
                     android:maxWidth="160dp"
                     android:paddingRight="4dp"
