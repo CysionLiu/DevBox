@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.RegexUtils;
+import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.base.BusEvent;
 import com.cysion.baselib.listener.PureListener;
@@ -60,7 +61,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.gray(this, Box.color(R.color.sub_background));
         mBtnLogin.setOnClickListener(this);
         mBtnGetCode.setOnClickListener(this);
         mIvClose.setOnClickListener(this);

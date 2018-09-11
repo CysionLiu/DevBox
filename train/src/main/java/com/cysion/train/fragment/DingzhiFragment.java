@@ -1,7 +1,9 @@
 package com.cysion.train.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -19,15 +21,19 @@ import com.cysion.baselib.Box;
 import com.cysion.baselib.base.BaseFragment;
 import com.cysion.baselib.listener.PureListener;
 import com.cysion.train.R;
+import com.cysion.train.activity.LoginActivity;
 import com.cysion.train.entity.AreaBean;
 import com.cysion.train.entity.PlanEntity;
 import com.cysion.train.logic.MultiLogic;
+import com.cysion.train.logic.UserCache;
+import com.cysion.train.simple.SimpleEditListener;
 import com.cysion.train.utils.AreaUtil;
 import com.cysion.train.view.MyToast;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.Unbinder;
 
 public class DingzhiFragment extends BaseFragment implements View.OnClickListener {
 
@@ -55,6 +61,9 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
     Button mBtnSubmit;
     @BindView(R.id.sc_box)
     NestedScrollView mScBox;
+    @BindView(R.id.cv_dingzhi)
+    CardView mCvDingzhi;
+    Unbinder unbinder;
     private List<PlanEntity> mPlanEntities;
     private String mSelectPlanId = "";
     private String mSearchAreaId = "";
@@ -71,25 +80,16 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
         mRvPlans.setNestedScrollingEnabled(false);
         initList();
         initEvent();
+        changeBtnStatue();
     }
 
     //设置方案列表
     private void initList() {
-
         if (mPlanEntities == null) {
             return;
         }
         LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
         mRvPlans.setLayoutManager(layoutManager);
-//        mRvPlans.setAdapter(new PlanAdapter(mPlanEntities, mActivity, new OnTypeClickListener() {
-//            @Override
-//            public void onClicked(Object obj, int position, int flag) {
-//                PlanEntity entity = (PlanEntity) obj;
-//                mSelectPlanId = entity.getId();
-//                mTvPlans.setText(entity.getName());
-//                mScBox.scrollTo(0, 3000);
-//            }
-//        }));
     }
 
     private void initEvent() {
@@ -97,8 +97,22 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
         mTvPlans.setOnClickListener(this);
         mIvRightArrow1.setOnClickListener(this);
         mIvRightArrow2.setOnClickListener(this);
+        mEtPhone.addTextChangedListener(mSimpleEditListener);
+        mEtContact.addTextChangedListener(mSimpleEditListener);
         mBtnSubmit.setOnClickListener(this);
         mIvDingzhiRightNow.setOnClickListener(this);
+        mScBox.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                int[] loc = new int[2];
+                mCvDingzhi.getLocationOnScreen(loc);
+                if (loc[1] + Box.density() * 50 > Box.h()) {
+                    mIvDingzhiRightNow.setVisibility(View.VISIBLE);
+                } else {
+                    mIvDingzhiRightNow.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -146,7 +160,7 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
                 toSubmit();
                 break;
             case R.id.iv_dingzhi_right_now:
-                mScBox.scrollTo(0, 5000);
+                mScBox.fullScroll(View.FOCUS_DOWN);
                 break;
             default:
                 break;
@@ -155,6 +169,11 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
 
     //提交方案
     private void toSubmit() {
+        if (!UserCache.obj().isLogin()) {
+            Intent myIntent = new Intent(mActivity, LoginActivity.class);
+            startActivity(myIntent);
+            return;
+        }
         String contact = mEtContact.getText().toString().trim();
         if (TextUtils.isEmpty(contact)) {
             MyToast.quickShow("联系人为空");
@@ -239,5 +258,25 @@ public class DingzhiFragment extends BaseFragment implements View.OnClickListene
         mEtContact.setText("");
         mTvAddress.setText("请选择");
         mTvPlans.setText("请选择");
+        changeBtnStatue();
     }
+
+    private void changeBtnStatue() {
+        String c = mEtContact.getText().toString().trim();
+        String p = mEtPhone.getText().toString().trim();
+        if (!TextUtils.isEmpty(c) && !TextUtils.isEmpty(p)) {
+            mBtnSubmit.setEnabled(true);
+        } else {
+            mBtnSubmit.setEnabled(false);
+        }
+    }
+
+    private SimpleEditListener mSimpleEditListener = new SimpleEditListener() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            super.onTextChanged(s, start, before, count);
+            changeBtnStatue();
+        }
+    };
+
 }
