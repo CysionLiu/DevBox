@@ -59,7 +59,7 @@ public class MapActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         mBarExpert.setTitle("地图");
         mBarExpert.setOnTopBarClickListener(new TopBar.OnTopBarClickListener() {
             @Override

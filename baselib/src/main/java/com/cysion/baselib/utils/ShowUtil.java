@@ -9,7 +9,13 @@ import android.view.View;
 import com.jaeger.library.StatusBarUtil;
 
 public class ShowUtil {
-    public static void darkAndWhite(Activity aActivity, boolean isBlack) {
+
+    public static void whiteStatusBar(Activity aActivity) {
+        whiteStatusBar(aActivity, true);
+
+    }
+
+    public static void whiteStatusBar(Activity aActivity, boolean isBlack) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             StatusBarUtil.setColor(aActivity, Color.WHITE, 0);
             if (isBlack) {

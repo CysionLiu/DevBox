@@ -118,7 +118,7 @@ public class TrainDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         Intent intent = getIntent();
         TrainCourseBean courseBean = null;
         if (intent != null) {

@@ -85,7 +85,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         mBarTrain.setTitle("个人资料");
         mBarTrain.imageRight(false);
         mBarTrain.setOnTopBarClickListener(new TopBar.OnTopBarClickListener() {

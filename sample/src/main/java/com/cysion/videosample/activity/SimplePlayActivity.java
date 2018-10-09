@@ -1,9 +1,10 @@
-package com.cysion.videosample;
+package com.cysion.videosample.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.cysion.videosample.R;
 import com.cysion.videosample.view.MyStandardPlayer;
 import com.orhanobut.logger.Logger;
 import com.shuyu.gsyvideoplayer.GSYBaseActivityDetail;

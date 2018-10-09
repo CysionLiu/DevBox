@@ -60,7 +60,7 @@ public class CollectActivity extends BaseActivity implements OnTypeClickListener
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         mBarExpert.setTitle("我的收藏");
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRvTrain.setLayoutManager(layoutManager);

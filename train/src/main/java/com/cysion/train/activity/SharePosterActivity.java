@@ -47,7 +47,7 @@ public class SharePosterActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         mBarPoster.setTitle("分享海报");
         mBarPoster.setOnTopBarClickListener(new TopBar.OnTopBarClickListener() {
             @Override

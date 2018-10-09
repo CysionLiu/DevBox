@@ -50,7 +50,7 @@ public class PayDescActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         mTvCopyNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

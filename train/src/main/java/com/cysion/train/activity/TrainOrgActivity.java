@@ -83,7 +83,7 @@ public class TrainOrgActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         Intent intent = getIntent();
         if (intent != null) {
             mId = intent.getStringExtra(PageConstant.EXPERT_OR_ORG_ID);

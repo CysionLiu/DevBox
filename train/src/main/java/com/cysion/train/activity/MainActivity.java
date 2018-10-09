@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         mVpHomeVp.setOffscreenPageLimit(4);
     }
 
@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity {
                     ShowUtil.normalColor(MainActivity.this, Box.color(R.color.yellow_background));
                     mTvTopTitle.setVisibility(View.GONE);
                 } else {
-                    ShowUtil.darkAndWhite(MainActivity.this, true);
+                    ShowUtil.whiteStatusBar(MainActivity.this, true);
                     mTvTopTitle.setVisibility(View.VISIBLE);
                 }
             }

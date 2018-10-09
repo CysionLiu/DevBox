@@ -123,7 +123,7 @@ public class EnrollInfoActivity extends BaseActivity implements OnTypeClickListe
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         getPageData();
         initTopBar();
         initSitList();

@@ -1,4 +1,4 @@
-package com.cysion.videosample;
+package com.cysion.videosample.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.cysion.videosample.R;
+import com.cysion.videosample.VideoConstant;
 import com.cysion.videosample.adapter.MyAdapter;
 import com.cysion.videosample.base.OnTypeClickListener;
 import com.cysion.videosample.entity.VideoEntity;
@@ -33,7 +35,7 @@ public class ListVideoActivity extends AppCompatActivity implements OnTypeClickL
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         //--
         mRecyclerView2 = findViewById(R.id.rl_list_video2);
-        mGridLayoutManager = new GridLayoutManager(this,2);
+        mGridLayoutManager = new GridLayoutManager(this,1);
         mRecyclerView2.setLayoutManager(mGridLayoutManager);
         loadData();
         mAdapter = new MyAdapter(mVideoEntities, this, this);

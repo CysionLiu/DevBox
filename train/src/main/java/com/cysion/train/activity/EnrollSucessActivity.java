@@ -25,7 +25,7 @@ public class EnrollSucessActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this,true);
+        ShowUtil.whiteStatusBar(this,true);
         mBarExpert.setOnTopBarClickListener(new TopBar.OnTopBarClickListener() {
             @Override
             public void onIconClicked(View aView, TopBar.Pos aPosition) {

@@ -54,7 +54,7 @@ public class MyEnrollActivity extends BaseActivity implements OnTypeClickListene
 
     @Override
     protected void initView() {
-        ShowUtil.darkAndWhite(this, true);
+        ShowUtil.whiteStatusBar(this, true);
         initTopBar();
         initRvList();
         initEvent();
