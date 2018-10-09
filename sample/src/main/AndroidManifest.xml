@@ -14,10 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- 最大长宽比 -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -33,8 +35,11 @@
         <activity
             android:name=".activity.ListVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.WebSocketActivity"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 
