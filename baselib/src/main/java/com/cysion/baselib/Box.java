@@ -12,8 +12,6 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
-import com.cysion.baselib.cache.ACache;
-
 /**
  * Created by cysion on 2017\12\22 0022.
  * 主要放置相关的配置信息，简短使用
@@ -27,6 +25,7 @@ public class Box {
     private static int height;
     private static Configuration cfg;
     private static Resources res;
+    private static String uuid = "";
 
     //Application创建时就需要调用此方法
     public static void init(Context aContext, boolean aIsDebug) {
@@ -144,27 +143,24 @@ public class Box {
     }
 
     public static String uuid() {
-        String key = "myUuidmyUuidmyUuid";
-        String myUuid = ACache.get(ctx()).getAsString(key);
-        if (!TextUtils.isEmpty(myUuid)) {
-            return myUuid;
+        if (!TextUtils.isEmpty(uuid)) {
+            return uuid;
         }
         //兼容老用户
         TelephonyManager mTelephonyMgr = (TelephonyManager) ctx
                 .getSystemService(Context.TELEPHONY_SERVICE);
         if (mTelephonyMgr != null) {
-            myUuid = mTelephonyMgr.getDeviceId();
+            uuid = mTelephonyMgr.getDeviceId();
         }
-        if (!TextUtils.isEmpty(myUuid) && !myUuid.startsWith("0")) {
-            return myUuid;
+        if (!TextUtils.isEmpty(uuid) && !uuid.startsWith("0")) {
+            return uuid;
         }
-        //没有，则生成唯一码，缓存
+        //没有获得imme，则获取硬件序列号
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            myUuid = Build.getSerial();
+            uuid = Build.getSerial();
         } else {
-            myUuid = Build.SERIAL;
+            uuid = Build.SERIAL;
         }
-        ACache.get(ctx()).put(key, myUuid);
-        return myUuid;
+        return uuid;
     }
 }

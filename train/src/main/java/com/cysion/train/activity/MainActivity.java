@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
                 Logger.d(tab.getPosition());
                 mTvTopTitle.setText(HomeHelper.obj().getTopTitles().get(tab.getPosition()));
                 if (tab.getPosition() == 3) {
-                    ShowUtil.yellow(MainActivity.this, Box.color(R.color.yellow_background));
+                    ShowUtil.normalColor(MainActivity.this, Box.color(R.color.yellow_background));
                     mTvTopTitle.setVisibility(View.GONE);
                 } else {
                     ShowUtil.darkAndWhite(MainActivity.this, true);

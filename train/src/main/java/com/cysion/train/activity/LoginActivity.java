@@ -61,7 +61,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initView() {
-        ShowUtil.gray(this, Box.color(R.color.sub_background));
+        ShowUtil.darkColor(this, Box.color(R.color.sub_background));
         mBtnLogin.setOnClickListener(this);
         mBtnGetCode.setOnClickListener(this);
         mIvClose.setOnClickListener(this);
