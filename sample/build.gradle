@@ -25,4 +25,7 @@ dependencies {
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
+    //音频录制--pcm,wav
+    implementation 'com.kailashdabhi:om-recorder:1.1.5'
+
 }

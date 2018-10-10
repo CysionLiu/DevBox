@@ -37,9 +37,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.WebSocketActivity"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activity.WebSocketActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.AudioRecordActivity">
         </activity>
     </application>
 
