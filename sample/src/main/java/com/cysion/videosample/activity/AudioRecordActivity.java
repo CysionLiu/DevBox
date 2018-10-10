@@ -5,10 +5,8 @@ import android.media.MediaRecorder;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.utils.ShowUtil;
@@ -24,19 +22,23 @@ import omrecorder.OmRecorder;
 import omrecorder.PullTransport;
 import omrecorder.PullableSource;
 import omrecorder.Recorder;
-import omrecorder.WriteAction;
 
 /**
  * 音频录制，基于audiorecord，过程中音频是pcm格式
  */
 public class AudioRecordActivity extends BaseActivity {
 
+    public static final int FREQUENCY = 16000;
+    public static final int IDLE = 340;
+    public static final int PLAYING = 341;
+    public static final int PAUSING = 342;
+    public static final int FINISHED = 343;
     Recorder recorder;
     ImageView recordButton;
-    CheckBox skipSilence;
-    private Button pauseResumeButton;
     private String mPath;
-    boolean isRunning;
+    private int mRecordState = IDLE;
+    private ImageView mIvPlay;
+    private ImageView mIvStop;
 
 
     @Override
@@ -49,74 +51,65 @@ public class AudioRecordActivity extends BaseActivity {
         ShowUtil.whiteStatusBar(self);
         mPath = getExternalCacheDir().getAbsolutePath() + "/pcmtest.wav";
         setupRecorder();
-        skipSilence = (CheckBox) findViewById(R.id.skipSilence);
-        skipSilence.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mIvPlay = findViewById(R.id.iv_play_or_pause);
+        mIvPlay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    setupNoiseRecorder();
-                } else {
-                    setupRecorder();
-                }
-            }
-        });
-        recordButton = (ImageView) findViewById(R.id.recordButton);
-        recordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                recorder.startRecording();
-                isRunning = true;
-                skipSilence.setEnabled(false);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        sendBytes();
-                    }
-                }).start();
-            }
-        });
-        findViewById(R.id.stopButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    recorder.stopRecording();
-                    isRunning = false;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                skipSilence.setEnabled(true);
-                recordButton.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        animateVoice(0);
-                    }
-                });
-            }
-        });
-        pauseResumeButton = (Button) findViewById(R.id.pauseResumeButton);
-        pauseResumeButton.setOnClickListener(new View.OnClickListener() {
-            boolean isPaused = false;
-
-            @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 if (recorder == null) {
-
                     return;
                 }
-                if (!isPaused) {
-                    pauseResumeButton.setText(getString(R.string.resume_recording));
+                if (mRecordState == PLAYING) {
                     recorder.pauseRecording();
-                    pauseResumeButton.postDelayed(new Runnable() {
+                    mIvPlay.setImageResource(R.drawable.play);
+                    mRecordState = PAUSING;
+                    Toast.makeText(AudioRecordActivity.this, "暂停录音", Toast.LENGTH_SHORT).show();
+
+                } else if (mRecordState == PAUSING) {
+                    recorder.resumeRecording();
+                    mIvPlay.setImageResource(R.drawable.pause);
+                    Toast.makeText(AudioRecordActivity.this, "继续录音", Toast.LENGTH_SHORT).show();
+                    mRecordState = PLAYING;
+
+                } else {
+                    mIvPlay.setImageResource(R.drawable.pause);
+                    recorder.startRecording();
+                    mRecordState = PLAYING;
+                    new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            animateVoice(0);
+                            sendBytes();
                         }
-                    }, 100);
-                } else {
-                    pauseResumeButton.setText(getString(R.string.pause_recording));
-                    recorder.resumeRecording();
+                    }).start();
                 }
-                isPaused = !isPaused;
+            }
+        });
+        mIvStop = findViewById(R.id.iv_stop);
+        mIvStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopRecord();
+            }
+        });
+        recordButton = findViewById(R.id.recordButton);
+    }
+
+    private void stopRecord() {
+        if (recorder == null) {
+            return;
+        }
+        if (mRecordState == IDLE || mRecordState == FINISHED) {
+            return;
+        }
+        try {
+            recorder.stopRecording();
+            mRecordState = FINISHED;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        recordButton.post(new Runnable() {
+            @Override
+            public void run() {
+                animateVoice(0);
             }
         });
     }
@@ -132,35 +125,17 @@ public class AudioRecordActivity extends BaseActivity {
                 }), file());
     }
 
-    private void setupNoiseRecorder() {
-        recorder = OmRecorder.wav(
-                new PullTransport.Noise(mic(),
-                        new PullTransport.OnAudioChunkPulledListener() {
-                            @Override
-                            public void onAudioChunkPulled(AudioChunk audioChunk) {
-                                animateVoice((float) (audioChunk.maxAmplitude() / 200.0));
-                            }
-                        },
-                        new WriteAction.Default(),
-                        new Recorder.OnSilenceListener() {
-                            @Override
-                            public void onSilence(long silenceTime) {
-
-                            }
-                        }, 200
-                ), file()
-        );
-    }
 
     private void animateVoice(final float maxPeak) {
         recordButton.animate().scaleX(1 + maxPeak).scaleY(1 + maxPeak).setDuration(10).start();
     }
 
+
     private PullableSource mic() {
         return new PullableSource.Default(
                 new AudioRecordConfig.Default(
                         MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT,
-                        AudioFormat.CHANNEL_IN_MONO, 16000
+                        AudioFormat.CHANNEL_IN_MONO, FREQUENCY
                 )
         );
     }
@@ -183,10 +158,10 @@ public class AudioRecordActivity extends BaseActivity {
         try (RandomAccessFile raf = new RandomAccessFile(mPath, "r")) {
             int len = -1;
             long lastTs = 0;
-            while ((len = raf.read(bytes)) != -1 || isRunning) {
+            while ((len = raf.read(bytes)) != -1 || (mRecordState == PLAYING || mRecordState == PAUSING)) {
                 if (len < CHUNCKED_SIZE) {
-                    if (isRunning) {
-                        Log.i("flag--","WavRecorderActivity.sendBytes(WavRecorderActivity.java:201)--"+len);
+                    if ((mRecordState == PLAYING || mRecordState == PAUSING)) {
+                        Log.i("flag--", "WavRecorderActivity.sendBytes(WavRecorderActivity.java:201)--" + len);
                         continue;
                     }
                     break;
@@ -217,14 +192,7 @@ public class AudioRecordActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (recorder != null && isRunning) {
-            try {
-                recorder.stopRecording();
-                isRunning = false;
-            } catch (IOException aE) {
-                aE.printStackTrace();
-            }
-        }
+        stopRecord();
     }
 
 }
