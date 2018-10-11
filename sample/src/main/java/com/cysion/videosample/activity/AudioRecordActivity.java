@@ -74,6 +74,7 @@ public class AudioRecordActivity extends BaseActivity {
                     mIvPlay.setImageResource(R.drawable.pause);
                     recorder.startRecording();
                     mRecordState = PLAYING;
+                    Toast.makeText(AudioRecordActivity.this, "开始录音", Toast.LENGTH_SHORT).show();
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -103,6 +104,7 @@ public class AudioRecordActivity extends BaseActivity {
         try {
             recorder.stopRecording();
             mRecordState = FINISHED;
+            Toast.makeText(AudioRecordActivity.this, "录音完成，已保存至"+mPath, Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
