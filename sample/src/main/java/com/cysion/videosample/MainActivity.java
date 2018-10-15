@@ -17,6 +17,7 @@ import com.cysion.baselib.listener.OnTypeClickListener;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.videosample.activity.AudioRecordActivity;
 import com.cysion.videosample.activity.ListVideoActivity;
+import com.cysion.videosample.activity.LivingTransferActivity;
 import com.cysion.videosample.activity.SimplePlayActivity;
 import com.cysion.videosample.activity.WebSocketActivity;
 import com.cysion.videosample.entity.PageBean;
@@ -59,6 +60,7 @@ public class MainActivity extends BaseActivity implements OnTypeClickListener {
         mPageBeanList.add(new PageBean(ListVideoActivity.class, "列表视频播放"));
         mPageBeanList.add(new PageBean(WebSocketActivity.class, "WebSocket测试练习"));
         mPageBeanList.add(new PageBean(AudioRecordActivity.class, "测试音频录制"));
+        mPageBeanList.add(new PageBean(LivingTransferActivity.class, "实时语音转写"));
 
     }
 

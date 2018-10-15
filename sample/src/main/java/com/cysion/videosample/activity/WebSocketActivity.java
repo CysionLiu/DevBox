@@ -10,14 +10,15 @@ import android.widget.TextView;
 import com.cysion.baselib.base.BaseActivity;
 import com.cysion.baselib.utils.ShowUtil;
 import com.cysion.videosample.R;
+import com.cysion.videosample.entity.TransferTextBean;
 import com.cysion.videosample.util.EncryptUtil;
+import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import org.json.JSONObject;
+
 import java.io.RandomAccessFile;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -45,10 +46,10 @@ public class WebSocketActivity extends BaseActivity implements View.OnClickListe
     // 每次发送的数据大小 1280 字节
     private static final int CHUNCKED_SIZE = 1280;
     // appid
-    private static final String APPID = "5a698a26";
+    private static final String APPID = "5bbb1fd3";
 
     // appid对应的secret_key
-    private static final String SECRET_KEY = "59f937fe4601472b06c5b466f3c620d3";
+    private static final String SECRET_KEY = "264bf5298b368f551147fd42493a3682";
     // 请求地址
     private static final String HOST = "rtasr.xfyun.cn/v1/ws";
 
@@ -101,8 +102,8 @@ public class WebSocketActivity extends BaseActivity implements View.OnClickListe
                 .writeTimeout(15, TimeUnit.SECONDS)
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .build();
-        Request request = new Request.Builder().url("ws://echo.websocket.org").build();
-//        Request request = new Request.Builder().url(BASE_URL + getHandShakeParams(APPID, SECRET_KEY)).build();
+//        Request request = new Request.Builder().url("ws://echo.websocket.org").build();
+        Request request = new Request.Builder().url(BASE_URL + getHandShakeParams(APPID, SECRET_KEY)).build();
         EchoWebSocketListener socketListener = new EchoWebSocketListener();
         mOkHttpClient.newWebSocket(request, socketListener);
         mOkHttpClient.dispatcher().executorService().shutdown();
@@ -115,7 +116,13 @@ public class WebSocketActivity extends BaseActivity implements View.OnClickListe
             Log.e("flag--", "onOpen(WebSocketActivity.java:82)---->>" + Thread.currentThread().getName());
             output("连接成功");
             mWebSocket = webSocket;
-            sendBytes();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    sendBytes();
+
+                }
+            }).start();
         }
 
         @Override
@@ -154,12 +161,14 @@ public class WebSocketActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private void output(final String text) {
-        Log.e("flag--", "WebSocketActivity.output(WebSocketActivity.java:111)--" + text);
+    private void output(String text) {
+        text = getContent(text);
+        final String finalText = text;
+        Log.e("flag--", "WebSocketActivity.output(WebSocketActivity.java:111)--" + finalText);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mTvShowMsg.setText(mTvShowMsg.getText() + "\r\n" + text);
+                mTvShowMsg.setText(mTvShowMsg.getText() + "\r\n" + finalText);
             }
         });
 
@@ -174,22 +183,22 @@ public class WebSocketActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void copyFile() {
-        mResPath = getExternalCacheDir().getAbsolutePath() + "/test01.pcm";
-        Log.e("flag--", "copyFile(WebSocketActivity.java:150)---->>" + mResPath);
-        if (!new File(mResPath).exists()) {
-            try {
-                FileOutputStream out = new FileOutputStream(mResPath);
-                InputStream in = getAssets().open("test_1.pcm");
-                byte[] buffer = new byte[1024];
-                int readBytes = 0;
-                while ((readBytes = in.read(buffer)) != -1)
-                    out.write(buffer, 0, readBytes);
-                in.close();
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        mResPath = getExternalCacheDir().getAbsolutePath() + "/pcmtest.pcm";
+//        Log.e("flag--", "copyFile(WebSocketActivity.java:150)---->>" + mResPath);
+//        if (!new File(mResPath).exists()) {
+//            try {
+//                FileOutputStream out = new FileOutputStream(mResPath);
+//                InputStream in = getAssets().open("test_1.pcm");
+//                byte[] buffer = new byte[1024];
+//                int readBytes = 0;
+//                while ((readBytes = in.read(buffer)) != -1)
+//                    out.write(buffer, 0, readBytes);
+//                in.close();
+//                out.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     private void sendBytes() {
@@ -213,13 +222,13 @@ public class WebSocketActivity extends BaseActivity implements View.OnClickListe
                         System.out.println("error time interval: " + s + " ms");
                     }
                 }
-                mWebSocket.send(ByteString.of(bytes, 0, len));
+                mWebSocket.send(ByteString.of(bytes));
                 // 每隔40毫秒发送一次数据
                 Thread.sleep(40);
             }
 
             // 发送结束标识
-            mWebSocket.send("{\"end\": true}");
+            mWebSocket.send(ByteString.of("{\"end\": true}".getBytes()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -237,5 +246,30 @@ public class WebSocketActivity extends BaseActivity implements View.OnClickListe
             e.printStackTrace();
         }
         return "";
+    }
+    // 把转写结果解析为句子
+    // 把转写结果解析为句子
+    public static String getContent(String message) {
+        StringBuffer resultBuilder = new StringBuffer();
+        message.replaceAll("\\\\", "");
+        try {
+            JSONObject messageObj = new JSONObject(message);
+            JSONObject data = new JSONObject(messageObj.optString("data"));
+            TransferTextBean bean = new Gson().fromJson(messageObj.optString("data"), TransferTextBean.class);
+            if (bean != null && bean.getCn() != null) {
+                if (bean.getCn().getSt().getType().equals("0")) {
+                    List<TransferTextBean.CnBean.StBean.RtBean> rt = bean.getCn().getSt().getRt();
+                    TransferTextBean.CnBean.StBean.RtBean rtBean1 = rt.get(0);
+                    List<TransferTextBean.CnBean.StBean.RtBean.WsBean> ws = rtBean1.getWs();
+                    for (TransferTextBean.CnBean.StBean.RtBean.WsBean w : ws) {
+                        resultBuilder.append(w.getCw().get(0).getW());
+                    }
+                    return resultBuilder.toString();
+                }
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

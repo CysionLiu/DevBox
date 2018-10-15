@@ -49,7 +49,7 @@ public class AudioRecordActivity extends BaseActivity {
     @Override
     protected void initView() {
         ShowUtil.whiteStatusBar(self);
-        mPath = getExternalCacheDir().getAbsolutePath() + "/pcmtest.wav";
+        mPath = getExternalCacheDir().getAbsolutePath() + "/pcmtest.pcm";
         setupRecorder();
         mIvPlay = findViewById(R.id.iv_play_or_pause);
         mIvPlay.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +118,7 @@ public class AudioRecordActivity extends BaseActivity {
 
 
     private void setupRecorder() {
-        recorder = OmRecorder.wav(
+        recorder = OmRecorder.pcm(
                 new PullTransport.Default(mic(), new PullTransport.OnAudioChunkPulledListener() {
                     @Override
                     public void onAudioChunkPulled(AudioChunk audioChunk) {
@@ -180,7 +180,7 @@ public class AudioRecordActivity extends BaseActivity {
                 }
                 Log.i("flag--", "PcmRecorderActivity.sendBytes(PcmRecorderActivity.java:199)--" + len);
                 // 每隔40毫秒发送一次数据
-                Thread.sleep(40);
+                Thread.sleep(60);
             }
             Log.i("flag--", "PcmRecorderActivity.sendBytes(PcmRecorderActivity.java:205)--");
 
