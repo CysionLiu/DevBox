@@ -203,6 +203,7 @@ public class AudioSocketClient {
         public void onClosed(WebSocket webSocket, int code, String reason) {
             super.onClosed(webSocket, code, reason);
             mSocketState = CLOSED;
+            hasAudio = false;
             if (mTypeAction != null) {
                 mTypeAction.done("连接关闭", mSocketState);
             }
@@ -213,6 +214,7 @@ public class AudioSocketClient {
         public void onFailure(WebSocket webSocket, Throwable t, Response response) {
             super.onFailure(webSocket, t, response);
             mSocketState = CLOSED;
+            hasAudio = false;
             if (mTypeAction != null) {
                 mTypeAction.done("连接关闭", CLOSED);
             }

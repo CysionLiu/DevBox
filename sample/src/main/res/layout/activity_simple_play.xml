@@ -6,13 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:padding="5dp"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="simplePlay"
         android:text="简单播放"
         android:textAllCaps="false"/>
 
@@ -20,4 +19,41 @@
         android:id="@+id/sp_video"
         android:layout_width="match_parent"
         android:layout_height="200dp"></com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer>
+
+    <com.cysion.videosample.view.TimeAxiel
+        android:id="@+id/timeaxel"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="startAnim"
+            android:text="开始"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pauseAnim"
+            android:text="暂停"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="resumeAnim"
+            android:text="恢复"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="stopAnim"
+            android:text="停止"/>
+    </LinearLayout>
 </LinearLayout>

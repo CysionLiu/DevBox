@@ -1,11 +1,14 @@
 package com.cysion.videosample.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.cysion.videosample.R;
 import com.cysion.videosample.view.MyStandardPlayer;
+import com.cysion.videosample.view.TimeAxiel;
 import com.orhanobut.logger.Logger;
 import com.shuyu.gsyvideoplayer.GSYBaseActivityDetail;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
@@ -18,6 +21,7 @@ public class SimplePlayActivity extends GSYBaseActivityDetail<StandardGSYVideoPl
 
     OrientationUtils orientationUtils;
     StandardGSYVideoPlayer detailPlayer;
+    private TimeAxiel mTimeAxiel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class SimplePlayActivity extends GSYBaseActivityDetail<StandardGSYVideoPl
         detailPlayer.getBackButton().setVisibility(View.GONE);
 
         initVideoBuilderMode();
+        mTimeAxiel = (TimeAxiel) findViewById(R.id.timeaxel);
 
 //        init();
     }
@@ -128,6 +133,36 @@ public class SimplePlayActivity extends GSYBaseActivityDetail<StandardGSYVideoPl
     @Override
     public boolean getDetailOrientationRotateAuto() {
         return true;
+    }
+
+    int t = 0;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mHandler.sendEmptyMessageDelayed(0, 1000);
+        }
+    };
+
+    public void startAnim(View view) {
+        mTimeAxiel.onStart();
+        mHandler.sendEmptyMessageDelayed(0, 1000);
+    }
+
+    public void pauseAnim(View view) {
+        mTimeAxiel.onPaused();
+        mHandler.removeCallbacksAndMessages(null);
+    }
+
+    public void resumeAnim(View view) {
+        mTimeAxiel.onResumed();
+        mHandler.sendEmptyMessageDelayed(0, 1000);
+    }
+
+    public void stopAnim(View view) {
+        mTimeAxiel.onStopped();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
 //    @Override
