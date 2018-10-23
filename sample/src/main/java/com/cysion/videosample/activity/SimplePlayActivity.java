@@ -1,12 +1,11 @@
 package com.cysion.videosample.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.cysion.videosample.R;
+import com.cysion.videosample.view.AudioWave;
 import com.cysion.videosample.view.MyStandardPlayer;
 import com.cysion.videosample.view.TimeAxiel;
 import com.orhanobut.logger.Logger;
@@ -22,6 +21,7 @@ public class SimplePlayActivity extends GSYBaseActivityDetail<StandardGSYVideoPl
     OrientationUtils orientationUtils;
     StandardGSYVideoPlayer detailPlayer;
     private TimeAxiel mTimeAxiel;
+    private AudioWave mAudioWave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class SimplePlayActivity extends GSYBaseActivityDetail<StandardGSYVideoPl
 
         initVideoBuilderMode();
         mTimeAxiel = (TimeAxiel) findViewById(R.id.timeaxel);
+        mAudioWave = (AudioWave) findViewById(R.id.audiowave);
 
 //        init();
     }
@@ -135,34 +136,24 @@ public class SimplePlayActivity extends GSYBaseActivityDetail<StandardGSYVideoPl
         return true;
     }
 
-    int t = 0;
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            mHandler.sendEmptyMessageDelayed(0, 1000);
-        }
-    };
-
     public void startAnim(View view) {
         mTimeAxiel.onStart();
-        mHandler.sendEmptyMessageDelayed(0, 1000);
+        mAudioWave.onStart();
     }
 
     public void pauseAnim(View view) {
         mTimeAxiel.onPaused();
-        mHandler.removeCallbacksAndMessages(null);
+        mAudioWave.onPaused();
     }
 
     public void resumeAnim(View view) {
         mTimeAxiel.onResumed();
-        mHandler.sendEmptyMessageDelayed(0, 1000);
+        mAudioWave.onResumed();
     }
 
     public void stopAnim(View view) {
         mTimeAxiel.onStopped();
-        mHandler.removeCallbacksAndMessages(null);
+        mAudioWave.onStopped();
     }
 
 //    @Override
