@@ -41,8 +41,11 @@ public class Caller implements ICall {
         mOkHttpClient = CallManager.obj().getOkBuilder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                //加入通用header
                 Request request = chain.request();
+                if (aAInjector==null) {
+                    return chain.proceed(request);
+                }
+                //加入通用header
                 mHeaders = aAInjector.headers();
                 if (mHeaders != null && mHeaders.size() > 0) {
                     Request.Builder builder = request.newBuilder();

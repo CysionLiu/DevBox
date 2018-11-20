@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.blankj.utilcode.util.Utils;
 import com.cysion.baselib.Box;
+import com.cysion.baselib.net.Caller;
 import com.cysion.baselib.simplify.AppLifeCallBacker;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -24,6 +25,7 @@ public class MyApp extends Application {
         });
         Utils.init(this);
         registerActivityLifecycleCallbacks(new AppLifeCallBacker());
+        Caller.obj().inject("https://trade.5dev.cn/", null);
 
     }
 }
