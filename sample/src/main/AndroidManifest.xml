@@ -48,6 +48,8 @@
         </activity>
         <activity android:name=".activity.PresenterActivity">
         </activity>
+        <activity android:name=".activity.RxActivity">
+        </activity>
     </application>
 
 </manifest>

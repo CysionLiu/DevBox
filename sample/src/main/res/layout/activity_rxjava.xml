@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operCreate"
+            android:padding="2dp"
+            android:text="create"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operMap"
+            android:padding="2dp"
+            android:text="map"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operFlatmap"
+            android:padding="2dp"
+            android:text="flatmap"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operzip"
+            android:padding="2dp"
+            android:text="zip"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operConcat"
+            android:padding="2dp"
+            android:text="concat"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operDistinct"
+            android:padding="2dp"
+            android:text="distinct"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operReduce"
+            android:padding="2dp"
+            android:text="reduce"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operDebounce"
+            android:padding="2dp"
+            android:text="debounce"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:onClick="operBuffer"
+            android:padding="2dp"
+            android:text="buffer"
+            android:textAllCaps="false"
+            android:textSize="12dp"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/tv_data"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:ellipsize="end"
+        android:text="仅仅列出主要的"
+        android:textColor="#ff000000"
+        android:textSize="14dp"/>
+</LinearLayout>
