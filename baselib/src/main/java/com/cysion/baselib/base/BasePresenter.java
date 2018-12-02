@@ -10,7 +10,7 @@ public class BasePresenter<V extends IBaseView> {
     }
 
     public void detachView() {
-
+        IView = null;
     }
 
     public boolean isViewAttached() {
